@@ -1,0 +1,3607 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANSFAL - Association pour la Coopération, le Développement et l'Environnement</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a6d2c;
+            --secondary: #2e8b57;
+            --accent: #3cb371;
+            --light: #f0f9f3;
+            --dark: #145a32;
+            --text: #333333;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --admin: #ff9800;
+            --whatsapp: #25D366;
+            --warning: #ff9800;
+            --success: #4caf50;
+            --danger: #f44336;
+            --info: #2196F3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        
+       /* ==================== LANGUAGE SWITCHER ==================== */
+.language-switcher {
+    position: fixed;
+    top: 15px;
+    left: 15px; /* Changé de right à left */
+    z-index: 2000;
+    display: flex;
+    gap: 5px;
+}
+
+.lang-btn {
+    background-color: rgba(26, 109, 44, 0.85); /* Version semi-transparente */
+    color: white;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.lang-btn:hover {
+    background-color: rgba(46, 139, 87, 0.9);
+    transform: translateY(-1px);
+}
+
+.lang-btn.active {
+    background-color: rgba(20, 90, 50, 0.95);
+}
+
+/* Ajustements pour mobile */
+@media (max-width: 768px) {
+    .language-switcher {
+        top: 10px;
+        left: 10px;
+        gap: 3px;
+    }
+    
+    .lang-btn {
+        padding: 3px 8px;
+        font-size: 0.7rem;
+    }
+    
+    .lang-btn i {
+        font-size: 0.7rem;
+    }
+}
+
+/* Si la barre admin est active */
+.admin-bar.active ~ .language-switcher {
+    top: 55px;
+    left: 15px;
+}
+
+/* Si le compteur de visiteurs est visible */
+.visitor-counter ~ .language-switcher {
+    top: 35px;
+    left: 15px;
+}
+
+.admin-bar.active + .visitor-counter ~ .language-switcher {
+    top: 85px;
+    left: 15px;
+}
+
+        /* RTL Support */
+        body.rtl {
+            direction: rtl;
+            text-align: right;
+        }
+
+        body.rtl .logo {
+            text-align: right;
+        }
+
+        body.rtl .value-card,
+        body.rtl .project-card,
+        body.rtl .comment-item {
+            text-align: right;
+        }
+
+        body.rtl nav ul {
+            text-align: right;
+        }
+
+        body.rtl .contact-info .contact-item {
+            text-align: right;
+        }
+
+        /* Adjust for admin bar */
+        .admin-bar.active ~ .language-switcher {
+            top: 50px;
+        }
+
+        /* Adjust for visitor counter */
+        .visitor-counter ~ .language-switcher {
+            top: 40px;
+        }
+
+        .admin-bar.active + .visitor-counter ~ .language-switcher {
+            top: 90px;
+        }
+
+        /* Visitor Counter - CORRIGÉ (discret) */
+        .visitor-counter {
+            background-color: rgba(33, 150, 243, 0.85);
+            color: white;
+            padding: 3px 0;
+            font-size: 0.75rem;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        .admin-bar.active + .visitor-counter {
+            top: 0;
+        }
+
+        .visitor-counter .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .visitor-count {
+            font-weight: bold;
+            background: rgba(255,255,255,0.2);
+            padding: 1px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+        }
+
+        /* S'assure que le header est au-dessus du compteur */
+        header {
+            z-index: 1000;
+        }
+
+        /* Ajuste les marges pour la barre admin */
+        .admin-bar.active + .visitor-counter + header,
+        .visitor-counter + header {
+            top: 24px;
+        }
+
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background-color: var(--whatsapp);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+            z-index: 1000;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-tooltip {
+            position: absolute;
+            right: 70px;
+            background-color: var(--dark);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .whatsapp-float:hover .whatsapp-tooltip {
+            opacity: 1;
+        }
+
+        /* ==================== ADMIN BAR - MODIFIÉ ==================== */
+        .admin-bar {
+            background-color: var(--admin);
+            color: white;
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            right: 0; /* Changé : position à droite */
+            width: 250px; /* Largeur fixe */
+            height: 100vh; /* Prend toute la hauteur */
+            z-index: 2000;
+            display: none;
+            flex-direction: column;
+            justify-content: flex-start;
+            box-shadow: var(--shadow);
+        }
+
+        .admin-bar.active {
+            display: flex;
+        }
+
+        .admin-controls {
+            display: flex;
+            flex-direction: column; /* Changé : disposition verticale */
+            justify-content: flex-start;
+            align-items: center;
+            padding: 20px 15px;
+            gap: 15px;
+            height: 100%;
+        }
+
+        .admin-bar .admin-buttons {
+            display: flex;
+            flex-direction: column; /* Changé : boutons verticaux */
+            gap: 10px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .admin-btn {
+            background-color: var(--dark);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-align: left;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .admin-btn:hover {
+            background-color: var(--primary);
+            transform: translateX(-5px);
+        }
+
+        /* Ajustement du texte dans la barre admin */
+        .admin-bar .admin-controls > span {
+            font-size: 0.9rem;
+            text-align: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: rgba(0,0,0,0.1);
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        /* Ajuster le bouton de connexion quand la barre admin est active */
+        .admin-bar.active ~ .login-btn {
+            right: 270px; /* Évite la superposition avec la barre admin */
+        }
+
+        /* Ajustements pour mobile */
+        @media (max-width: 768px) {
+            .admin-bar {
+                width: 200px; /* Largeur réduite sur mobile */
+            }
+            
+            .admin-bar.active ~ .login-btn {
+                right: 220px;
+            }
+        }
+
+        /* Ajuster le contenu quand la barre admin est active */
+        .admin-bar.active + .visitor-counter + header + .hero {
+            margin-top: 70px; /* Garde la même marge */
+        }
+
+        .admin-bar.active ~ header {
+            right: 0; /* Pas de décalage horizontal */
+        }
+
+        /* Ajuster le contenu en mode RTL */
+        body.rtl .admin-bar {
+            right: auto;
+            left: 0; /* Barre à gauche en RTL */
+        }
+
+        body.rtl .admin-btn {
+            text-align: right;
+        }
+
+        body.rtl .admin-btn:hover {
+            transform: translateX(5px); /* Animation inversée en RTL */
+        }
+
+        .login-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--admin);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        /* Media Library Button */
+        .media-library-btn {
+            position: fixed;
+            bottom: 80px;
+            left: 20px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            display: none;
+        }
+
+        .media-library-btn.active {
+            display: flex;
+        }
+
+        .media-library-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Comments Button */
+        .comments-btn {
+            position: fixed;
+            bottom: 140px;
+            right: 20px;
+            background-color: var(--info);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .comments-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .comments-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--danger);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-content h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        /* Login Modal */
+        .login-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .login-form h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        /* Comments Section */
+        .comments-section {
+            padding: 60px 0;
+            background-color: var(--light);
+        }
+
+        .comments-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .comment-form {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .comment-form h3 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .comments-list {
+            margin-top: 40px;
+        }
+
+        .comment-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--accent);
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .comment-author {
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .comment-date {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .comment-content {
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .no-comments {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .admin-comment-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            justify-content: flex-end;
+        }
+
+        .delete-comment-btn {
+            background-color: var(--danger);
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        /* Media Library */
+        .media-library {
+            display: none;
+        }
+
+        .media-library.active {
+            display: block;
+        }
+
+        .media-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .media-tab {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text);
+            border-bottom: 3px solid transparent;
+        }
+
+        .media-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+        }
+
+        .media-item {
+            position: relative;
+            border-radius: 5px;
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 1;
+            border: 2px solid transparent;
+        }
+
+        .media-item:hover {
+            border-color: var(--primary);
+        }
+
+        .media-item.selected {
+            border-color: var(--accent);
+        }
+
+        .media-item img,
+        .media-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .media-item .media-type {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+        }
+
+        /* Upload Area */
+        .upload-area {
+            border: 3px dashed #ddd;
+            border-radius: 10px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .upload-area:hover {
+            border-color: var(--accent);
+            background-color: var(--light);
+        }
+
+        .upload-area i {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .upload-area p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .upload-area .file-input {
+            display: none;
+        }
+
+        /* Progress Bar */
+        .upload-progress {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #eee;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--accent);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        /* Media Actions */
+        .media-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        /* Edit Buttons */
+        .edit-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--admin);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            z-index: 100;
+        }
+
+        .editable:hover .edit-btn {
+            display: flex;
+        }
+
+        .image-edit-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--admin);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            z-index: 100;
+        }
+
+        .image-editable:hover .image-edit-btn {
+            display: flex;
+        }
+
+        /* Plus Button for adding new media */
+        .plus-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        .media-section:hover .plus-btn,
+        .gallery-item:hover .plus-btn,
+        .video-item:hover .plus-btn,
+        .project-card:hover .plus-btn {
+            display: flex;
+        }
+
+        /* Minus Button for removing media */
+        .minus-btn {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background-color: var(--danger);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        .media-section:hover .minus-btn,
+        .gallery-item:hover .minus-btn,
+        .video-item:hover .minus-btn,
+        .project-card:hover .minus-btn {
+            display: flex;
+        }
+
+        /* Delete confirmation modal */
+        .delete-confirm-modal {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .delete-confirm-modal h3 {
+            color: var(--danger);
+            margin-bottom: 20px;
+        }
+
+        .delete-confirm-modal p {
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .delete-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .delete-btn {
+            background-color: var(--danger);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .cancel-btn {
+            background-color: #ccc;
+            color: var(--text);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .admin-bar.active + .visitor-counter + header {
+            top: 24px;
+        }
+
+        .visitor-counter + header {
+            top: 24px;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0;
+            color: var(--primary);
+        }
+
+        .logo-text p {
+            font-size: 0.8rem;
+            color: var(--secondary);
+            margin-top: -5px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        var(--hero-bg, url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80'));
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            padding: 180px 0 100px;
+            margin-top: 70px;
+            position: relative;
+        }
+
+        .admin-bar.active + .visitor-counter + header + .hero {
+            margin-top: 94px;
+        }
+
+        .visitor-counter + header + .hero {
+            margin-top: 94px;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: 2px solid var(--accent);
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--accent);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--white);
+            margin-left: 15px;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--white);
+            color: var(--dark);
+        }
+
+        .btn-whatsapp {
+            background-color: var(--whatsapp);
+            border-color: var(--whatsapp);
+            margin-left: 15px;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: transparent;
+            color: var(--whatsapp);
+        }
+
+        .btn-maps {
+            background-color: #4285F4;
+            border-color: #4285F4;
+            margin-left: 15px;
+        }
+
+        .btn-maps:hover {
+            background-color: transparent;
+            color: #4285F4;
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent);
+        }
+
+        /* Media Sections */
+        .media-section {
+            position: relative;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            aspect-ratio: 4/3;
+        }
+
+        .gallery-item img,
+        .gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img,
+        .gallery-item:hover video {
+            transform: scale(1.05);
+        }
+
+        /* About */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-img {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            position: relative;
+            aspect-ratio: 4/3;
+        }
+
+        .about-img img,
+        .about-img video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .about-img:hover img,
+        .about-img:hover video {
+            transform: scale(1.05);
+        }
+
+        /* Values */
+        .values {
+            background-color: var(--light);
+        }
+
+        .values-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .value-card {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .value-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        /* Projects */
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 16/9;
+        }
+
+        .project-img img,
+        .project-img video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .project-card:hover .project-img img,
+        .project-card:hover .project-img video {
+            transform: scale(1.1);
+        }
+
+        .project-info {
+            padding: 25px;
+            background-color: var(--white);
+        }
+
+        /* Video Gallery Section */
+        .video-gallery {
+            background-color: var(--light);
+        }
+
+        .video-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .video-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            aspect-ratio: 16/9;
+        }
+
+        .video-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .visitor-counter .container {
+                flex-direction: column;
+                gap: 5px;
+                padding: 5px 20px;
+            }
+
+            .media-library-btn.active {
+                bottom: 140px;
+                left: 15px;
+            }
+
+            .whatsapp-float {
+                bottom: 80px;
+                right: 15px;
+            }
+
+            .comments-btn {
+                bottom: 140px;
+                right: 15px;
+            }
+
+            .login-btn {
+                bottom: 15px;
+                right: 15px;
+            }
+
+            .hero .btn {
+                display: block;
+                margin: 10px auto;
+                width: 80%;
+                max-width: 250px;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .media-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+
+            /* Menu horizontal adapté pour mobile */
+            nav ul {
+                flex-wrap: wrap;
+                gap: 15px;
+                justify-content: center;
+            }
+            
+            nav li {
+                font-size: 0.9rem;
+            }
+            
+            .language-switcher {
+                top: 5px;
+                left: 5px;
+            }
+            
+            .lang-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+            
+            /* Admin bar responsive */
+            .admin-bar {
+                width: 200px;
+            }
+            
+            .admin-bar.active ~ .login-btn {
+                right: 220px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .visitor-counter {
+                font-size: 0.8rem;
+            }
+
+            .media-library-btn.active {
+                bottom: 120px;
+            }
+
+            .comments-btn {
+                bottom: 180px;
+            }
+
+            .modal-content {
+                padding: 15px;
+            }
+
+            .media-tabs {
+                flex-wrap: wrap;
+            }
+            
+            /* Menu très compact sur très petits écrans */
+            nav ul {
+                gap: 10px;
+            }
+            
+            nav li {
+                font-size: 0.8rem;
+            }
+            
+            .language-switcher {
+                flex-direction: column;
+                gap: 3px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button class="lang-btn active" data-lang="fr" onclick="changeLanguage('fr')">
+            <i class="fas fa-flag"></i> FR
+        </button>
+        <button class="lang-btn" data-lang="ar" onclick="changeLanguage('ar')">
+            <i class="fas fa-star-and-crescent"></i> AR
+        </button>
+    </div>
+
+    <!-- ==================== ADMIN BAR - MODIFIÉ ==================== -->
+    <div class="admin-bar" id="adminBar">
+        <div class="admin-controls">
+            <span><strong data-translate="adminMode">Mode Administrateur</strong><br><small>Modification du contenu activée</small></span>
+            <div class="admin-buttons">
+                <button class="admin-btn" onclick="saveContent()">
+                    <i class="fas fa-save"></i> <span data-translate="adminSave">Sauvegarder</span>
+                </button>
+                <button class="admin-btn" onclick="showMediaLibrary()">
+                    <i class="fas fa-images"></i> <span data-translate="adminLibrary">Bibliothèque</span>
+                </button>
+                <button class="admin-btn" onclick="showCommentsModal()">
+                    <i class="fas fa-comments"></i> <span data-translate="adminComments">Commentaires</span>
+                </button>
+                <button class="admin-btn" onclick="showChangePasswordModal()">
+                    <i class="fas fa-key"></i> <span>Changer mot de passe</span>
+                </button>
+                <button class="admin-btn" onclick="logout()" style="margin-top: 20px; background-color: var(--danger);">
+                    <i class="fas fa-sign-out-alt"></i> <span data-translate="adminLogout">Déconnexion</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Visitor Counter -->
+    <div class="visitor-counter">
+        <div class="container">
+            <span>Nombre de visiteurs : <span class="visitor-count" id="visitorCount">0</span></span>
+            <span>Visiteurs en ligne : <span class="visitor-count" id="onlineVisitors">0</span></span>
+            <span id="lastVisit">Première visite</span>
+        </div>
+    </div>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/212668378550" class="whatsapp-float" target="_blank" id="whatsappFloat">
+        <i class="fab fa-whatsapp"></i>
+        <div class="whatsapp-tooltip">Contactez-nous sur WhatsApp</div>
+    </a>
+
+    <!-- Media Library Button -->
+    <button class="media-library-btn" id="mediaLibraryBtn" title="Bibliothèque Média">
+        <i class="fas fa-images"></i>
+    </button>
+
+    <!-- Comments Button -->
+    <button class="comments-btn" id="commentsBtn" title="Voir les commentaires" onclick="scrollToComments()">
+        <i class="fas fa-comments"></i>
+        <div class="comments-badge" id="commentsBadge">0</div>
+    </button>
+
+    <!-- Login Button -->
+    <button class="login-btn" id="loginBtn" title="Connexion Administrateur">
+        <i class="fas fa-lock"></i>
+    </button>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="login-form">
+            <h3 data-translate="adminLogin">Connexion Administrateur</h3>
+            <input type="password" id="adminPassword" placeholder="Mot de passe administrateur" data-translate-placeholder="adminPasswordPlaceholder">
+            <button class="btn" onclick="login()" style="width: 100%; margin-bottom: 10px;" data-translate="adminLoginBtn">Se connecter</button>
+            <p style="text-align: center; margin-top: 15px; font-size: 0.9rem; color: #666;">
+                Contactez l'administrateur si vous avez oublié le mot de passe
+            </p>
+        </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div class="modal" id="changePasswordModal">
+        <div class="login-form">
+            <h3>Changer le mot de passe administrateur</h3>
+            <input type="password" id="currentPassword" placeholder="Mot de passe actuel">
+            <input type="password" id="newPassword" placeholder="Nouveau mot de passe (min. 6 caractères)">
+            <input type="password" id="confirmPassword" placeholder="Confirmer le nouveau mot de passe">
+            <button class="btn" onclick="changePassword()" style="width: 100%; margin-bottom: 10px;">
+                <i class="fas fa-key"></i> Changer le mot de passe
+            </button>
+            <button class="btn btn-secondary" onclick="hideChangePasswordModal()" style="width: 100%;">
+                <i class="fas fa-times"></i> Annuler
+            </button>
+        </div>
+    </div>
+
+    <!-- Media Library Modal -->
+    <div class="modal" id="mediaLibraryModal">
+        <div class="modal-content">
+            <h3 data-translate="mediaLibraryTitle">Bibliothèque Média</h3>
+            
+            <div class="media-tabs">
+                <button class="media-tab active" onclick="switchMediaTab('images')">
+                    <i class="fas fa-image"></i> <span data-translate="mediaImages">Images</span>
+                </button>
+                <button class="media-tab" onclick="switchMediaTab('videos')">
+                    <i class="fas fa-video"></i> <span data-translate="mediaVideos">Vidéos</span>
+                </button>
+                <button class="media-tab" onclick="switchMediaTab('upload')">
+                    <i class="fas fa-upload"></i> <span data-translate="mediaUpload">Télécharger</span>
+                </button>
+            </div>
+
+            <!-- Images Tab -->
+            <div id="imagesTab" class="media-library active">
+                <div class="media-grid" id="imagesGrid">
+                    <!-- Images will be loaded here -->
+                </div>
+                <div class="media-actions">
+                    <button class="btn" onclick="useSelectedMedia()">
+                        <i class="fas fa-check"></i> <span data-translate="mediaUse">Utiliser la sélection</span>
+                    </button>
+                    <button class="btn btn-secondary" onclick="hideMediaLibrary()" data-translate="mediaCancel">
+                        Annuler
+                    </button>
+                </div>
+            </div>
+
+            <!-- Videos Tab -->
+            <div id="videosTab" class="media-library">
+                <div class="media-grid" id="videosGrid">
+                    <!-- Videos will be loaded here -->
+                </div>
+                <div class="media-actions">
+                    <button class="btn" onclick="useSelectedMedia()">
+                        <i class="fas fa-check"></i> <span data-translate="mediaUse">Utiliser la sélection</span>
+                    </button>
+                    <button class="btn btn-secondary" onclick="hideMediaLibrary()" data-translate="mediaCancel">
+                        Annuler
+                    </button>
+                </div>
+            </div>
+
+            <!-- Upload Tab -->
+            <div id="uploadTab" class="media-library">
+                <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p data-translate="mediaUploadClick">Cliquez pour sélectionner des fichiers</p>
+                    <p style="font-size: 0.9rem; color: #999;" data-translate="mediaUploadFormats">
+                        Formats supportés: JPG, PNG, GIF, MP4, WebM
+                    </p>
+                    <input type="file" id="fileInput" class="file-input" multiple 
+                           accept="image/*,video/*" onchange="handleFileSelect(event)">
+                </div>
+
+                <div class="upload-progress" id="uploadProgress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p id="progressText" data-translate="mediaUploading">Téléchargement en cours...</p>
+                </div>
+
+                <div class="media-actions">
+                    <button class="btn" onclick="hideMediaLibrary()">
+                        Terminer
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <h3 id="editTitle">Modifier le contenu</h3>
+            <div id="editContent">
+                <!-- Content will be loaded here -->
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button class="btn" onclick="saveEdit()" style="flex: 1;">
+                    <i class="fas fa-save"></i> Enregistrer
+                </button>
+                <button class="btn btn-secondary" onclick="closeEditModal()" style="flex: 1;">
+                    Annuler
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal" id="deleteConfirmModal">
+        <div class="delete-confirm-modal">
+            <h3>Confirmer la suppression</h3>
+            <p id="deleteMessage">Êtes-vous sûr de vouloir supprimer cet élément ?</p>
+            <div class="delete-actions">
+                <button class="delete-btn" onclick="confirmDelete()">
+                    <i class="fas fa-trash"></i> Supprimer
+                </button>
+                <button class="cancel-btn" onclick="cancelDelete()">
+                    <i class="fas fa-times"></i> Annuler
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo editable" data-id="logo">
+                <i class="fas fa-hands-helping"></i>
+                <div class="logo-text">
+                    <h1 data-editable="true" data-id="siteTitle">ANSFAL</h1>
+                    <p data-editable="true" data-id="siteSubtitle">Coopération, Développement & Environnement</p>
+                </div>
+                <button class="edit-btn" onclick="editText('siteTitle')">
+                    <i class="fas fa-edit"></i>
+                </button>
+            </div>
+            
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="#accueil" data-translate="navHome">Accueil</a></li>
+                    <li><a href="#apropos" data-translate="navAbout">À propos</a></li>
+                    <li><a href="#mission" data-translate="navMission">Notre mission</a></li>
+                    <li><a href="#projets" data-translate="navProjects">Projets</a></li>
+                    <li><a href="#galerie" data-translate="navGallery">Galerie</a></li>
+                    <li><a href="#videos" data-translate="navVideos">Vidéos</a></li>
+                    <li><a href="#commentaires" data-translate="navComments">Commentaires</a></li>
+                    <li><a href="#contact" data-translate="navContact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="accueil">
+        <div class="media-section">
+            <button class="plus-btn" onclick="addHeroMedia()" title="Ajouter une image ou vidéo">
+                <i class="fas fa-plus"></i>
+            </button>
+            <button class="minus-btn" onclick="removeHeroMedia()" title="Retirer l'image d'arrière-plan">
+                <i class="fas fa-minus"></i>
+            </button>
+            <button class="image-edit-btn" onclick="editMedia('heroBg')">
+                <i class="fas fa-camera"></i>
+            </button>
+        </div>
+        <div class="container">
+            <h2 class="editable" data-id="heroTitle" data-editable="true">ANSFAL</h2>
+            <button class="edit-btn" onclick="editText('heroTitle')">
+                <i class="fas fa-edit"></i>
+            </button>
+            
+            <h3 class="editable" data-id="heroSubtitle" data-editable="true">Association pour la Coopération, le Développement et l'Environnement</h3>
+            <button class="edit-btn" onclick="editText('heroSubtitle')">
+                <i class="fas fa-edit"></i>
+            </button>
+            
+            <p class="editable" data-id="heroText" data-editable="true">Œuvrant pour un développement durable, la coopération internationale et la protection de l'environnement depuis 2023.</p>
+            <button class="edit-btn" onclick="editText('heroText')">
+                <i class="fas fa-edit"></i>
+            </button>
+            
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 30px;">
+                <a href="#projets" class="btn" data-translate="btnDiscover">Découvrir nos actions</a>
+                <a href="#galerie" class="btn btn-maps">
+                    <i class="fas fa-images"></i> <span data-translate="btnGallery">Galerie</span>
+                </a>
+                <a href="#commentaires" class="btn" onclick="scrollToComments()">
+                    <i class="fas fa-comments"></i> <span data-translate="btnComments">Commentaires</span>
+                </a>
+                <a href="https://wa.me/212668378550" class="btn btn-whatsapp" target="_blank">
+                    <i class="fab fa-whatsapp"></i> <span data-translate="btnContact">Contact</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="apropos">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="editable" data-id="aboutTitle" data-editable="true">À propos d'ANSFAL</h2>
+                <button class="edit-btn" onclick="editText('aboutTitle')">
+                    <i class="fas fa-edit"></i>
+                </button>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3 class="editable" data-id="aboutSubtitle" data-editable="true">Notre histoire</h3>
+                    <button class="edit-btn" onclick="editText('aboutSubtitle')">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    
+                    <p class="editable" data-id="aboutText1" data-editable="true">Fondée en 2023, l'Association ANSFAL POUR LA COOPÉRATION ET LE DÉVELOPPEMENT ET L'ENVIRONNEMENT est née de la conviction que le développement humain et la protection environnementale doivent aller de pair.</p>
+                    <button class="edit-btn" onclick="editText('aboutText1')">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    
+                    <p class="editable" data-id="aboutText2" data-editable="true">Notre nom "ANSFAL" symbolise notre engagement pour un avenir meilleur, où la coopération internationale sert de levier pour un développement durable et équitable.</p>
+                    <button class="edit-btn" onclick="editText('aboutText2')">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                </div>
+                <div class="about-img image-editable" data-id="aboutImage">
+                    <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" 
+                         alt="Équipe ANSFAL"
+                         id="aboutImage">
+                    <button class="image-edit-btn" onclick="editMedia('aboutImage')">
+                        <i class="fas fa-camera"></i>
+                    </button>
+                    <button class="plus-btn" onclick="addAboutMedia()" title="Ajouter une image ou vidéo">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button class="minus-btn" onclick="removeAboutMedia()" title="Supprimer cette image">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="galerie" class="media-section">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="editable" data-id="galleryTitle" data-editable="true">Galerie Photos</h2>
+                <button class="edit-btn" onclick="editText('galleryTitle')">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <p class="editable" data-id="gallerySubtitle" data-editable="true">Découvrez nos activités en images</p>
+                <button class="edit-btn" onclick="editText('gallerySubtitle')">
+                    <i class="fas fa-edit"></i>
+                </button>
+            </div>
+            
+            <div class="gallery-grid" id="galleryGrid">
+                <div class="gallery-item image-editable" data-id="gallery1">
+                    <img src="https://images.unsplash.com/photo-1586773860418-dc22f8b874bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" 
+                         alt="Activité 1"
+                         id="gallery1">
+                    <button class="image-edit-btn" onclick="editMedia('gallery1')">
+                        <i class="fas fa-camera"></i>
+                    </button>
+                    <button class="plus-btn" onclick="addGalleryMedia('gallery1')" title="Changer cette image">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button class="minus-btn" onclick="removeGalleryItem('gallery1')" title="Supprimer cette image">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+                <div class="gallery-item image-editable" data-id="gallery2">
+                    <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1472&q=80" 
+                         alt="Activité 2"
+                         id="gallery2">
+                    <button class="image-edit-btn" onclick="editMedia('gallery2')">
+                        <i class="fas fa-camera"></i>
+                    </button>
+                    <button class="plus-btn" onclick="addGalleryMedia('gallery2')" title="Changer cette image">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button class="minus-btn" onclick="removeGalleryItem('gallery2')" title="Supprimer cette image">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+                <div class="gallery-item image-editable" data-id="gallery3">
+                    <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" 
+                         alt="Activité 3"
+                         id="gallery3">
+                    <button class="image-edit-btn" onclick="editMedia('gallery3')">
+                        <i class="fas fa-camera"></i>
+                    </button>
+                    <button class="plus-btn" onclick="addGalleryMedia('gallery3')" title="Changer cette image">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button class="minus-btn" onclick="removeGalleryItem('gallery3')" title="Supprimer cette image">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <button class="plus-btn" onclick="addGalleryItem()" title="Ajouter une image à la galerie" 
+                    style="position: relative; margin: 30px auto 0; display: block; width: 50px; height: 50px;">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- Video Gallery Section -->
+    <section id="videos" class="video-gallery media-section">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="editable" data-id="videosTitle" data-editable="true">Nos Vidéos</h2>
+                <button class="edit-btn" onclick="editText('videosTitle')">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <p class="editable" data-id="videosSubtitle" data-editable="true">Regardez nos projets en action</p>
+                <button class="edit-btn" onclick="editText('videosSubtitle')">
+                    <i class="fas fa-edit"></i>
+                </button>
+            </div>
+            
+            <div class="video-container" id="videoContainer">
+                <div class="video-item image-editable" data-id="video1">
+                    <video id="video1" controls>
+                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la vidéo.
+                    </video>
+                    <button class="image-edit-btn" onclick="editMedia('video1')">
+                        <i class="fas fa-video"></i>
+                    </button>
+                    <button class="plus-btn" onclick="addVideoMedia('video1')" title="Changer cette vidéo">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button class="minus-btn" onclick="removeVideoItem('video1')" title="Supprimer cette vidéo">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <button class="plus-btn" onclick="addVideoItem()" title="Ajouter une vidéo" 
+                    style="position: relative; margin: 30px auto 0; display: block; width: 50px; height: 50px;">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- Comments Section -->
+    <section id="commentaires" class="comments-section">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-translate="commentsTitle">Commentaires des Visiteurs</h2>
+                <p data-translate="commentsSubtitle">Partagez vos impressions et suggestions</p>
+            </div>
+            
+            <div class="comments-container">
+                <div class="comment-form">
+                    <h3 data-translate="commentFormTitle">Laisser un commentaire</h3>
+                    <form id="commentForm">
+                        <div class="form-group">
+                            <label for="commentName" data-translate="commentName">Nom *</label>
+                            <input type="text" id="commentName" name="name" required maxlength="50">
+                        </div>
+                        <div class="form-group">
+                            <label for="commentEmail" data-translate="commentEmail">Email (facultatif)</label>
+                            <input type="email" id="commentEmail" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="commentMessage" data-translate="commentMessage">Message *</label>
+                            <textarea id="commentMessage" name="message" required maxlength="1000"></textarea>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%;">
+                            <i class="fas fa-paper-plane"></i> <span data-translate="commentSubmit">Publier le commentaire</span>
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="comments-list" id="commentsList">
+                    <div class="no-comments" id="noComments">
+                        <i class="fas fa-comments" style="font-size: 3rem; margin-bottom: 15px; color: #ccc;"></i>
+                        <p data-translate="noComments">Soyez le premier à laisser un commentaire !</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projets">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="editable" data-id="projectsTitle" data-editable="true">Nos Projets</h2>
+                <button class="edit-btn" onclick="editText('projectsTitle')">
+                    <i class="fas fa-edit"></i>
+                </button>
+            </div>
+            <div class="projects-container">
+                <!-- Project 1 -->
+                <div class="project-card editable" data-id="project1">
+                    <div class="project-img image-editable" data-id="project1Image">
+                        <img src="https://images.unsplash.com/photo-1586773860418-dc22f8b874bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" 
+                             alt="Coopération internationale"
+                             id="project1Image">
+                        <button class="image-edit-btn" onclick="editMedia('project1Image')">
+                            <i class="fas fa-camera"></i>
+                        </button>
+                        <button class="plus-btn" onclick="addProjectMedia('project1Image')" title="Changer l'image">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <button class="minus-btn" onclick="removeProjectMedia('project1Image')" title="Supprimer cette image">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="editable" data-id="project1Title" data-editable="true">Coopération Internationale</h3>
+                        <button class="edit-btn" onclick="editText('project1Title')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <p class="editable" data-id="project1Text" data-editable="true">Mise en place de programmes d'échange, jumelages entre villes, et partenariats institutionnels pour le transfert de compétences.</p>
+                        <button class="edit-btn" onclick="editText('project1Text')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card editable" data-id="project2">
+                    <div class="project-img image-editable" data-id="project2Image">
+                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1472&q=80" 
+                             alt="Développement rural"
+                             id="project2Image">
+                        <button class="image-edit-btn" onclick="editMedia('project2Image')">
+                            <i class="fas fa-camera"></i>
+                        </button>
+                        <button class="plus-btn" onclick="addProjectMedia('project2Image')" title="Changer l'image">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <button class="minus-btn" onclick="removeProjectMedia('project2Image')" title="Supprimer cette image">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="editable" data-id="project2Title" data-editable="true">Développement Rural</h3>
+                        <button class="edit-btn" onclick="editText('project2Title')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <p class="editable" data-id="project2Text" data-editable="true">Appui aux agriculteurs de la région d'Azilal, promotion de l'agroécologie, gestion des ressources en eau.</p>
+                        <button class="edit-btn" onclick="editText('project2Text')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-translate="contactTitle">Contactez ANSFAL</h2>
+                <p data-translate="contactSubtitle">Pour toute information ou collaboration</p>
+            </div>
+            <div style="text-align: center;">
+                <div class="contact-info" style="max-width: 600px; margin: 0 auto;">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4 data-translate="address">Adresse</h4>
+                            <p data-translate="addressText">Douar Ansfal, Boukhadel<br>Zaouiat Ahansal, Azilal<br>Maroc</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4 data-translate="phone">Téléphone</h4>
+                            <p data-translate="phoneText">+212 668 378 550</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <div>
+                            <h4 data-translate="whatsapp">WhatsApp</h4>
+                            <p data-translate="whatsappText">+212 625 931 318</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4 data-translate="email">Email</h4>
+                            <p data-translate="emailText">ascoansfal@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-logo">
+                    <h3>ANSFAL</h3>
+                    <p>Association pour la Coopération, le Développement et l'Environnement</p>
+                </div>
+                
+                <div class="footer-social">
+                    <h4 data-translate="followUs">Suivez-nous</h4>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://wa.me/212668378550" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="mailto:ascoansfal@gmail.com"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p data-translate="copyright">&copy; 2023 ANSFAL - Association pour la Coopération, le Développement et l'Environnement</p>
+                <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.8;">
+                    <span id="totalComments">0</span> commentaires • <span id="totalVisitors">0</span> visiteurs
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ==================== DÉBOGAGE ====================
+        console.log('Script chargé - Démarrage...');
+
+        // ==================== TRANSLATION SYSTEM ====================
+        const TRANSLATIONS_KEY = 'ansfal_translations';
+        const LANGUAGE_KEY = 'ansfal_language';
+
+        let translations = {
+            fr: {
+                // Header & Navigation
+                siteTitle: "ANSFAL",
+                siteSubtitle: "Coopération, Développement & Environnement",
+                navHome: "Accueil",
+                navAbout: "À propos",
+                navMission: "Notre mission",
+                navProjects: "Projets",
+                navGallery: "Galerie",
+                navVideos: "Vidéos",
+                navComments: "Commentaires",
+                navContact: "Contact",
+                
+                // Hero Section
+                heroTitle: "ANSFAL",
+                heroSubtitle: "Association pour la Coopération, le Développement et l'Environnement",
+                heroText: "Œuvrant pour un développement durable, la coopération internationale et la protection de l'environnement depuis 2023.",
+                btnDiscover: "Découvrir nos actions",
+                btnGallery: "Galerie",
+                btnComments: "Commentaires",
+                btnContact: "Contact",
+                
+                // About Section
+                aboutTitle: "À propos d'ANSFAL",
+                aboutSubtitle: "Notre histoire",
+                aboutText1: "Fondée en 2023, l'Association ANSFAL POUR LA COOPÉRATION ET LE DÉVELOPPEMENT ET L'ENVIRONNEMENT est née de la conviction que le développement humain et la protection environnementale doivent aller de pair.",
+                aboutText2: "Notre nom 'ANSFAL' symbolise notre engagement pour un avenir meilleur, où la coopération internationale sert de levier pour un développement durable et équitable.",
+                
+                // Gallery Section
+                galleryTitle: "Galerie Photos",
+                gallerySubtitle: "Découvrez nos activités en images",
+                
+                // Videos Section
+                videosTitle: "Nos Vidéos",
+                videosSubtitle: "Regardez nos projets en action",
+                
+                // Projects Section
+                projectsTitle: "Nos Projets",
+                project1Title: "Coopération Internationale",
+                project1Text: "Mise en place de programmes d'échange, jumelages entre villes, et partenariats institutionnels pour le transfert de compétences.",
+                project2Title: "Développement Rural",
+                project2Text: "Appui aux agriculteurs de la région d'Azilal, promotion de l'agroécologie, gestion des ressources en eau.",
+                
+                // Comments Section
+                commentsTitle: "Commentaires des Visiteurs",
+                commentsSubtitle: "Partagez vos impressions et suggestions",
+                commentFormTitle: "Laisser un commentaire",
+                commentName: "Nom *",
+                commentEmail: "Email (facultatif)",
+                commentMessage: "Message *",
+                commentSubmit: "Publier le commentaire",
+                noComments: "Soyez le premier à laisser un commentaire !",
+                commentAuthor: "Auteur",
+                commentDate: "Date",
+                
+                // Contact Section
+                contactTitle: "Contactez ANSFAL",
+                contactSubtitle: "Pour toute information ou collaboration",
+                address: "Adresse",
+                phone: "Téléphone",
+                whatsapp: "WhatsApp",
+                email: "Email",
+                addressText: "Douar Ansfal, Boukhadel<br>Zaouiat Ahansal, Azilal<br>Maroc",
+                phoneText: "+212 668 37 85 50",
+                whatsappText: "+212 625 93 13 18",
+                emailText: "ascoansfal@gmail.com",
+                
+                // Footer
+                followUs: "Suivez-nous",
+                copyright: "© 2025 ANSFAL - Association pour la Coopération, le Développement et l'Environnement",
+                
+                // Admin
+                adminMode: "Mode Administrateur",
+                adminSave: "Sauvegarder",
+                adminLibrary: "Bibliothèque",
+                adminComments: "Commentaires",
+                adminLogout: "Déconnexion",
+                adminLogin: "Connexion Administrateur",
+                adminPasswordPlaceholder: "Mot de passe administrateur",
+                adminLoginBtn: "Se connecter",
+                
+                // Media Library
+                mediaLibraryTitle: "Bibliothèque Média",
+                mediaImages: "Images",
+                mediaVideos: "Vidéos",
+                mediaUpload: "Télécharger",
+                mediaUse: "Utiliser la sélection",
+                mediaCancel: "Annuler",
+                mediaUploadClick: "Cliquez pour sélectionner des fichiers",
+                mediaUploadFormats: "Formats supportés: JPG, PNG, GIF, MP4, WebM",
+                mediaUploading: "Téléchargement en cours...",
+                mediaUploadComplete: "Téléchargement terminé",
+                
+                // Messages
+                confirmDelete: "Êtes-vous sûr de vouloir supprimer cet élément ?",
+                deleteSuccess: "Élément supprimé avec succès !",
+                saveSuccess: "Modification enregistrée !",
+                saveAllSuccess: "Tout le contenu a été sauvegardé !",
+                loginSuccess: "Mode administrateur activé !",
+                logoutSuccess: "Déconnexion réussie",
+                commentSuccess: "Merci pour votre commentaire ! Il a été publié avec succès.",
+                passwordIncorrect: "Mot de passe incorrect"
+            },
+            ar: {
+                // Header & Navigation
+                siteTitle: "أنسفال",
+                siteSubtitle: "التعاون، التنمية والبيئة",
+                navHome: "الرئيسية",
+                navAbout: "من نحن",
+                navMission: "مهمتنا",
+                navProjects: "المشاريع",
+                navGallery: "معرض الصور",
+                navVideos: "الفيديوهات",
+                navComments: "التعليقات",
+                navContact: "اتصل بنا",
+                
+                // Hero Section
+                heroTitle: "أنسفال",
+                heroSubtitle: "جمعية التعاون، التنمية والبيئة",
+                heroText: "تعمل من أجل تنمية مستدامة، تعاون دولي وحماية البيئة منذ عام 2023.",
+                btnDiscover: "اكتشف مبادراتنا",
+                btnGallery: "معرض الصور",
+                btnComments: "التعليقات",
+                btnContact: "اتصل بنا",
+                
+                // About Section
+                aboutTitle: "عن أنسفال",
+                aboutSubtitle: "تاريخنا",
+                aboutText1: "تأسست جمعية أنسفال للتعاون والتنمية والبيئة سنة 2023، انطلاقا من قناعة أن التنمية البشرية وحماية البيئة يجب أن يسيرا يداً بيد.",
+                aboutText2: "اسم 'أنسفال' يرمز لالتزامنا بمستقبل أفضل، حيث يكون التعاون الدولي رافعة للتنمية المستدامة والعادلة.",
+                
+                // Gallery Section
+                galleryTitle: "معرض الصور",
+                gallerySubtitle: "اكتشفوا أنشطتنا في الصور",
+                
+                // Videos Section
+                videosTitle: "فيديوهاتنا",
+                videosSubtitle: "شاهدوا مشاريعنا في العمل",
+                
+                // Projects Section
+                projectsTitle: "مشاريعنا",
+                project1Title: "التعاون الدولي",
+                project1Text: "تنفيذ برامج تبادل، توأمة بين االجمعيات لمدن، وشراكات مؤسسية لنقل المهارات.",
+                project2Title: "التنمية القروية",
+                project2Text: "دعم الفلاحين بمنطقة زاوية احنصال، تشجيع الزراعة الإيكولوجية، إدارة الموارد المائية.",
+                
+                // Comments Section
+                commentsTitle: "تعليقات الزوار",
+                commentsSubtitle: "شاركوا انطباعاتكم واقتراحاتكم",
+                commentFormTitle: "اترك تعليقاً",
+                commentName: "الاسم *",
+                commentEmail: "البريد الإلكتروني (اختياري)",
+                commentMessage: "الرسالة *",
+                commentSubmit: "نشر التعليق",
+                noComments: "كن أول من يترك تعليقاً!",
+                commentAuthor: "المؤلف",
+                commentDate: "التاريخ",
+                
+                // Contact Section
+                contactTitle: "اتصل بأنسفال",
+                contactSubtitle: "لأي معلومات أو تعاون",
+                address: "العنوان",
+                phone: "الهاتف",
+                whatsapp: "واتساب",
+                email: "البريد الإلكتروني",
+                addressText: "دوار أنسفال، بوخدل<br>زاوية أحنصال، أزيلال<br>المغرب",
+                phoneText: '<span class="ltr-number">+212 668 37 85 50</span>',
+                whatsappText: '<span class="ltr-number">+212 625 93 13 18</span>',
+                emailText: "ascoansfal@gmail.com",
+                
+                // Footer
+                followUs: "تابعونا",
+                copyright: "© 2025 أنسفال - جمعية التعاون، التنمية والبيئة",
+                
+                // Admin
+                adminMode: "وضع المدير",
+                adminSave: "حفظ",
+                adminLibrary: "المكتبة",
+                adminComments: "التعليقات",
+                adminLogout: "تسجيل الخروج",
+                adminLogin: "تسجيل دخول المدير",
+                adminPasswordPlaceholder: "كلمة مرور المدير",
+                adminLoginBtn: "تسجيل الدخول",
+                
+                // Media Library
+                mediaLibraryTitle: "مكتبة الوسائط",
+                mediaImages: "الصور",
+                mediaVideos: "الفيديوهات",
+                mediaUpload: "رفع ملف",
+                mediaUse: "استخدام المحدد",
+                mediaCancel: "إلغاء",
+                mediaUploadClick: "انقر لاختيار الملفات",
+                mediaUploadFormats: "الصيغ المدعومة: JPG, PNG, GIF, MP4, WebM",
+                mediaUploading: "جاري التحميل...",
+                mediaUploadComplete: "تم التحميل بنجاح",
+                
+                // Messages
+                confirmDelete: "هل أنت متأكد من حذف هذا العنصر؟",
+                deleteSuccess: "تم حذف العنصر بنجاح!",
+                saveSuccess: "تم حفظ التعديل!",
+                saveAllSuccess: "تم حفظ جميع المحتويات!",
+                loginSuccess: "تم تفعيل وضع المدير!",
+                logoutSuccess: "تم تسجيل الخروج بنجاح",
+                commentSuccess: "شكراً لتعليقك! تم نشره بنجاح.",
+                passwordIncorrect: "كلمة المرور غير صحيحة"
+            }
+        };
+
+        let currentLang = 'fr';
+
+        // Initialize translation system
+        function initTranslationSystem() {
+            console.log('Initialisation du système de traduction...');
+            // Load saved language preference
+            const savedLang = localStorage.getItem(LANGUAGE_KEY) || 'fr';
+            console.log('Langue sauvegardée:', savedLang);
+            changeLanguage(savedLang);
+            
+            // Save translations if not exists
+            const savedTranslations = localStorage.getItem(TRANSLATIONS_KEY);
+            if (!savedTranslations) {
+                localStorage.setItem(TRANSLATIONS_KEY, JSON.stringify(translations));
+            } else {
+                translations = JSON.parse(savedTranslations);
+            }
+            console.log('Système de traduction initialisé');
+        }
+
+        // Change language
+        function changeLanguage(lang) {
+            console.log('Changement de langue vers:', lang);
+            currentLang = lang;
+            
+            // Update buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if (btn.dataset.lang === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Update direction
+            if (lang === 'ar') {
+                document.body.classList.add('rtl');
+                document.body.setAttribute('dir', 'rtl');
+                document.body.setAttribute('lang', 'ar');
+                console.log('Mode RTL activé');
+            } else {
+                document.body.classList.remove('rtl');
+                document.body.setAttribute('dir', 'ltr');
+                document.body.setAttribute('lang', 'fr');
+                console.log('Mode LTR activé');
+            }
+            
+            // Update all translatable text
+            updateAllTexts();
+            
+            // Save preference
+            localStorage.setItem(LANGUAGE_KEY, lang);
+            console.log('Langue changée avec succès vers:', lang);
+        }
+
+        // Update all texts - CORRIGÉ
+        function updateAllTexts() {
+            console.log('Mise à jour des textes pour la langue:', currentLang);
+            
+            // Update elements with data-translate attribute
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[currentLang] && translations[currentLang][key]) {
+                    // Pour les éléments qui contiennent du HTML (comme addressText)
+                    if (key === 'addressText' || key === 'phoneText' || key === 'whatsappText') {
+                        element.innerHTML = translations[currentLang][key];
+                    } else {
+                        element.textContent = translations[currentLang][key];
+                    }
+                }
+            });
+            
+            // Update placeholder attributes
+            document.querySelectorAll('[data-translate-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-translate-placeholder');
+                if (translations[currentLang] && translations[currentLang][key]) {
+                    element.placeholder = translations[currentLang][key];
+                }
+            });
+            
+            // Update editable content with translations ONLY if not in admin mode
+            const editableIds = [
+                'siteTitle', 'siteSubtitle', 'heroTitle', 'heroSubtitle', 'heroText',
+                'aboutTitle', 'aboutSubtitle', 'aboutText1', 'aboutText2',
+                'galleryTitle', 'gallerySubtitle', 'videosTitle', 'videosSubtitle',
+                'projectsTitle', 'project1Title', 'project1Text', 'project2Title', 'project2Text'
+            ];
+            
+            editableIds.forEach(id => {
+                const element = document.querySelector(`[data-id="${id}"]`);
+                if (element && translations[currentLang] && translations[currentLang][id]) {
+                    // Only update if not being edited
+                    if (!element.classList.contains('editing')) {
+                        element.textContent = translations[currentLang][id];
+                    }
+                }
+            });
+            
+            console.log('Textes mis à jour avec succès');
+        }
+
+        // ==================== VISITOR COUNTER SYSTEM ====================
+        
+        const VISITOR_STORAGE_KEY = 'ansfal_visitor_stats';
+        const ONLINE_TIMEOUT = 300000; // 5 minutes en millisecondes
+        
+        let visitorStats = {
+            totalVisits: 0,
+            uniqueVisitors: 0,
+            onlineVisitors: 0,
+            lastVisit: null,
+            visitorSessions: {},
+            lastOnlineCheck: Date.now()
+        };
+
+        // Initialize visitor counter
+        function initVisitorCounter() {
+            console.log('Initialisation du compteur de visiteurs...');
+            const saved = localStorage.getItem(VISITOR_STORAGE_KEY);
+            if (saved) {
+                visitorStats = JSON.parse(saved);
+            }
+            
+            // Generate unique visitor ID
+            let visitorId = localStorage.getItem('ansfal_visitor_id');
+            if (!visitorId) {
+                visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('ansfal_visitor_id', visitorId);
+                visitorStats.uniqueVisitors++;
+            }
+            
+            // Check if this is a new session (last visit more than 30 minutes ago)
+            const now = Date.now();
+            const lastSession = visitorStats.visitorSessions[visitorId] || 0;
+            const sessionTimeout = 30 * 60 * 1000; // 30 minutes
+            
+            if (now - lastSession > sessionTimeout) {
+                visitorStats.totalVisits++;
+                visitorStats.visitorSessions[visitorId] = now;
+            }
+            
+            // Update online visitors
+            updateOnlineVisitors(visitorId);
+            
+            // Update last visit
+            const lastVisit = localStorage.getItem('ansfal_last_visit');
+            if (lastVisit) {
+                visitorStats.lastVisit = lastVisit;
+            }
+            
+            // Save current visit
+            const visitDate = new Date().toLocaleString('fr-FR');
+            localStorage.setItem('ansfal_last_visit', visitDate);
+            visitorStats.lastVisit = visitDate;
+            
+            saveVisitorStats();
+            updateVisitorDisplay();
+            
+            // Update online status periodically
+            setInterval(() => updateOnlineStatus(visitorId), 60000); // Every minute
+            console.log('Compteur de visiteurs initialisé');
+        }
+
+        // Update online visitors
+        function updateOnlineVisitors(visitorId) {
+            const now = Date.now();
+            visitorStats.lastOnlineCheck = now;
+            
+            // Remove old sessions (more than 5 minutes)
+            Object.keys(visitorStats.visitorSessions).forEach(id => {
+                if (now - visitorStats.visitorSessions[id] > ONLINE_TIMEOUT) {
+                    delete visitorStats.visitorSessions[id];
+                }
+            });
+            
+            // Update current visitor session
+            visitorStats.visitorSessions[visitorId] = now;
+            
+            // Count online visitors
+            visitorStats.onlineVisitors = Object.keys(visitorStats.visitorSessions).length;
+        }
+
+        // Update online status
+        function updateOnlineStatus(visitorId) {
+            updateOnlineVisitors(visitorId);
+            saveVisitorStats();
+            updateVisitorDisplay();
+        }
+
+        // Update visitor display
+        function updateVisitorDisplay() {
+            document.getElementById('visitorCount').textContent = visitorStats.totalVisits.toLocaleString();
+            document.getElementById('onlineVisitors').textContent = visitorStats.onlineVisitors.toLocaleString();
+            document.getElementById('totalVisitors').textContent = visitorStats.totalVisits.toLocaleString();
+            
+            const lastVisitElement = document.getElementById('lastVisit');
+            if (visitorStats.lastVisit) {
+                lastVisitElement.textContent = 'Dernière visite: ' + visitorStats.lastVisit;
+            }
+        }
+
+        // Save visitor stats
+        function saveVisitorStats() {
+            localStorage.setItem(VISITOR_STORAGE_KEY, JSON.stringify(visitorStats));
+        }
+
+        // ==================== COMMENTS SYSTEM ====================
+        
+        const COMMENTS_STORAGE_KEY = 'ansfal_comments';
+        const COMMENTS_PER_PAGE = 10;
+        
+        let comments = [];
+        let currentPage = 1;
+
+        // Initialize comments system
+        function initCommentsSystem() {
+            console.log('Initialisation du système de commentaires...');
+            const saved = localStorage.getItem(COMMENTS_STORAGE_KEY);
+            if (saved) {
+                comments = JSON.parse(saved);
+            }
+            
+            // Filter out deleted comments
+            comments = comments.filter(comment => !comment.deleted);
+            
+            updateCommentsDisplay();
+            setupCommentForm();
+            updateCommentsBadge();
+            console.log('Système de commentaires initialisé');
+        }
+
+        // Setup comment form
+        function setupCommentForm() {
+            const form = document.getElementById('commentForm');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('commentName').value.trim();
+                const email = document.getElementById('commentEmail').value.trim();
+                const message = document.getElementById('commentMessage').value.trim();
+                
+                if (!name || !message) {
+                    alert('Veuillez remplir tous les champs obligatoires (*)');
+                    return;
+                }
+                
+                if (message.length > 1000) {
+                    alert('Le message ne doit pas dépasser 1000 caractères');
+                    return;
+                }
+                
+                const newComment = {
+                    id: 'comment_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+                    name: name,
+                    email: email || null,
+                    message: message,
+                    date: new Date().toLocaleString('fr-FR'),
+                    approved: true,
+                    deleted: false
+                };
+                
+                comments.unshift(newComment);
+                saveComments();
+                updateCommentsDisplay();
+                updateCommentsBadge();
+                
+                // Reset form
+                form.reset();
+                
+                alert(translations[currentLang].commentSuccess);
+                
+                setTimeout(() => {
+                    document.getElementById('commentaires').scrollIntoView({ behavior: 'smooth' });
+                }, 500);
+            });
+        }
+
+        // Update comments display
+        function updateCommentsDisplay() {
+            const commentsList = document.getElementById('commentsList');
+            const noComments = document.getElementById('noComments');
+            
+            if (comments.length === 0) {
+                noComments.style.display = 'block';
+                commentsList.innerHTML = '';
+                commentsList.appendChild(noComments);
+                return;
+            }
+            
+            noComments.style.display = 'none';
+            
+            const approvedComments = comments.filter(comment => comment.approved && !comment.deleted);
+            
+            document.getElementById('totalComments').textContent = approvedComments.length.toLocaleString();
+            
+            commentsList.innerHTML = '';
+            
+            approvedComments.forEach(comment => {
+                const commentElement = document.createElement('div');
+                commentElement.className = 'comment-item';
+                commentElement.id = comment.id;
+                
+                let adminControls = '';
+                if (isAdmin) {
+                    adminControls = `
+                        <div class="admin-comment-controls">
+                            <button class="delete-comment-btn" onclick="deleteComment('${comment.id}')">
+                                <i class="fas fa-trash"></i> ${currentLang === 'ar' ? 'حذف' : 'Supprimer'}
+                            </button>
+                        </div>
+                    `;
+                }
+                
+                commentElement.innerHTML = `
+                    <div class="comment-header">
+                        <div class="comment-author">${escapeHtml(comment.name)}</div>
+                        <div class="comment-date">${comment.date}</div>
+                    </div>
+                    <div class="comment-content">${escapeHtml(comment.message).replace(/\n/g, '<br>')}</div>
+                    ${adminControls}
+                `;
+                
+                commentsList.appendChild(commentElement);
+            });
+        }
+
+        // Delete comment
+        function deleteComment(commentId) {
+            if (!isAdmin) {
+                alert('Veuillez vous connecter en tant qu\'administrateur');
+                showLoginModal();
+                return;
+            }
+            
+            if (confirm(translations[currentLang].confirmDelete)) {
+                const commentIndex = comments.findIndex(c => c.id === commentId);
+                if (commentIndex !== -1) {
+                    comments[commentIndex].deleted = true;
+                    saveComments();
+                    updateCommentsDisplay();
+                    updateCommentsBadge();
+                    alert(translations[currentLang].deleteSuccess);
+                }
+            }
+        }
+
+        // Update comments badge
+        function updateCommentsBadge() {
+            const approvedComments = comments.filter(comment => comment.approved && !comment.deleted);
+            const badge = document.getElementById('commentsBadge');
+            badge.textContent = approvedComments.length;
+            
+            if (approvedComments.length > 0) {
+                badge.style.display = 'flex';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
+        // Save comments
+        function saveComments() {
+            localStorage.setItem(COMMENTS_STORAGE_KEY, JSON.stringify(comments));
+        }
+
+        // Escape HTML to prevent XSS
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Show comments modal
+        function showCommentsModal() {
+            if (!isAdmin) {
+                alert('Veuillez vous connecter en tant qu\'administrateur');
+                showLoginModal();
+                return;
+            }
+            
+            scrollToComments();
+        }
+
+        // Scroll to comments
+        function scrollToComments() {
+            document.getElementById('commentaires').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ==================== MEDIA LIBRARY SYSTEM ====================
+        
+        const MEDIA_STORAGE_KEY = 'ansfal_media_library';
+        let mediaLibrary = {
+            images: [],
+            videos: []
+        };
+        let selectedMedia = null;
+        let currentEditElement = null;
+        let isUploading = false;
+        let deleteTarget = null;
+
+        // Initialize media library
+        function initMediaLibrary() {
+            console.log('Initialisation de la bibliothèque média...');
+            const saved = localStorage.getItem(MEDIA_STORAGE_KEY);
+            if (saved) {
+                mediaLibrary = JSON.parse(saved);
+            }
+            renderMediaLibrary();
+            console.log('Bibliothèque média initialisée');
+        }
+
+        // Show media library
+        function showMediaLibrary() {
+            if (!isAdmin) {
+                alert('Veuillez vous connecter en tant qu\'administrateur');
+                showLoginModal();
+                return;
+            }
+            document.getElementById('mediaLibraryModal').classList.add('active');
+            renderMediaLibrary();
+        }
+
+        // Hide media library
+        function hideMediaLibrary() {
+            document.getElementById('mediaLibraryModal').classList.remove('active');
+            selectedMedia = null;
+        }
+
+        // Switch between tabs
+        function switchMediaTab(tabName) {
+            document.querySelectorAll('.media-library').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.media-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.getElementById(tabName + 'Tab').classList.add('active');
+            
+            document.querySelector(`.media-tab[onclick*="${tabName}"]`).classList.add('active');
+            
+            selectedMedia = null;
+            document.querySelectorAll('.media-item.selected').forEach(item => {
+                item.classList.remove('selected');
+            });
+        }
+
+        // Render media library
+        function renderMediaLibrary() {
+            document.getElementById('imagesGrid').innerHTML = '';
+            document.getElementById('videosGrid').innerHTML = '';
+            
+            // Render images
+            mediaLibrary.images.forEach((media, index) => {
+                const img = document.createElement('div');
+                img.className = 'media-item';
+                img.onclick = () => selectMedia('images', index);
+                img.innerHTML = `
+                    <img src="${media.url}" alt="${media.name}">
+                    <div class="media-type">${currentLang === 'ar' ? 'صورة' : 'IMG'}</div>
+                    <button class="delete-media-btn" onclick="event.stopPropagation(); deleteFromLibrary('images', ${index})" 
+                            style="position: absolute; top: 5px; left: 5px; background: var(--danger); color: white; border: none; border-radius: 3px; padding: 2px 5px; font-size: 0.7rem;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                document.getElementById('imagesGrid').appendChild(img);
+            });
+            
+            // Render videos
+            mediaLibrary.videos.forEach((media, index) => {
+                const video = document.createElement('div');
+                video.className = 'media-item';
+                video.onclick = () => selectMedia('videos', index);
+                video.innerHTML = `
+                    <video>
+                        <source src="${media.url}" type="${media.type}">
+                    </video>
+                    <div class="media-type">${currentLang === 'ar' ? 'فيديو' : 'VID'}</div>
+                    <button class="delete-media-btn" onclick="event.stopPropagation(); deleteFromLibrary('videos', ${index})" 
+                            style="position: absolute; top: 5px; left: 5px; background: var(--danger); color: white; border: none; border-radius: 3px; padding: 2px 5px; font-size: 0.7rem;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                document.getElementById('videosGrid').appendChild(video);
+            });
+            
+            if (mediaLibrary.images.length === 0 && document.getElementById('imagesGrid').children.length === 0) {
+                document.getElementById('imagesGrid').innerHTML = 
+                    '<p style="grid-column: 1/-1; text-align: center; color: #666; padding: 20px;">' + 
+                    (currentLang === 'ar' ? 'لا توجد صور في المكتبة' : 'Aucune image dans la bibliothèque') + '</p>';
+            }
+            
+            if (mediaLibrary.videos.length === 0 && document.getElementById('videosGrid').children.length === 0) {
+                document.getElementById('videosGrid').innerHTML = 
+                    '<p style="grid-column: 1/-1; text-align: center; color: #666; padding: 20px;">' + 
+                    (currentLang === 'ar' ? 'لا توجد فيديوهات في المكتبة' : 'Aucune vidéo dans la bibliothèque') + '</p>';
+            }
+        }
+
+        // Select media item
+        function selectMedia(type, index) {
+            document.querySelectorAll('.media-item.selected').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            const items = document.querySelectorAll(`#${type}Tab .media-item`);
+            if (items[index]) {
+                items[index].classList.add('selected');
+                selectedMedia = { type, index, ...mediaLibrary[type][index] };
+            }
+        }
+
+        // Use selected media
+        function useSelectedMedia() {
+            if (!selectedMedia || !currentEditElement) {
+                alert(currentLang === 'ar' ? 'الرجاء تحديد وسائط أولاً' : 'Veuillez sélectionner un média d\'abord');
+                return;
+            }
+            
+            if (currentEditElement.tagName === 'IMG') {
+                currentEditElement.src = selectedMedia.url;
+                currentEditElement.alt = selectedMedia.name || (currentLang === 'ar' ? 'صورة أنسفال' : 'Image ANSFAL');
+            } else if (currentEditElement.tagName === 'VIDEO') {
+                currentEditElement.innerHTML = `
+                    <source src="${selectedMedia.url}" type="${selectedMedia.type}">
+                    ${currentLang === 'ar' ? 'متصفحك لا يدعم الفيديو' : 'Votre navigateur ne supporte pas la vidéo.'}
+                `;
+                currentEditElement.load();
+            } else if (currentEditElement.id === 'heroBg') {
+                document.querySelector('.hero').style.backgroundImage = 
+                    `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('${selectedMedia.url}')`;
+            }
+            
+            saveMediaToStorage(currentEditElement.id, selectedMedia.url);
+            
+            hideMediaLibrary();
+            alert(currentLang === 'ar' ? 'تم تطبيق الوسائط بنجاح!' : 'Média appliqué avec succès !');
+        }
+
+        // Handle file selection
+        function handleFileSelect(event) {
+            const files = event.target.files;
+            if (!files.length) return;
+            
+            if (isUploading) {
+                alert(currentLang === 'ar' ? 'يتم التحميل بالفعل' : 'Un téléchargement est déjà en cours');
+                return;
+            }
+            
+            const progress = document.getElementById('uploadProgress');
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            
+            progress.style.display = 'block';
+            progressFill.style.width = '0%';
+            progressText.textContent = translations[currentLang].mediaUploading;
+            
+            isUploading = true;
+            
+            Array.from(files).forEach((file, index) => {
+                uploadFile(file, index, files.length, progressFill, progressText);
+            });
+        }
+
+        // Upload file
+        function uploadFile(file, index, total, progressFill, progressText) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                const mediaData = {
+                    name: file.name,
+                    type: file.type,
+                    size: file.size,
+                    url: e.target.result,
+                    uploaded: new Date().toISOString()
+                };
+                
+                if (file.type.startsWith('image/')) {
+                    mediaLibrary.images.push(mediaData);
+                } else if (file.type.startsWith('video/')) {
+                    mediaLibrary.videos.push(mediaData);
+                }
+                
+                saveMediaLibrary();
+                
+                const progress = ((index + 1) / total) * 100;
+                progressFill.style.width = `${progress}%`;
+                progressText.textContent = currentLang === 'ar' 
+                    ? `جاري التحميل ${index + 1}/${total}...` 
+                    : `Téléchargement ${index + 1}/${total}...`;
+                
+                if (index === total - 1) {
+                    setTimeout(() => {
+                        saveMediaLibrary();
+                        renderMediaLibrary();
+                        
+                        progressText.textContent = currentLang === 'ar'
+                            ? `تم تحميل ${total} ملف(ملفات) بنجاح!`
+                            : `${total} fichier(s) téléchargé(s) avec succès !`;
+                        isUploading = false;
+                        
+                        document.getElementById('fileInput').value = '';
+                    }, 500);
+                }
+            };
+            
+            reader.onerror = function() {
+                alert(currentLang === 'ar' 
+                    ? `خطأ في قراءة الملف: ${file.name}` 
+                    : `Erreur lors de la lecture du fichier: ${file.name}`);
+                isUploading = false;
+            };
+            
+            reader.readAsDataURL(file);
+        }
+
+        // Delete from library
+        function deleteFromLibrary(type, index) {
+            if (confirm(currentLang === 'ar' 
+                ? 'هل تريد حقاً حذف هذه الوسائط من المكتبة؟' 
+                : 'Voulez-vous vraiment supprimer ce média de la bibliothèque ?')) {
+                mediaLibrary[type].splice(index, 1);
+                saveMediaLibrary();
+                renderMediaLibrary();
+                alert(currentLang === 'ar' ? 'تم حذف الوسائط من المكتبة' : 'Média supprimé de la bibliothèque');
+            }
+        }
+
+        // Save media library
+        function saveMediaLibrary() {
+            localStorage.setItem(MEDIA_STORAGE_KEY, JSON.stringify(mediaLibrary));
+        }
+
+        // Edit media
+        function editMedia(elementId) {
+            if (!isAdmin) {
+                alert(currentLang === 'ar' ? 'الرجاء تسجيل الدخول كمسؤول' : 'Veuillez vous connecter en tant qu\'administrateur');
+                showLoginModal();
+                return;
+            }
+            
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            
+            currentEditElement = element;
+            showMediaLibrary();
+        }
+
+        // Add hero media
+        function addHeroMedia() {
+            if (!isAdmin) {
+                alert(currentLang === 'ar' ? 'الرجاء تسجيل الدخول كمسؤول' : 'Veuillez vous connecter en tant qu\'administrateur');
+                showLoginModal();
+                return;
+            }
+            
+            currentEditElement = { id: 'heroBg' };
+            showMediaLibrary();
+        }
+
+        // Remove hero media
+        function removeHeroMedia() {
+            if (!isAdmin) {
+                alert(currentLang === 'ar' ? 'الرجاء تسجيل الدخول كمسؤول' : 'Veuillez vous connecter en tant qu\'administrateur');
+                showLoginModal();
+                return;
+            }
+            
+            if (confirm(currentLang === 'ar' 
+                ? 'هل تريد إزالة صورة الخلفية من قسم البطل؟' 
+                : 'Voulez-vous retirer l\'image d\'arrière-plan de la section Hero ?')) {
+                document.querySelector('.hero').style.backgroundImage = 
+                    'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80")';
+                saveMediaToStorage('heroBg', '');
+                alert(currentLang === 'ar' ? 'تمت إزالة صورة الخلفية!' : 'Image d\'arrière-plan retirée !');
+            }
+        }
+
+        // Add about media
+        function addAboutMedia() {
+            if (!isAdmin) {
+                alert(currentLang === 'ar' ? 'الرجاء تسجيل الدخول كمسؤول' : 'Veuillez vous connecter en tant qu\'administrateur');
+                showLoginModal();
+                return;
+            }
+            
+            const aboutImg = document.getElementById('aboutImage');
+            if (aboutImg) {
+                currentEditElement = aboutImg;
+                showMediaLibrary();
+            }
+        }
+
+        // Remove about media
+        function removeAboutMedia() {
+            if (!isAdmin) {
+                alert(currentLang === 'ar' ? 'الرجاء تسجيل الدخول كمسؤول' : 'Veuillez vous connecter en tant qu\'administrateur');
+                showLoginModal();
+                return;
+            }
+            
+            const element = document.getElementById('aboutImage');
+            if (element) {
+                deleteTarget = {
+                    element: element,
+                    type: 'image',
+                    section: 'about'
+                };
+                document.getElementById('deleteMessage').textContent = 
+                    currentLang === 'ar' 
+                    ? 'هل أنت متأكد من حذف هذه الصورة من قسم "من نحن"؟'
+                    : 'Êtes-vous sûr de vouloir supprimer cette image de la section "À propos" ?';
+                document.getElementById('deleteConfirmModal').classList.add('active');
+            }
+        }
+
+        // Add gallery media
+        function addGalleryMedia(galleryId) {
+            if (!isAdmin) {
+                alert(currentLang === 'ar' ? 'الرجاء تسجيل الدخول كمسؤول' : 'Veuillez vous connecter en tant qu\'administrateur');
+                showLoginModal();
+                return;
+            }
+            
+            const element = document.getElementById(galleryId);
+            if (element) {
+                currentEditElement = element;
+                showMediaLibrary();
+            }
+        }
+
+        // Add gallery item
+        function addGalleryItem() {
+            if (!isAdmin) {
+                alert(currentLang === 'ar' ? 'الرجاء تسجيل الدخول كمسؤول' : 'Veuillez vous connecter en tant qu\'administrateur');
+                showLoginModal();
+                return;
+            }
+            
+            const galleryGrid = document.getElementById('galleryGrid');
+            const newId = 'gallery' + (galleryGrid.children.length + 1);
+            
+            const newItem = document.createElement('div');
+            newItem.className = 'gallery-item image-editable';
+            newItem.setAttribute('data-id', newId);
+            newItem.innerHTML = `
+                <img src="https://via.placeholder.com/400x300/3cb371/ffffff?text=${currentLang === 'ar' ? 'إضافة+صورة' : 'Ajouter+une+image'}" 
+                     alt="${currentLang === 'ar' ? 'صورة جديدة' : 'Nouvelle image'}"
+                     id="${newId}">
+                <button class="image-edit-btn" onclick="editMedia('${newId}')">
+                    <i class="fas fa-camera"></i>
+                </button>
+                <button class="plus-btn" onclick="addGalleryMedia('${newId}')" title="${currentLang === 'ar' ? 'تغيير هذه الصورة' : 'Changer cette image'}">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <button class="minus-btn" onclick="removeGalleryItem('${newId}')" title="${currentLang === 'ar' ? 'حذف هذه الصورة' : 'Supprimer cette image'}">
+                    <i class="fas fa-minus"></i>
+                </button>
+            `;
+            
+            galleryGrid.appendChild(newItem);
+            currentEditElement = document.getElementById(newId);
+            showMediaLibrary();
+        }
+
+        // Remove gallery item
+        function removeGalleryItem(galleryId) {
+            if (!isAdmin) {
+                alert(currentLang === 'ar' ? 'الرجاء تسجيل الدخول كمسؤول' : 'Veuillez vous connecter en tant qu\'administrateur');
+                showLoginModal();
+                return;
+            }
+            
+            const element = document.getElementById(galleryId);
+            if (element) {
+                deleteTarget = {
+                    element: element.parentElement,
+                    type: 'gallery',
+                    id: galleryId
+                };
+                document.getElementById('deleteMessage').textContent = 
+                    currentLang === 'ar' 
+                    ? 'هل أنت متأكد من حذف هذه الصورة من المعرض؟'
+                    : 'Êtes-vous sûr de vouloir supprimer cette image de la galerie ?';
+                document.getElementById('deleteConfirmModal').classList.add('active');
+            }
+        }
+
+        // Add video media
+        function addVideoMedia(videoId) {
+            if (!isAdmin) {
+                alert(currentLang === 'ar' ? 'الرجاء تسجيل الدخول كمسؤول' : 'Veuillez vous connecter en tant qu\'administrateur');
+                showLoginModal();
+                return;
+            }
+            
+            const element = document.getElementById(videoId);
+            if (element) {
+                currentEditElement = element;
+                showMediaLibrary();
+            }
+        }
+
+        // Add video item
+        function addVideoItem() {
+            if (!isAdmin) {
+                alert(currentLang === 'ar' ? 'الرجاء تسجيل الدخول كمسؤول' : 'Veuillez vous connecter en tant qu\'administrateur');
+                showLoginModal();
+                return;
+            }
+            
+            const videoContainer = document.getElementById('videoContainer');
+            const newId = 'video' + (videoContainer.children.length + 1);
+            
+            const newItem = document.createElement('div');
+            newItem.className = 'video-item image-editable';
+            newItem.setAttribute('data-id', newId);
+            newItem.innerHTML = `
+                <video id="${newId}" controls style="width: 100%; height: 100%;">
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                    ${currentLang === 'ar' ? 'متصفحك لا يدعم الفيديو' : 'Votre navigateur ne supporte pas la vidéo.'}
+                </video>
+                <button class="image-edit-btn" onclick="editMedia('${newId}')">
+                    <i class="fas fa-video"></i>
+                </button>
+                <button class="plus-btn" onclick="addVideoMedia('${newId}')" title="${currentLang === 'ar' ? 'تغيير هذا الفيديو' : 'Changer cette vidéo'}">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <button class="minus-btn" onclick="removeVideoItem('${newId}')" title="${currentLang === 'ar' ? 'حذف هذا الفيديو' : 'Supprimer cette vidéo'}">
+                    <i class="fas fa-minus"></i>
+                </button>
+            `;
+            
+            videoContainer.appendChild(newItem);
+            currentEditElement = document.getElementById(newId);
+            showMediaLibrary();
+        }
+
+        // Remove video item
+        function removeVideoItem(videoId) {
+            if (!isAdmin) {
+                alert(currentLang === 'ar' ? 'الرجاء تسجيل الدخول كمسؤول' : 'Veuillez vous connecter en tant qu\'administrateur');
+                showLoginModal();
+                return;
+            }
+            
+            const element = document.getElementById(videoId);
+            if (element) {
+                deleteTarget = {
+                    element: element.parentElement,
+                    type: 'video',
+                    id: videoId
+                };
+                document.getElementById('deleteMessage').textContent = 
+                    currentLang === 'ar' 
+                    ? 'هل أنت متأكد من حذف هذا الفيديو؟'
+                    : 'Êtes-vous sûr de vouloir supprimer cette vidéo ?';
+                document.getElementById('deleteConfirmModal').classList.add('active');
+            }
+        }
+
+        // Add project media
+        function addProjectMedia(projectId) {
+            if (!isAdmin) {
+                alert(currentLang === 'ar' ? 'الرجاء تسجيل الدخول كمسؤول' : 'Veuillez vous connecter en tant qu\'administrateur');
+                showLoginModal();
+                return;
+            }
+            
+            const element = document.getElementById(projectId);
+            if (element) {
+                currentEditElement = element;
+                showMediaLibrary();
+            }
+        }
+
+        // Remove project media
+        function removeProjectMedia(projectId) {
+            if (!isAdmin) {
+                alert(currentLang === 'ar' ? 'الرجاء تسجيل الدخول كمسؤول' : 'Veuillez vous connecter en tant qu\'administrateur');
+                showLoginModal();
+                return;
+            }
+            
+            const element = document.getElementById(projectId);
+            if (element) {
+                deleteTarget = {
+                    element: element,
+                    type: 'project-image',
+                    id: projectId
+                };
+                document.getElementById('deleteMessage').textContent = 
+                    currentLang === 'ar' 
+                    ? 'هل أنت متأكد من حذف هذه الصورة du projet ?' : 'Êtes-vous sûr de vouloir supprimer cette image du projet ?';
+                document.getElementById('deleteConfirmModal').classList.add('active');
+            }
+        }
+
+        // Confirm delete
+        function confirmDelete() {
+            if (!deleteTarget) return;
+            
+            if (deleteTarget.type === 'gallery' || deleteTarget.type === 'video') {
+                deleteTarget.element.remove();
+                saveMediaToStorage(deleteTarget.id, '');
+            } else if (deleteTarget.type === 'image' || deleteTarget.type === 'project-image') {
+                const defaultImages = {
+                    'aboutImage': 'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                    'project1Image': 'https://images.unsplash.com/photo-1586773860418-dc22f8b874bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                    'project2Image': 'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1472&q=80'
+                };
+                
+                if (deleteTarget.element.tagName === 'IMG') {
+                    deleteTarget.element.src = defaultImages[deleteTarget.id] || 
+                        `https://via.placeholder.com/400x300/3cb371/ffffff?text=${currentLang === 'ar' ? 'صورة+أنسفال' : 'Image+ANSFAL'}`;
+                }
+                saveMediaToStorage(deleteTarget.id, '');
+            }
+            
+            cancelDelete();
+            alert(translations[currentLang].deleteSuccess);
+        }
+
+        // Cancel delete
+        function cancelDelete() {
+            deleteTarget = null;
+            document.getElementById('deleteConfirmModal').classList.remove('active');
+        }
+
+        // ==================== ADMIN SYSTEM ====================
+        
+        const ADMIN_PASSWORD_KEY = 'ansfal_admin_password';
+        const STORAGE_KEY = "ansfal_website_content";
+        let isAdmin = false;
+        let currentEditId = null;
+        let currentEditType = null;
+
+        // Get admin password from storage or use default
+        function getAdminPassword() {
+            return localStorage.getItem(ADMIN_PASSWORD_KEY) || "ansfal2024";
+        }
+
+        // Save admin password to storage
+        function saveAdminPassword(password) {
+            localStorage.setItem(ADMIN_PASSWORD_KEY, password);
+        }
+
+        // Show login modal
+        function showLoginModal() {
+            console.log('Affichage du modal de login');
+            document.getElementById('loginModal').classList.add('active');
+            const passwordInput = document.getElementById('adminPassword');
+            if (passwordInput) {
+                passwordInput.focus();
+            }
+        }
+
+        // Hide login modal
+        function hideLoginModal() {
+            document.getElementById('loginModal').classList.remove('active');
+            const passwordInput = document.getElementById('adminPassword');
+            if (passwordInput) {
+                passwordInput.value = '';
+            }
+        }
+
+        // Show change password modal
+        function showChangePasswordModal() {
+            if (!isAdmin) {
+                alert('Veuillez vous connecter en tant qu\'administrateur');
+                showLoginModal();
+                return;
+            }
+            
+            document.getElementById('changePasswordModal').classList.add('active');
+            document.getElementById('currentPassword').focus();
+        }
+
+        // Hide change password modal
+        function hideChangePasswordModal() {
+            document.getElementById('changePasswordModal').classList.remove('active');
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+        }
+
+        // Check login on page load
+        function checkLogin() {
+            console.log('Vérification du login...');
+            const savedLogin = localStorage.getItem('ansfal_admin_logged_in');
+            if (savedLogin === 'true') {
+                console.log('Login trouvé dans le stockage local');
+                activateAdminMode();
+            } else {
+                console.log('Aucun login trouvé');
+            }
+        }
+
+        // Handle login button click
+        document.getElementById('loginBtn').addEventListener('click', showLoginModal);
+
+        // Login function - CORRIGÉ
+        function login() {
+            console.log('Tentative de connexion...');
+            const passwordInput = document.getElementById('adminPassword');
+            const password = passwordInput ? passwordInput.value : '';
+            const storedPassword = getAdminPassword();
+            
+            console.log('Mot de passe saisi:', password);
+            console.log('Mot de passe stocké:', storedPassword);
+            
+            if (password === storedPassword) {
+                console.log('Mot de passe correct! Activation du mode admin...');
+                activateAdminMode();
+                localStorage.setItem('ansfal_admin_logged_in', 'true');
+                hideLoginModal();
+                alert(translations[currentLang].loginSuccess || 'Mode administrateur activé !');
+            } else {
+                console.log('Mot de passe incorrect');
+                alert(translations[currentLang].passwordIncorrect || 'Mot de passe incorrect');
+                if (passwordInput) {
+                    passwordInput.value = '';
+                    passwordInput.focus();
+                }
+            }
+        }
+
+        // Change password function
+        function changePassword() {
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            const storedPassword = getAdminPassword();
+            
+            // Validation
+            if (currentPassword !== storedPassword) {
+                alert('Le mot de passe actuel est incorrect');
+                document.getElementById('currentPassword').focus();
+                return;
+            }
+            
+            if (newPassword.length < 6) {
+                alert('Le nouveau mot de passe doit contenir au moins 6 caractères');
+                document.getElementById('newPassword').focus();
+                return;
+            }
+            
+            if (newPassword !== confirmPassword) {
+                alert('Les nouveaux mots de passe ne correspondent pas');
+                document.getElementById('confirmPassword').focus();
+                return;
+            }
+            
+            // Save new password
+            saveAdminPassword(newPassword);
+            
+            // Hide modal
+            hideChangePasswordModal();
+            
+            // Show success message
+            alert('Mot de passe changé avec succès !\n\nNouveau mot de passe : ' + newPassword + 
+                  '\n\n⚠️ Notez-le bien, vous en aurez besoin pour vos prochaines connexions.');
+        }
+
+        // Activate admin mode - CORRIGÉ
+        function activateAdminMode() {
+            console.log('Activation du mode admin...');
+            isAdmin = true;
+            
+            // Afficher la barre admin
+            const adminBar = document.getElementById('adminBar');
+            if (adminBar) {
+                adminBar.classList.add('active');
+                console.log('Barre admin activée');
+            }
+            
+            // Afficher le bouton bibliothèque média
+            const mediaLibraryBtn = document.getElementById('mediaLibraryBtn');
+            if (mediaLibraryBtn) {
+                mediaLibraryBtn.classList.add('active');
+                console.log('Bouton média activé');
+            }
+            
+            // Afficher tous les boutons d'édition
+            const editButtons = document.querySelectorAll('.edit-btn, .image-edit-btn, .plus-btn, .minus-btn');
+            editButtons.forEach(btn => {
+                btn.style.display = 'flex';
+            });
+            console.log(`${editButtons.length} boutons d'édition activés`);
+            
+            // Mettre à jour l'affichage des commentaires
+            updateCommentsDisplay();
+            
+            // Déplacer le bouton de login
+            const loginBtn = document.getElementById('loginBtn');
+            if (loginBtn) {
+                loginBtn.style.right = '270px';
+            }
+            
+            console.log('Mode admin activé avec succès!');
+        }
+
+        // Logout function
+        function logout() {
+            console.log('Déconnexion...');
+            isAdmin = false;
+            
+            const adminBar = document.getElementById('adminBar');
+            if (adminBar) {
+                adminBar.classList.remove('active');
+            }
+            
+            const mediaLibraryBtn = document.getElementById('mediaLibraryBtn');
+            if (mediaLibraryBtn) {
+                mediaLibraryBtn.classList.remove('active');
+            }
+            
+            localStorage.removeItem('ansfal_admin_logged_in');
+            
+            document.querySelectorAll('.edit-btn, .image-edit-btn, .plus-btn, .minus-btn').forEach(btn => {
+                btn.style.display = 'none';
+            });
+            
+            updateCommentsDisplay();
+            
+            // Remettre le bouton de login à sa position originale
+            const loginBtn = document.getElementById('loginBtn');
+            if (loginBtn) {
+                loginBtn.style.right = '20px';
+            }
+            
+            alert(translations[currentLang].logoutSuccess);
+            console.log('Déconnexion réussie');
+        }
+
+        // Edit text
+        function editText(elementId) {
+            if (!isAdmin) {
+                alert(currentLang === 'ar' ? 'الرجاء تسجيل الدخول كمسؤول' : 'Veuillez vous connecter en tant qu\'administrateur');
+                showLoginModal();
+                return;
+            }
+            
+            const element = document.querySelector(`[data-id="${elementId}"]`);
+            if (!element) return;
+            
+            currentEditId = elementId;
+            currentEditType = 'text';
+            
+            const currentText = element.textContent;
+            const isParagraph = element.tagName === 'P' || element.tagName === 'H1' || element.tagName === 'H2' || element.tagName === 'H3' || element.tagName === 'H4';
+            
+            let editHTML = '';
+            
+            if (isParagraph) {
+                editHTML = `
+                    <label>${currentLang === 'ar' ? 'تعديل النص:' : 'Modifier le texte:'}</label>
+                    <textarea id="editField" style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; min-height: 150px;">${currentText}</textarea>
+                `;
+            } else {
+                editHTML = `
+                    <label>${currentLang === 'ar' ? 'تعديل المحتوى:' : 'Modifier le contenu:'}</label>
+                    <input type="text" id="editField" value="${currentText}" style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px;">
+                `;
+            }
+            
+            document.getElementById('editTitle').textContent = currentLang === 'ar' ? 'تعديل المحتوى' : 'Modifier le contenu';
+            document.getElementById('editContent').innerHTML = editHTML;
+            document.getElementById('editModal').classList.add('active');
+        }
+
+        // Save edit
+        function saveEdit() {
+            if (!currentEditId) return;
+            
+            const editField = document.getElementById('editField');
+            if (!editField) return;
+            
+            const newValue = editField.value.trim();
+            
+            if (currentEditType === 'text') {
+                const element = document.querySelector(`[data-id="${currentEditId}"]`);
+                if (element) {
+                    element.textContent = newValue;
+                    saveToStorage(currentEditId, newValue);
+                }
+            }
+            
+            closeEditModal();
+            alert(translations[currentLang].saveSuccess);
+        }
+
+        // Close edit modal
+        function closeEditModal() {
+            document.getElementById('editModal').classList.remove('active');
+            currentEditId = null;
+            currentEditType = null;
+        }
+
+        // Save to storage
+        function saveToStorage(key, value) {
+            const content = getStoredContent();
+            content[key] = value;
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(content));
+        }
+
+        // Save media to storage
+        function saveMediaToStorage(key, value) {
+            const element = document.getElementById(key);
+            let mediaUrl = value;
+            
+            if (!value && element) {
+                if (element.tagName === 'IMG') {
+                    mediaUrl = element.src;
+                } else if (element.tagName === 'VIDEO') {
+                    const source = element.querySelector('source');
+                    mediaUrl = source ? source.src : '';
+                } else if (element.id === 'heroBg') {
+                    const heroSection = document.querySelector('.hero');
+                    const bgImage = heroSection.style.backgroundImage;
+                    mediaUrl = bgImage ? bgImage.replace(/^url\(["']?/, '').replace(/["']?\)$/, '') : '';
+                }
+            }
+            
+            const content = getStoredContent();
+            content[key] = mediaUrl;
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(content));
+        }
+
+        // Get stored content
+        function getStoredContent() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            return stored ? JSON.parse(stored) : {};
+        }
+
+        // Load content
+        function loadContent() {
+            console.log('Chargement du contenu...');
+            const content = getStoredContent();
+            
+            document.querySelectorAll('[data-id][data-editable="true"]').forEach(element => {
+                const id = element.getAttribute('data-id');
+                if (content[id]) {
+                    element.textContent = content[id];
+                }
+            });
+            
+            document.querySelectorAll('img[id], video[id]').forEach(media => {
+                const id = media.id;
+                if (content[id]) {
+                    if (media.tagName === 'IMG') {
+                        media.src = content[id];
+                    } else if (media.tagName === 'VIDEO') {
+                        media.innerHTML = `<source src="${content[id]}" type="video/mp4">`;
+                        media.load();
+                    }
+                }
+            });
+            console.log('Contenu chargé');
+        }
+
+        // Save all content
+        function saveContent() {
+            if (!isAdmin) {
+                alert(currentLang === 'ar' ? 'الرجاء تسجيل الدخول كمسؤول' : 'Veuillez vous connecter en tant qu\'administrateur');
+                showLoginModal();
+                return;
+            }
+            
+            const content = {};
+            
+            document.querySelectorAll('[data-id][data-editable="true"]').forEach(element => {
+                const id = element.getAttribute('data-id');
+                content[id] = element.textContent;
+            });
+            
+            document.querySelectorAll('img[id], video[id]').forEach(media => {
+                const id = media.id;
+                if (media.tagName === 'IMG') {
+                    content[id] = media.src;
+                } else if (media.tagName === 'VIDEO') {
+                    const source = media.querySelector('source');
+                    if (source) content[id] = source.src;
+                }
+            });
+            
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(content));
+            saveMediaLibrary();
+            saveVisitorStats();
+            saveComments();
+            alert(translations[currentLang].saveAllSuccess);
+        }
+
+        // Setup Enter key for login
+        function setupEnterKey() {
+            const adminPasswordInput = document.getElementById('adminPassword');
+            if (adminPasswordInput) {
+                adminPasswordInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        login();
+                    }
+                });
+            }
+            
+            const currentPasswordInput = document.getElementById('currentPassword');
+            if (currentPasswordInput) {
+                currentPasswordInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        changePassword();
+                    }
+                });
+            }
+        }
+
+        // Close modals on click outside
+        function setupModalClose() {
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        this.classList.remove('active');
+                    }
+                });
+            });
+        }
+
+        // Initialize everything
+        window.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM entièrement chargé');
+            
+            // Vérifier les éléments critiques
+            const elementsToCheck = [
+                'adminBar', 'loginBtn', 'loginModal', 'adminPassword',
+                'language-switcher', 'commentsBtn'
+            ];
+            
+            elementsToCheck.forEach(id => {
+                const element = document.getElementById(id) || document.querySelector('.' + id);
+                if (element) {
+                    console.log(`✓ Élément trouvé: ${id}`);
+                } else {
+                    console.error(`✗ Élément manquant: ${id}`);
+                }
+            });
+            
+            // Initialiser tous les systèmes
+            checkLogin();
+            loadContent();
+            initMediaLibrary();
+            initVisitorCounter();
+            initCommentsSystem();
+            initTranslationSystem();
+            setupEnterKey();
+            setupModalClose();
+            
+            // Vérifier le bouton admin
+            const loginBtn = document.getElementById('loginBtn');
+            if (loginBtn) {
+                loginBtn.addEventListener('click', function() {
+                    console.log('Bouton login cliqué');
+                    showLoginModal();
+                });
+            }
+            
+            // Vérifier le bouton bibliothèque média
+            const mediaLibraryBtn = document.getElementById('mediaLibraryBtn');
+            if (mediaLibraryBtn) {
+                mediaLibraryBtn.addEventListener('click', showMediaLibrary);
+            }
+            
+            console.log('Initialisation terminée');
+        });
+    </script>
+</body>
+</html>
