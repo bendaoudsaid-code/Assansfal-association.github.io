@@ -37,7 +37,7 @@
             color: var(--text);
             background-color: var(--white);
             transition: all 0.3s ease;
-            padding-top: 40px; /* Pour le compteur */
+            padding-top: 40px;
         }
 
         h1, h2, h3, h4 {
@@ -124,7 +124,7 @@
             box-shadow: var(--shadow);
             position: fixed;
             width: 100%;
-            top: 40px; /* Sous le compteur */
+            top: 40px;
             z-index: 999;
         }
 
@@ -201,7 +201,7 @@
             color: var(--white);
             text-align: center;
             padding: 180px 0 100px;
-            margin-top: 95px; /* Header + compteur */
+            margin-top: 95px;
         }
 
         .hero h2 {
@@ -289,7 +289,327 @@
             transform: scale(1.05);
         }
 
-        /* ==================== BARRES ADMIN SIMPLIFIÉES ==================== */
+        /* ==================== GALERIE ==================== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            aspect-ratio: 4/3;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* ==================== VIDÉOS ==================== */
+        .video-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .video-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            aspect-ratio: 16/9;
+        }
+
+        .youtube-embed {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            padding-bottom: 56.25%;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .youtube-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* ==================== PROJETS ==================== */
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .project-card:hover .project-img img {
+            transform: scale(1.1);
+        }
+
+        .project-info {
+            padding: 25px;
+            background-color: var(--white);
+        }
+
+        /* ==================== PUBLICATIONS ==================== */
+        .publications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .publication-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .publication-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .publication-header {
+            padding: 20px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .publication-type {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .publication-date {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        .publication-content {
+            padding: 20px;
+        }
+
+        .publication-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .publication-description {
+            color: var(--text);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .publication-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .btn-view, .btn-download {
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s;
+        }
+
+        .btn-view {
+            background-color: var(--info);
+            color: white;
+        }
+
+        .btn-download {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .btn-view:hover, .btn-download:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* ==================== COMMENTAIRES ==================== */
+        .comment-form {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .comment-form input,
+        .comment-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .comment-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .comment-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--accent);
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .comment-author {
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .comment-date {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .comment-content {
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .no-comments {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* ==================== CONTACT ==================== */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: 20px;
+            background: var(--light);
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-item i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* ==================== PANELS ADMIN/WEBMASTER ==================== */
         .admin-overlay, .webmaster-overlay {
             position: fixed;
             top: 0;
@@ -538,6 +858,210 @@
             display: flex;
         }
 
+        .edit-btn:hover,
+        .image-edit-btn:hover,
+        .add-section-btn:hover,
+        .add-item-btn:hover {
+            background-color: var(--secondary);
+            transform: scale(1.1);
+        }
+
+        .remove-item-btn:hover {
+            background-color: #d32f2f;
+            transform: scale(1.1);
+        }
+
+        /* ==================== MODALES ==================== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        /* ==================== UPLOAD MODAL ==================== */
+        .upload-options {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .upload-option {
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .upload-option input[type="radio"] {
+            display: none;
+        }
+
+        .upload-option label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            background-color: var(--light);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            text-align: center;
+        }
+
+        .upload-option label i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .upload-option input[type="radio"]:checked + label {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--dark);
+        }
+
+        .upload-option input[type="radio"]:checked + label i {
+            color: white;
+        }
+
+        .upload-option label:hover {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .upload-option label:hover i {
+            color: white;
+        }
+
+        .file-upload-container {
+            margin: 20px 0;
+        }
+
+        .file-input-label {
+            display: block;
+            width: 100%;
+        }
+
+        .file-input-area {
+            border: 2px dashed var(--primary);
+            border-radius: 10px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background-color: rgba(26, 109, 44, 0.05);
+        }
+
+        .file-input-area:hover {
+            background-color: rgba(26, 109, 44, 0.1);
+            border-color: var(--secondary);
+        }
+
+        .file-input-area.dragover {
+            background-color: rgba(26, 109, 44, 0.2);
+            border-color: var(--accent);
+            transform: scale(1.02);
+        }
+
+        .browse-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .browse-btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .file-preview {
+            background-color: var(--light);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .file-info {
+            background-color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        .file-info p {
+            margin: 5px 0;
+        }
+
+        .upload-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .upload-actions .btn {
+            flex: 1;
+            text-align: center;
+        }
+
+        /* Animation de chargement */
+        .upload-progress {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .upload-progress.active {
+            display: block;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #eee;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--success);
+            width: 0%;
+            transition: width 0.3s;
+            border-radius: 10px;
+        }
+
+        .progress-text {
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
         /* ==================== RESPONSIVE ==================== */
         @media (max-width: 768px) {
             .visitor-counter .container {
@@ -569,6 +1093,11 @@
                 grid-template-columns: 1fr;
             }
             
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
             .whatsapp-float {
                 bottom: 70px;
                 right: 15px;
@@ -593,6 +1122,10 @@
                 bottom: 130px;
                 left: 15px;
             }
+            
+            .upload-options {
+                flex-direction: column;
+            }
         }
 
         @media (max-width: 480px) {
@@ -612,34 +1145,6 @@
             .section-title h2 {
                 font-size: 2rem;
             }
-        }
-
-        /* ==================== MODALES ==================== */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 3000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 800px;
-            max-height: 80vh;
-            overflow-y: auto;
         }
 
         /* ==================== RTL SUPPORT ==================== */
@@ -709,6 +1214,10 @@
         body.rtl .comments-btn {
             right: auto;
             left: 20px;
+        }
+        
+        body.rtl .publication-actions {
+            justify-content: flex-start;
         }
     </style>
 </head>
@@ -888,6 +1397,243 @@
         </div>
     </section>
 
+    <!-- ==================== GALERIE ==================== -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title">
+                    <h2 class="editable" data-id="galleryTitle" data-editable="true">Galerie Photos</h2>
+                    <button class="edit-btn" onclick="editText('galleryTitle')">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                </div>
+                <button class="add-section-btn" onclick="showImageUploadModal()" title="Ajouter une image">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+            <div class="gallery-grid" id="galleryGrid">
+                <div class="gallery-item image-editable" data-id="gallery1">
+                    <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Projet environnemental">
+                    <button class="image-edit-btn" onclick="editImage('gallery1')">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="add-item-btn" onclick="showImageUploadModal()" title="Ajouter une image">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button class="remove-item-btn" onclick="removeGalleryItem('gallery1')" title="Supprimer cette image">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== VIDÉOS ==================== -->
+    <section class="videos" id="videos">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title">
+                    <h2 class="editable" data-id="videosTitle" data-editable="true">Vidéos</h2>
+                    <button class="edit-btn" onclick="editText('videosTitle')">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                </div>
+                <button class="add-section-btn" onclick="showVideoUploadModal()" title="Ajouter une vidéo">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+            <div class="video-container" id="videoContainer">
+                <div class="video-item">
+                    <div class="youtube-embed">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                    </div>
+                    <button class="add-item-btn" onclick="showVideoUploadModal()" title="Ajouter une vidéo">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button class="remove-item-btn" onclick="removeVideoItem(this)" title="Supprimer cette vidéo">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PROJETS ==================== -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title">
+                    <h2 class="editable" data-id="projectsTitle" data-editable="true">Nos Projets</h2>
+                    <button class="edit-btn" onclick="editText('projectsTitle')">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                </div>
+                <button class="add-section-btn" onclick="showProjectUploadModal()" title="Ajouter un projet">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+            <div class="projects-container" id="projectsContainer">
+                <div class="project-card">
+                    <div class="project-img image-editable" data-id="project1">
+                        <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Projet Environnement">
+                        <button class="image-edit-btn" onclick="editImage('project1')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="editable" data-id="projectTitle1" data-editable="true">Protection des Forêts</h3>
+                        <button class="edit-btn" onclick="editText('projectTitle1')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <p class="editable" data-id="projectDesc1" data-editable="true">Campagne de reboisement et sensibilisation à la protection des écosystèmes forestiers.</p>
+                        <button class="edit-btn" onclick="editText('projectDesc1')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </div>
+                    <button class="add-item-btn" onclick="showProjectUploadModal()" title="Ajouter un projet">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button class="remove-item-btn" onclick="removeProjectItem(this)" title="Supprimer ce projet">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PUBLICATIONS ==================== -->
+    <section class="publications" id="publications">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title">
+                    <h2 class="editable" data-id="publicationsTitle" data-editable="true">Publications</h2>
+                    <button class="edit-btn" onclick="editText('publicationsTitle')">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                </div>
+                <button class="add-section-btn" onclick="showPublicationUploadModal()" title="Ajouter une publication">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+            <div class="publications-grid" id="publicationsGrid">
+                <div class="publication-card">
+                    <div class="publication-header">
+                        <span class="publication-type">Rapport</span>
+                        <span class="publication-date">15/03/2024</span>
+                    </div>
+                    <div class="publication-content">
+                        <h3 class="publication-title editable" data-id="pubTitle1" data-editable="true">Rapport Annuel 2023</h3>
+                        <button class="edit-btn" onclick="editText('pubTitle1')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <p class="publication-description editable" data-id="pubDesc1" data-editable="true">Bilan des activités et réalisations de l'association pour l'année 2023.</p>
+                        <button class="edit-btn" onclick="editText('pubDesc1')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <div class="publication-actions">
+                            <a href="#" class="btn-view">
+                                <i class="fas fa-eye"></i> <span class="btn-view-text">Voir</span>
+                            </a>
+                            <a href="#" class="btn-download">
+                                <i class="fas fa-download"></i> <span class="btn-download-text">Télécharger</span>
+                            </a>
+                        </div>
+                    </div>
+                    <button class="add-item-btn" onclick="showPublicationUploadModal()" title="Ajouter une publication">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button class="remove-item-btn" onclick="removePublicationItem(this)" title="Supprimer cette publication">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== COMMENTAIRES ==================== -->
+    <section class="comments-section" id="comments">
+        <div class="container">
+            <h2 class="editable" data-id="commentsTitle" data-editable="true">Commentaires</h2>
+            <button class="edit-btn" onclick="editText('commentsTitle')">
+                <i class="fas fa-edit"></i>
+            </button>
+            <div class="comment-form">
+                <h3>Laissez un commentaire</h3>
+                <input type="text" id="commentNameInput" placeholder="Votre nom">
+                <textarea id="commentTextInput" placeholder="Votre commentaire"></textarea>
+                <button class="btn" onclick="submitComment()" id="btnSubmitComment">Publier le commentaire</button>
+            </div>
+            <div class="comments-list" id="commentsList">
+                <div class="no-comments">Aucun commentaire pour le moment. Soyez le premier à commenter!</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CONTACT ==================== -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="editable" data-id="contactTitle" data-editable="true">Contactez-nous</h2>
+            <button class="edit-btn" onclick="editText('contactTitle')">
+                <i class="fas fa-edit"></i>
+            </button>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Adresse</h3>
+                    <p class="editable" data-id="contactAddress" data-editable="true">Maroc</p>
+                    <button class="edit-btn" onclick="editText('contactAddress')">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <h3>Téléphone</h3>
+                    <p class="editable" data-id="contactPhone" data-editable="true">+212 6 12 34 56 78</p>
+                    <button class="edit-btn" onclick="editText('contactPhone')">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p class="editable" data-id="contactEmail" data-editable="true">contact@ansfal.org</p>
+                    <button class="edit-btn" onclick="editText('contactEmail')">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-logo">
+                    <div class="logo">
+                        <i class="fas fa-hands-helping"></i>
+                        <div class="logo-text">
+                            <h3 style="color: white;">ANSFAL</h3>
+                            <p style="color: rgba(255,255,255,0.8);">Coopération, Développement & Environnement</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-social">
+                    <h4>Suivez-nous</h4>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Association ANSFAL. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
     <!-- ==================== BOUTONS FLOTTANTS ==================== -->
     <a href="#" class="whatsapp-float" id="whatsappBtn">
         <i class="fab fa-whatsapp"></i>
@@ -910,16 +1656,21 @@
         <i class="fas fa-user-cog"></i>
     </button>
 
-    <!-- ==================== JAVASCRIPT SIMPLIFIÉ ==================== -->
+    <!-- ==================== JAVASCRIPT ==================== -->
     <script>
         // Variables globales
         let isAdmin = false;
         let isWebmaster = false;
         let currentLanguage = 'fr';
+        let contentData = {};
+        let pendingComments = [];
+        let approvedComments = [];
 
         // Initialisation
         document.addEventListener('DOMContentLoaded', function() {
-            // Mettre à jour le compteur
+            // Charger les données
+            loadContentData();
+            loadComments();
             updateVisitorCount();
             
             // Charger la langue
@@ -937,7 +1688,7 @@
             initNavigation();
         });
 
-        // ==================== FONCTIONS D'AFFICHAGE ====================
+        // ==================== GESTION DE L'AFFICHAGE ====================
         function showAdminPanel() {
             document.getElementById('adminOverlay').classList.add('active');
             showEditButtons();
@@ -951,6 +1702,7 @@
             document.getElementById('webmasterOverlay').classList.add('active');
             document.getElementById('mediaLibraryBtn').classList.add('active');
             showUploadButtons();
+            showUploadModal(); // Ouvre directement l'upload modal
         }
 
         function hideWebmasterPanel() {
@@ -1003,11 +1755,14 @@
                 document.body.classList.remove('rtl');
             }
             
-            // Traductions simples
+            // Traductions
+            translatePage(lang);
+        }
+
+        function translatePage(lang) {
             const translations = {
                 'fr': {
-                    'siteTitle': 'ASSOCIATION ANSFAL',
-                    'siteSubtitle': 'Coopération, Développement & Environnement',
+                    // Navigation
                     'navHome': 'Accueil',
                     'navAbout': 'À propos',
                     'navGallery': 'Galerie',
@@ -1016,21 +1771,63 @@
                     'navPublications': 'Publications',
                     'navComments': 'Commentaires',
                     'navContact': 'Contact',
+                    
+                    // Hero
                     'heroTitle': 'ANSFAL',
                     'heroSubtitle': 'Association pour la Coopération, le Développement et l\'Environnement',
                     'heroText': 'Œuvrant pour un développement durable, la coopération nationale et la protection de l\'environnement depuis 2023.',
                     'btnDiscover': 'Découvrir nos actions',
+                    
+                    // About
                     'aboutTitle': 'À propos d\'ANSFAL',
                     'aboutSubtitle': 'Notre histoire',
                     'aboutText1': 'Fondée en 2023, l\'Association ANSFAL POUR LA COOPÉRATION ET LE DÉVELOPPEMENT ET L\'ENVIRONNEMENT est née de la conviction que le développement humain et la protection environnementale doivent aller de pair.',
                     'aboutText2': 'Notre nom \'ANSFAL\' symbolise notre engagement pour un avenir meilleur, basé sur la solidarité, le développement durable et la préservation de notre environnement.',
+                    
+                    // Sections
+                    'galleryTitle': 'Galerie Photos',
+                    'videosTitle': 'Vidéos',
+                    'projectsTitle': 'Nos Projets',
+                    'publicationsTitle': 'Publications',
+                    'commentsTitle': 'Commentaires',
+                    'contactTitle': 'Contactez-nous',
+                    
+                    // Projects
+                    'projectTitle1': 'Protection des Forêts',
+                    'projectDesc1': 'Campagne de reboisement et sensibilisation à la protection des écosystèmes forestiers.',
+                    
+                    // Publications
+                    'pubTitle1': 'Rapport Annuel 2023',
+                    'pubDesc1': 'Bilan des activités et réalisations de l\'association pour l\'année 2023.',
+                    
+                    // Contact
+                    'contactAddress': 'Maroc',
+                    'contactPhone': '+212 6 12 34 56 78',
+                    'contactEmail': 'contact@ansfal.org',
+                    
+                    // Labels
                     'visitorsLabel': 'Visiteurs:',
                     'onlineLabel': 'En ligne:',
-                    'lastVisitLabel': 'Dernière visite:'
+                    'lastVisitLabel': 'Dernière visite:',
+                    
+                    // Upload
+                    'uploadTitle': 'Upload de fichiers',
+                    'uploadImage': 'Image',
+                    'uploadVideo': 'Vidéo',
+                    'uploadDocument': 'Document',
+                    'browseBtn': 'Parcourir',
+                    'uploadBtn': 'Uploader',
+                    'cancelBtn': 'Annuler',
+                    'dragDropText': 'Glissez les fichiers ici ou cliquez pour choisir',
+                    'filePreview': 'Aperçu du fichier',
+                    'orDirectLink': 'Ou entrez le lien directement',
+                    'uploadSuccess': 'Fichier uploadé avec succès!',
+                    'fileTooLarge': 'Fichier trop volumineux (maximum 50MB)',
+                    'invalidUrl': 'URL invalide',
+                    'selectFileOrUrl': 'Veuillez choisir un fichier ou entrer un lien'
                 },
                 'ar': {
-                    'siteTitle': 'جمعية أنسفال',
-                    'siteSubtitle': 'التعاون، التنمية والبيئة',
+                    // Navigation
                     'navHome': 'الرئيسية',
                     'navAbout': 'عن الجمعية',
                     'navGallery': 'المعرض',
@@ -1039,17 +1836,60 @@
                     'navPublications': 'المنشورات',
                     'navComments': 'التعليقات',
                     'navContact': 'اتصل',
+                    
+                    // Hero
                     'heroTitle': 'أنسفال',
                     'heroSubtitle': 'جمعية التعاون والتنمية والبيئة',
                     'heroText': 'تعمل من أجل التنمية المستدامة، والتعاون  وحماية البيئة منذ 2023.',
                     'btnDiscover': 'اكتشف أنشطتنا',
+                    
+                    // About
                     'aboutTitle': 'عن أنسفال',
                     'aboutSubtitle': 'تاريخنا',
                     'aboutText1': 'تأسست في عام 2023، جمعية أنسفال للتعاون والتنمية والبيئة ولدت من قناعة بأن التنمية البشرية وحماية البيئة يجب أن يسيرا جنباً إلى جنب.',
                     'aboutText2': 'اسمنا \'أنسفال\' يرمز لالتزامنا بمستقبل أفضل، يقوم على التضامن والتنمية المستدامة والحفاظ على بيئتنا.',
+                    
+                    // Sections
+                    'galleryTitle': 'معرض الصور',
+                    'videosTitle': 'مقاطع الفيديو',
+                    'projectsTitle': 'مشاريعنا',
+                    'publicationsTitle': 'المنشورات',
+                    'commentsTitle': 'التعليقات',
+                    'contactTitle': 'اتصل بنا',
+                    
+                    // Projects
+                    'projectTitle1': 'حماية الغابات',
+                    'projectDesc1': 'حملة التشجير والتوعية بحماية النظم البيئية للغابات.',
+                    
+                    // Publications
+                    'pubTitle1': 'التقرير السنوي 2023',
+                    'pubDesc1': 'خلاصة أنشطة وإنجازات الجمعية لعام 2023.',
+                    
+                    // Contact
+                    'contactAddress': 'المغرب',
+                    'contactPhone': '212 6 12 34 56 78+',
+                    'contactEmail': 'contact@ansfal.org',
+                    
+                    // Labels
                     'visitorsLabel': 'الزوار:',
                     'onlineLabel': 'متصل الآن:',
-                    'lastVisitLabel': 'آخر زيارة:'
+                    'lastVisitLabel': 'آخر زيارة:',
+                    
+                    // Upload
+                    'uploadTitle': 'رفع الملفات',
+                    'uploadImage': 'صورة',
+                    'uploadVideo': 'فيديو',
+                    'uploadDocument': 'وثيقة',
+                    'browseBtn': 'تصفح',
+                    'uploadBtn': 'رفع',
+                    'cancelBtn': 'إلغاء',
+                    'dragDropText': 'اسحب الملفات هنا أو انقر للاختيار',
+                    'filePreview': 'معاينة الملف',
+                    'orDirectLink': 'أو أدخل الرابط مباشرة',
+                    'uploadSuccess': 'تم رفع الملف بنجاح!',
+                    'fileTooLarge': 'الملف كبير جداً (الحد الأقصى 50 ميجابايت)',
+                    'invalidUrl': 'الرابط غير صالح',
+                    'selectFileOrUrl': 'الرجاء اختيار ملف أو إدخال رابط'
                 }
             };
             
@@ -1060,27 +1900,31 @@
                     element.textContent = translations[lang][key];
                 }
                 
-                // Éléments spéciaux
+                // Boutons spéciaux
+                if (key === 'btnDiscover') {
+                    document.getElementById('btnDiscover').textContent = translations[lang][key];
+                }
+                
+                // Labels du compteur
                 if (key === 'visitorsLabel') {
-                    document.getElementById('visitorsLabel').innerHTML = `${translations[lang][key]} <span class="visitor-count" id="totalVisitors">0</span>`;
+                    document.getElementById('visitorsLabel').innerHTML = translations[lang][key] + ' <span class="visitor-count" id="totalVisitors">0</span>';
                 }
                 if (key === 'onlineLabel') {
-                    document.getElementById('onlineLabel').innerHTML = `${translations[lang][key]} <span class="visitor-count" id="onlineVisitors">0</span>`;
+                    document.getElementById('onlineLabel').innerHTML = translations[lang][key] + ' <span class="visitor-count" id="onlineVisitors">0</span>';
                 }
                 if (key === 'lastVisitLabel') {
-                    document.getElementById('lastVisitLabel').innerHTML = `${translations[lang][key]} <span id="lastVisit">--/--/---- --:--:--</span>`;
+                    document.getElementById('lastVisitLabel').innerHTML = translations[lang][key] + ' <span id="lastVisit">--/--/---- --:--:--</span>';
                 }
             });
         }
 
         // ==================== GESTION DES VISITEURS ====================
         function updateVisitorCount() {
-            // Simuler des données de visiteurs
+            // Simuler des données
             const total = localStorage.getItem('ansfal_total_visitors') || 319;
             const online = 1;
             const lastVisit = '24/12/2025 14:22:17';
             
-            // Mettre à jour l'affichage
             document.getElementById('totalVisitors').textContent = total;
             document.getElementById('onlineVisitors').textContent = online;
             document.getElementById('lastVisit').textContent = lastVisit;
@@ -1089,58 +1933,751 @@
         // ==================== ÉDITION DU CONTENU ====================
         function editText(elementId) {
             const element = document.querySelector(`[data-id="${elementId}"]`);
+            if (!element) return;
+            
             const currentText = element.textContent;
-            const newText = prompt('Modifier le texte:', currentText);
+            const promptText = currentLanguage === 'ar' ? 'تعديل النص:' : 'Modifier le texte:';
+            const newText = prompt(promptText, currentText);
             
             if (newText !== null && newText !== currentText) {
                 element.textContent = newText;
-                // Sauvegarder dans localStorage
-                const contentData = JSON.parse(localStorage.getItem('ansfal_content') || '{}');
-                contentData[elementId] = newText;
-                localStorage.setItem('ansfal_content', JSON.stringify(contentData));
+                saveContentToStorage(elementId, newText);
             }
         }
 
         function editImage(elementId) {
-            const url = prompt('Entrez l\'URL de la nouvelle image:');
+            const promptText = currentLanguage === 'ar' ? 'أدخل رابط الصورة:' : 'Entrez l\'URL de l\'image:';
+            const url = prompt(promptText);
             if (url) {
                 const element = document.querySelector(`[data-id="${elementId}"] img`);
                 if (element) {
                     element.src = url;
-                    // Sauvegarder dans localStorage
-                    const contentData = JSON.parse(localStorage.getItem('ansfal_content') || '{}');
-                    contentData[elementId + '_img'] = url;
-                    localStorage.setItem('ansfal_content', JSON.stringify(contentData));
+                    saveContentToStorage(elementId + '_img', url);
+                }
+            }
+        }
+
+        function saveContentToStorage(id, content) {
+            if (!contentData) contentData = {};
+            contentData[id] = content;
+            localStorage.setItem('ansfal_content', JSON.stringify(contentData));
+        }
+
+        function loadContentData() {
+            const saved = localStorage.getItem('ansfal_content');
+            if (saved) {
+                try {
+                    contentData = JSON.parse(saved);
+                    Object.keys(contentData).forEach(id => {
+                        if (id.endsWith('_img')) {
+                            const elementId = id.replace('_img', '');
+                            const element = document.querySelector(`[data-id="${elementId}"] img`);
+                            if (element) element.src = contentData[id];
+                        } else {
+                            const element = document.querySelector(`[data-id="${id}"]`);
+                            if (element) element.textContent = contentData[id];
+                        }
+                    });
+                } catch (e) {
+                    console.error('Erreur chargement contenu:', e);
                 }
             }
         }
 
         function saveContent() {
-            alert('Contenu sauvegardé avec succès!');
+            // Sauvegarder tous les éléments éditables
+            const editableElements = document.querySelectorAll('[data-editable="true"]');
+            editableElements.forEach(element => {
+                const id = element.dataset.id;
+                if (id) {
+                    contentData[id] = element.textContent;
+                }
+            });
+            
+            // Sauvegarder les images
+            const imageElements = document.querySelectorAll('.image-editable img');
+            imageElements.forEach(element => {
+                const parent = element.closest('.image-editable');
+                if (parent && parent.dataset.id) {
+                    contentData[parent.dataset.id + '_img'] = element.src;
+                }
+            });
+            
+            localStorage.setItem('ansfal_content', JSON.stringify(contentData));
+            showNotification(currentLanguage === 'ar' ? 'تم حفظ المحتوى!' : 'Contenu sauvegardé!', 'success');
+        }
+
+        // ==================== UPLOAD DE FICHIERS ====================
+        function showUploadModal() {
+            // Fermer d'abord les autres modales
+            closeUploadModal();
+            
+            const modal = document.createElement('div');
+            modal.className = 'modal active';
+            modal.id = 'uploadModal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <h3>${currentLanguage === 'ar' ? 'رفع الملفات' : 'Upload de fichiers'}</h3>
+                    <div class="upload-options">
+                        <div class="upload-option">
+                            <input type="radio" id="uploadImage" name="uploadType" value="image" checked>
+                            <label for="uploadImage">
+                                <i class="fas fa-image"></i>
+                                ${currentLanguage === 'ar' ? 'صورة' : 'Image'}
+                            </label>
+                        </div>
+                        <div class="upload-option">
+                            <input type="radio" id="uploadVideo" name="uploadType" value="video">
+                            <label for="uploadVideo">
+                                <i class="fas fa-video"></i>
+                                ${currentLanguage === 'ar' ? 'فيديو' : 'Vidéo'}
+                            </label>
+                        </div>
+                        <div class="upload-option">
+                            <input type="radio" id="uploadDocument" name="uploadType" value="document">
+                            <label for="uploadDocument">
+                                <i class="fas fa-file-pdf"></i>
+                                ${currentLanguage === 'ar' ? 'وثيقة' : 'Document'}
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="file-upload-container">
+                        <label class="file-input-label">
+                            <input type="file" id="fileInput" accept="image/*,video/*,.pdf,.doc,.docx" style="display: none;">
+                            <div class="file-input-area">
+                                <i class="fas fa-cloud-upload-alt" style="font-size: 3rem; color: var(--primary); margin-bottom: 15px;"></i>
+                                <h4>${currentLanguage === 'ar' ? 'انقر أو اسحب الملف هنا' : 'Cliquez ou glissez le fichier ici'}</h4>
+                                <p>${currentLanguage === 'ar' ? 'الصور، الفيديوهات، PDF، Word' : 'Images, vidéos, PDF, Word'}</p>
+                                <button class="btn browse-btn" style="margin-top: 15px; background-color: var(--primary);">
+                                    <i class="fas fa-folder-open"></i> ${currentLanguage === 'ar' ? 'تصفح' : 'Parcourir'}
+                                </button>
+                            </div>
+                        </label>
+                        
+                        <div class="file-preview" id="filePreview" style="display: none; margin-top: 20px;">
+                            <h4>${currentLanguage === 'ar' ? 'معاينة الملف:' : 'Aperçu du fichier:'}</h4>
+                            <div id="previewContainer"></div>
+                            <div class="file-info" id="fileInfo"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="url-option" style="margin-top: 20px;">
+                        <h4>${currentLanguage === 'ar' ? 'أو أدخل الرابط مباشرة:' : 'Ou entrez le lien directement:'}</h4>
+                        <input type="text" id="urlInput" placeholder="${currentLanguage === 'ar' ? 'https://exemple.com/image.jpg' : 'https://exemple.com/image.jpg'}" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin: 10px 0;">
+                    </div>
+                    
+                    <div class="upload-actions" style="display: flex; gap: 10px; margin-top: 20px;">
+                        <button class="btn" onclick="uploadFile()" style="background-color: var(--success);">
+                            <i class="fas fa-upload"></i> ${currentLanguage === 'ar' ? 'رفع' : 'Uploader'}
+                        </button>
+                        <button class="btn" onclick="closeUploadModal()" style="background-color: var(--danger);">
+                            <i class="fas fa-times"></i> ${currentLanguage === 'ar' ? 'إلغاء' : 'Annuler'}
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Gestion du clic sur le bouton Parcourir
+            const browseBtn = modal.querySelector('.browse-btn');
+            const fileInput = modal.querySelector('#fileInput');
+            
+            browseBtn.addEventListener('click', () => {
+                fileInput.click();
+            });
+            
+            // Gestion de la sélection de fichier
+            fileInput.addEventListener('change', handleFileSelect);
+            
+            // Gestion du glisser-déposer
+            const fileInputArea = modal.querySelector('.file-input-area');
+            fileInputArea.addEventListener('dragover', handleDragOver);
+            fileInputArea.addEventListener('drop', handleDrop);
+        }
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                previewFile(file);
+            }
+        }
+
+        function handleDragOver(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            event.dataTransfer.dropEffect = 'copy';
+            event.currentTarget.classList.add('dragover');
+        }
+
+        function handleDrop(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            event.currentTarget.classList.remove('dragover');
+            
+            const files = event.dataTransfer.files;
+            if (files.length > 0) {
+                const fileInput = document.getElementById('fileInput');
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(files[0]);
+                fileInput.files = dataTransfer.files;
+                previewFile(files[0]);
+            }
+        }
+
+        function previewFile(file) {
+            const previewContainer = document.getElementById('previewContainer');
+            const filePreview = document.getElementById('filePreview');
+            const fileInfo = document.getElementById('fileInfo');
+            
+            previewContainer.innerHTML = '';
+            filePreview.style.display = 'block';
+            
+            // Afficher les informations du fichier
+            const fileSize = (file.size / (1024 * 1024)).toFixed(2);
+            fileInfo.innerHTML = `
+                <p><strong>${currentLanguage === 'ar' ? 'الاسم:' : 'Nom:'}</strong> ${file.name}</p>
+                <p><strong>${currentLanguage === 'ar' ? 'النوع:' : 'Type:'}</strong> ${file.type}</p>
+                <p><strong>${currentLanguage === 'ar' ? 'الحجم:' : 'Taille:'}</strong> ${fileSize} MB</p>
+            `;
+            
+            // Prévisualisation pour les images
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewContainer.innerHTML = `
+                        <img src="${e.target.result}" style="max-width: 200px; max-height: 200px; border-radius: 5px; margin-top: 10px;">
+                    `;
+                };
+                reader.readAsDataURL(file);
+            }
+            // Prévisualisation pour les vidéos
+            else if (file.type.startsWith('video/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewContainer.innerHTML = `
+                        <video controls style="max-width: 200px; max-height: 200px; border-radius: 5px; margin-top: 10px;">
+                            <source src="${e.target.result}" type="${file.type}">
+                        </video>
+                    `;
+                };
+                reader.readAsDataURL(file);
+            }
+            // Pour les documents
+            else {
+                previewContainer.innerHTML = `
+                    <div style="background-color: var(--light); padding: 20px; border-radius: 5px; text-align: center;">
+                        <i class="fas fa-file" style="font-size: 3rem; color: var(--primary);"></i>
+                        <p style="margin-top: 10px;">${file.name}</p>
+                    </div>
+                `;
+            }
+        }
+
+        function simulateUpload() {
+            const progressBar = document.createElement('div');
+            progressBar.className = 'upload-progress active';
+            progressBar.innerHTML = `
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">0%</div>
+            `;
+            
+            const modalContent = document.querySelector('.modal-content');
+            const uploadActions = modalContent.querySelector('.upload-actions');
+            modalContent.insertBefore(progressBar, uploadActions);
+            
+            let progress = 0;
+            return new Promise((resolve) => {
+                const interval = setInterval(() => {
+                    progress += Math.random() * 20;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                        setTimeout(() => {
+                            progressBar.remove();
+                            resolve(true);
+                        }, 500);
+                    }
+                    
+                    const progressFill = document.getElementById('progressFill');
+                    const progressText = document.getElementById('progressText');
+                    if (progressFill) {
+                        progressFill.style.width = progress + '%';
+                        progressText.textContent = Math.round(progress) + '%';
+                    }
+                }, 200);
+            });
+        }
+
+        async function uploadFile() {
+            const fileInput = document.getElementById('fileInput');
+            const urlInput = document.getElementById('urlInput');
+            const uploadType = document.querySelector('input[name="uploadType"]:checked').value;
+            
+            let fileUrl = '';
+            
+            // Si un fichier est sélectionné
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                
+                // Vérification de la taille
+                if (file.size > 50 * 1024 * 1024) {
+                    alert(currentLanguage === 'ar' ? 'الملف كبير جداً (الحد الأقصى 50 ميجابايت)' : 'Fichier trop volumineux (maximum 50MB)');
+                    return;
+                }
+                
+                // Simulation d'upload
+                const uploadSuccess = await simulateUpload();
+                
+                if (uploadSuccess) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        fileUrl = e.target.result;
+                        addContentFromUpload(fileUrl, uploadType, file.name);
+                        closeUploadModal();
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+            // Si une URL est fournie
+            else if (urlInput.value.trim() !== '') {
+                fileUrl = urlInput.value.trim();
+                
+                if (!isValidUrl(fileUrl)) {
+                    alert(currentLanguage === 'ar' ? 'الرابط غير صالح' : 'URL invalide');
+                    return;
+                }
+                
+                addContentFromUpload(fileUrl, uploadType, fileUrl.split('/').pop());
+                closeUploadModal();
+            }
+            else {
+                alert(currentLanguage === 'ar' ? 'الرجاء اختيار ملف أو إدخال رابط' : 'Veuillez choisir un fichier ou entrer un lien');
+            }
+        }
+
+        function addContentFromUpload(url, type, fileName) {
+            switch(type) {
+                case 'image':
+                    // Ajouter à la galerie
+                    addGalleryItem(url);
+                    showNotification(
+                        currentLanguage === 'ar' ? `تم إضافة الصورة: ${fileName}` : `Image ajoutée: ${fileName}`,
+                        'success'
+                    );
+                    break;
+                    
+                case 'video':
+                    // Ajouter aux vidéos
+                    addVideoItem(url);
+                    showNotification(
+                        currentLanguage === 'ar' ? `تم إضافة الفيديو: ${fileName}` : `Vidéo ajoutée: ${fileName}`,
+                        'success'
+                    );
+                    break;
+                    
+                case 'document':
+                    // Ajouter aux publications
+                    addDocumentToPublications(url, fileName);
+                    showNotification(
+                        currentLanguage === 'ar' ? `تم إضافة الوثيقة: ${fileName}` : `Document ajouté: ${fileName}`,
+                        'success'
+                    );
+                    break;
+            }
+        }
+
+        function addDocumentToPublications(url, fileName) {
+            const date = new Date().toLocaleDateString();
+            const title = fileName.replace(/\.[^/.]+$/, ""); // Retirer l'extension
+            const type = getFileType(fileName);
+            
+            const publicationsGrid = document.getElementById('publicationsGrid');
+            const pubId = 'pub' + Date.now();
+            const titleId = 'pubTitle' + Date.now();
+            const descId = 'pubDesc' + Date.now();
+            
+            const newItem = document.createElement('div');
+            newItem.className = 'publication-card';
+            newItem.innerHTML = `
+                <div class="publication-header">
+                    <span class="publication-type">${type}</span>
+                    <span class="publication-date">${date}</span>
+                </div>
+                <div class="publication-content">
+                    <h3 class="publication-title editable" data-id="${titleId}" data-editable="true">${title}</h3>
+                    <button class="edit-btn" onclick="editText('${titleId}')">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <p class="publication-description editable" data-id="${descId}" data-editable="true">
+                        ${currentLanguage === 'ar' ? 'تم رفع هذا الملف حديثاً' : 'Ce fichier a été uploadé récemment'}
+                    </p>
+                    <button class="edit-btn" onclick="editText('${descId}')">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <div class="publication-actions">
+                        <a href="${url}" target="_blank" class="btn-view">
+                            <i class="fas fa-eye"></i> <span class="btn-view-text">${currentLanguage === 'ar' ? 'عرض' : 'Voir'}</span>
+                        </a>
+                        <a href="${url}" download="${fileName}" class="btn-download">
+                            <i class="fas fa-download"></i> <span class="btn-download-text">${currentLanguage === 'ar' ? 'تحميل' : 'Télécharger'}</span>
+                        </a>
+                    </div>
+                </div>
+                <button class="add-item-btn" onclick="showPublicationUploadModal()" title="${currentLanguage === 'ar' ? 'إضافة منشور' : 'Ajouter une publication'}">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <button class="remove-item-btn" onclick="removePublicationItem(this)" title="${currentLanguage === 'ar' ? 'حذف هذا المنشور' : 'Supprimer cette publication'}">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            publicationsGrid.appendChild(newItem);
+            saveContent();
+        }
+
+        function getFileType(fileName) {
+            const ext = fileName.split('.').pop().toLowerCase();
+            if (['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'].includes(ext)) return 'Image';
+            if (['mp4', 'avi', 'mov', 'wmv', 'flv', 'mkv'].includes(ext)) return 'Vidéo';
+            if (['pdf'].includes(ext)) return 'PDF';
+            if (['doc', 'docx'].includes(ext)) return 'Word';
+            if (['xls', 'xlsx'].includes(ext)) return 'Excel';
+            if (['ppt', 'pptx'].includes(ext)) return 'PowerPoint';
+            return 'Document';
+        }
+
+        function isValidUrl(string) {
+            try {
+                new URL(string);
+                return true;
+            } catch (_) {
+                return false;
+            }
+        }
+
+        function closeUploadModal() {
+            const modal = document.getElementById('uploadModal');
+            if (modal) {
+                modal.remove();
+            }
+        }
+
+        // ==================== FONCTIONS D'AJOUT ====================
+        function showImageUploadModal() {
+            const url = prompt(currentLanguage === 'ar' ? 'أدخل رابط الصورة:' : 'Entrez l\'URL de l\'image:', 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');
+            if (url) {
+                addGalleryItem(url);
+            }
+        }
+
+        function addGalleryItem(url) {
+            const galleryGrid = document.getElementById('galleryGrid');
+            const newId = 'gallery' + Date.now();
+            
+            const newItem = document.createElement('div');
+            newItem.className = 'gallery-item image-editable';
+            newItem.setAttribute('data-id', newId);
+            newItem.innerHTML = `
+                <img src="${url}" alt="Image">
+                <button class="image-edit-btn" onclick="editImage('${newId}')">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button class="add-item-btn" onclick="showImageUploadModal()" title="${currentLanguage === 'ar' ? 'إضافة صورة' : 'Ajouter une image'}">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <button class="remove-item-btn" onclick="removeGalleryItem('${newId}')" title="${currentLanguage === 'ar' ? 'حذف هذه الصورة' : 'Supprimer cette image'}">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            galleryGrid.appendChild(newItem);
+            saveContent();
+        }
+
+        function removeGalleryItem(id) {
+            if (confirm(currentLanguage === 'ar' ? 'هل تريد حذف هذه الصورة؟' : 'Voulez-vous supprimer cette image?')) {
+                const element = document.querySelector(`[data-id="${id}"]`);
+                if (element) element.remove();
+                saveContent();
+            }
+        }
+
+        function showVideoUploadModal() {
+            const url = prompt(currentLanguage === 'ar' ? 'أدخل رابط فيديو YouTube:' : 'Entrez l\'URL de la vidéo YouTube:', 'https://www.youtube.com/embed/dQw4w9WgXcQ');
+            if (url) {
+                addVideoItem(url);
+            }
+        }
+
+        function addVideoItem(url) {
+            const videoContainer = document.getElementById('videoContainer');
+            
+            const newItem = document.createElement('div');
+            newItem.className = 'video-item';
+            newItem.innerHTML = `
+                <div class="youtube-embed">
+                    <iframe src="${url}" allowfullscreen></iframe>
+                </div>
+                <button class="add-item-btn" onclick="showVideoUploadModal()" title="${currentLanguage === 'ar' ? 'إضافة فيديو' : 'Ajouter une vidéo'}">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <button class="remove-item-btn" onclick="removeVideoItem(this)" title="${currentLanguage === 'ar' ? 'حذف هذا الفيديو' : 'Supprimer cette vidéo'}">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            videoContainer.appendChild(newItem);
+        }
+
+        function removeVideoItem(button) {
+            if (confirm(currentLanguage === 'ar' ? 'هل تريد حذف هذا الفيديو؟' : 'Voulez-vous supprimer cette vidéo?')) {
+                button.closest('.video-item').remove();
+            }
+        }
+
+        function showProjectUploadModal() {
+            const title = prompt(currentLanguage === 'ar' ? 'أدخل عنوان المشروع:' : 'Entrez le titre du projet:', 'Nouveau projet');
+            if (!title) return;
+            
+            const description = prompt(currentLanguage === 'ar' ? 'أدخل وصف المشروع:' : 'Entrez la description du projet:', 'Description du projet');
+            if (!description) return;
+            
+            const imageUrl = prompt(currentLanguage === 'ar' ? 'أدخل رابط صورة المشروع:' : 'Entrez l\'URL de l\'image du projet:', 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');
+            if (!imageUrl) return;
+            
+            addProjectItem(title, description, imageUrl);
+        }
+
+        function addProjectItem(title, description, imageUrl) {
+            const projectsContainer = document.getElementById('projectsContainer');
+            const projectId = 'project' + Date.now();
+            const titleId = 'projectTitle' + Date.now();
+            const descId = 'projectDesc' + Date.now();
+            const imgId = 'projectImg' + Date.now();
+            
+            const newItem = document.createElement('div');
+            newItem.className = 'project-card';
+            newItem.innerHTML = `
+                <div class="project-img image-editable" data-id="${imgId}">
+                    <img src="${imageUrl}" alt="${title}">
+                    <button class="image-edit-btn" onclick="editImage('${imgId}')">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                </div>
+                <div class="project-info">
+                    <h3 class="editable" data-id="${titleId}" data-editable="true">${title}</h3>
+                    <button class="edit-btn" onclick="editText('${titleId}')">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <p class="editable" data-id="${descId}" data-editable="true">${description}</p>
+                    <button class="edit-btn" onclick="editText('${descId}')">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                </div>
+                <button class="add-item-btn" onclick="showProjectUploadModal()" title="${currentLanguage === 'ar' ? 'إضافة مشروع' : 'Ajouter un projet'}">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <button class="remove-item-btn" onclick="removeProjectItem(this)" title="${currentLanguage === 'ar' ? 'حذف هذا المشروع' : 'Supprimer ce projet'}">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            projectsContainer.appendChild(newItem);
+            saveContent();
+        }
+
+        function removeProjectItem(button) {
+            if (confirm(currentLanguage === 'ar' ? 'هل تريد حذف هذا المشروع؟' : 'Voulez-vous supprimer ce projet?')) {
+                button.closest('.project-card').remove();
+                saveContent();
+            }
+        }
+
+        function showPublicationUploadModal() {
+            const title = prompt(currentLanguage === 'ar' ? 'أدخل عنوان المنشور:' : 'Entrez le titre de la publication:', 'Nouvelle publication');
+            if (!title) return;
+            
+            const description = prompt(currentLanguage === 'ar' ? 'أدخل وصف المنشور:' : 'Entrez la description de la publication:', 'Description de la publication');
+            if (!description) return;
+            
+            addPublicationItem(title, description);
+        }
+
+        function addPublicationItem(title, description) {
+            const publicationsGrid = document.getElementById('publicationsGrid');
+            const pubId = 'pub' + Date.now();
+            const titleId = 'pubTitle' + Date.now();
+            const descId = 'pubDesc' + Date.now();
+            const date = new Date().toLocaleDateString();
+            
+            const newItem = document.createElement('div');
+            newItem.className = 'publication-card';
+            newItem.innerHTML = `
+                <div class="publication-header">
+                    <span class="publication-type">Rapport</span>
+                    <span class="publication-date">${date}</span>
+                </div>
+                <div class="publication-content">
+                    <h3 class="publication-title editable" data-id="${titleId}" data-editable="true">${title}</h3>
+                    <button class="edit-btn" onclick="editText('${titleId}')">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <p class="publication-description editable" data-id="${descId}" data-editable="true">${description}</p>
+                    <button class="edit-btn" onclick="editText('${descId}')">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <div class="publication-actions">
+                        <a href="#" class="btn-view">
+                            <i class="fas fa-eye"></i> <span class="btn-view-text">${currentLanguage === 'ar' ? 'عرض' : 'Voir'}</span>
+                        </a>
+                        <a href="#" class="btn-download">
+                            <i class="fas fa-download"></i> <span class="btn-download-text">${currentLanguage === 'ar' ? 'تحميل' : 'Télécharger'}</span>
+                        </a>
+                    </div>
+                </div>
+                <button class="add-item-btn" onclick="showPublicationUploadModal()" title="${currentLanguage === 'ar' ? 'إضافة منشور' : 'Ajouter une publication'}">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <button class="remove-item-btn" onclick="removePublicationItem(this)" title="${currentLanguage === 'ar' ? 'حذف هذا المنشور' : 'Supprimer cette publication'}">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            publicationsGrid.appendChild(newItem);
+            saveContent();
+        }
+
+        function removePublicationItem(button) {
+            if (confirm(currentLanguage === 'ar' ? 'هل تريد حذف هذا المنشور؟' : 'Voulez-vous supprimer cette publication?')) {
+                button.closest('.publication-card').remove();
+                saveContent();
+            }
+        }
+
+        function addAboutItem() {
+            const text = prompt(currentLanguage === 'ar' ? 'أدخل نصًا جديدًا:' : 'Entrez un nouveau texte:');
+            if (text) {
+                const aboutText = document.querySelector('.about-text');
+                const paraId = 'aboutText' + Date.now();
+                
+                const newPara = document.createElement('p');
+                newPara.className = 'editable';
+                newPara.setAttribute('data-id', paraId);
+                newPara.setAttribute('data-editable', 'true');
+                newPara.textContent = text;
+                
+                const editBtn = document.createElement('button');
+                editBtn.className = 'edit-btn';
+                editBtn.innerHTML = '<i class="fas fa-edit"></i>';
+                editBtn.onclick = () => editText(paraId);
+                
+                newPara.appendChild(editBtn);
+                aboutText.appendChild(newPara);
+                saveContent();
+            }
+        }
+
+        // ==================== GESTION DES COMMENTAIRES ====================
+        function submitComment() {
+            const nameInput = document.getElementById('commentNameInput');
+            const textInput = document.getElementById('commentTextInput');
+            
+            const name = nameInput.value.trim();
+            const text = textInput.value.trim();
+            
+            if (!name || !text) {
+                alert(currentLanguage === 'ar' ? 'يرجى إدخال اسمك وتعليقك' : 'Veuillez entrer votre nom et votre commentaire');
+                return;
+            }
+            
+            const comment = {
+                id: Date.now(),
+                name: name,
+                text: text,
+                date: new Date().toLocaleString(),
+                approved: true
+            };
+            
+            approvedComments.push(comment);
+            saveComments();
+            
+            nameInput.value = '';
+            textInput.value = '';
+            
+            renderComments();
+            showNotification(currentLanguage === 'ar' ? 'شكراً لتعليقك!' : 'Merci pour votre commentaire!', 'success');
+        }
+
+        function loadComments() {
+            const saved = localStorage.getItem('ansfal_comments');
+            if (saved) {
+                try {
+                    const commentsData = JSON.parse(saved);
+                    pendingComments = commentsData.pending || [];
+                    approvedComments = commentsData.approved || [];
+                } catch (e) {
+                    console.error('Erreur chargement commentaires:', e);
+                }
+            }
+        }
+
+        function saveComments() {
+            const commentsData = {
+                pending: pendingComments,
+                approved: approvedComments
+            };
+            localStorage.setItem('ansfal_comments', JSON.stringify(commentsData));
+        }
+
+        function renderComments() {
+            const commentsList = document.getElementById('commentsList');
+            commentsList.innerHTML = '';
+            
+            if (approvedComments.length === 0) {
+                commentsList.innerHTML = '<div class="no-comments">' + (currentLanguage === 'ar' ? 'لا توجد تعليقات بعد. كن أول من يعلق!' : 'Aucun commentaire pour le moment. Soyez le premier à commenter!') + '</div>';
+                return;
+            }
+            
+            approvedComments.forEach(comment => {
+                const commentItem = document.createElement('div');
+                commentItem.className = 'comment-item';
+                commentItem.innerHTML = `
+                    <div class="comment-header">
+                        <div class="comment-author">${comment.name}</div>
+                        <div class="comment-date">${comment.date}</div>
+                    </div>
+                    <div class="comment-content">${comment.text}</div>
+                `;
+                commentsList.appendChild(commentItem);
+            });
         }
 
         // ==================== AUTHENTIFICATION ====================
         function showLoginModal() {
-            const password = prompt('Mot de passe administrateur:');
+            const password = prompt(currentLanguage === 'ar' ? 'كلمة مرور المدير:' : 'Mot de passe administrateur:');
             if (password === 'admin123') {
                 isAdmin = true;
                 localStorage.setItem('ansfal_admin_logged_in', 'true');
                 showAdminPanel();
-                alert('Connexion réussie!');
+                showNotification(currentLanguage === 'ar' ? 'تم تسجيل الدخول!' : 'Connexion réussie!', 'success');
             } else {
-                alert('Mot de passe incorrect!');
+                alert(currentLanguage === 'ar' ? 'كلمة المرور غير صحيحة!' : 'Mot de passe incorrect!');
             }
         }
 
         function showWebmasterLoginModal() {
-            const password = prompt('Mot de passe webmaster:');
+            const password = prompt(currentLanguage === 'ar' ? 'كلمة مرور ويبماستر:' : 'Mot de passe webmaster:');
             if (password === 'web123') {
                 isWebmaster = true;
                 localStorage.setItem('ansfal_webmaster_logged_in', 'true');
                 showWebmasterPanel();
-                alert('Connexion réussie!');
+                showNotification(currentLanguage === 'ar' ? 'تم تسجيل الدخول!' : 'Connexion réussie!', 'success');
             } else {
-                alert('Mot de passe incorrect!');
+                alert(currentLanguage === 'ar' ? 'كلمة المرور غير صحيحة!' : 'Mot de passe incorrect!');
             }
         }
 
@@ -1164,7 +2701,7 @@
             localStorage.removeItem('ansfal_admin_logged_in');
             hideEditButtons();
             hideAdminPanel();
-            alert('Déconnexion réussie!');
+            showNotification(currentLanguage === 'ar' ? 'تم تسجيل الخروج!' : 'Déconnexion réussie!', 'info');
         }
 
         function logoutWebmaster() {
@@ -1173,7 +2710,7 @@
             document.getElementById('mediaLibraryBtn').classList.remove('active');
             hideUploadButtons();
             hideWebmasterPanel();
-            alert('Déconnexion réussie!');
+            showNotification(currentLanguage === 'ar' ? 'تم تسجيل الخروج!' : 'Déconnexion réussie!', 'info');
         }
 
         // ==================== FONCTIONS UTILITAIRES ====================
@@ -1183,7 +2720,6 @@
         }
 
         function initNavigation() {
-            // Navigation fluide
             document.querySelectorAll('nav a').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     const href = this.getAttribute('href');
@@ -1213,11 +2749,7 @@
         }
 
         function showMediaLibrary() {
-            alert('Bibliothèque média - Fonction à implémenter');
-        }
-
-        function showUploadModal() {
-            alert('Upload de fichiers - Fonction à implémenter');
+            alert(currentLanguage === 'ar' ? 'مكتبة الوسائط - ستتم إضافتها قريبًا' : 'Bibliothèque média - À implémenter prochainement');
         }
 
         function showCommentsAdmin() {
@@ -1229,32 +2761,25 @@
         }
 
         function showUserManagement() {
-            alert('Gestion des utilisateurs - Fonction à implémenter');
+            alert(currentLanguage === 'ar' ? 'إدارة المستخدمين - ستتم إضافتها قريبًا' : 'Gestion des utilisateurs - À implémenter prochainement');
         }
 
         function showChangePasswordModal(role) {
-            const newPass = prompt('Nouveau mot de passe:');
+            const newPass = prompt(currentLanguage === 'ar' ? 'كلمة المرور الجديدة:' : 'Nouveau mot de passe:');
             if (newPass) {
-                alert(`Mot de passe ${role} changé avec succès!`);
-            }
-        }
-
-        function addAboutItem() {
-            const text = prompt('Ajouter un nouveau texte:');
-            if (text) {
-                const aboutText = document.querySelector('.about-text');
-                const newPara = document.createElement('p');
-                newPara.textContent = text;
-                newPara.className = 'editable';
-                aboutText.appendChild(newPara);
+                alert((currentLanguage === 'ar' ? 'تم تغيير كلمة المرور!' : 'Mot de passe changé!'));
             }
         }
 
         // ==================== NOTIFICATIONS ====================
         function showNotification(message, type = 'info') {
-            // Créer une notification simple
-            alert(message);
+            // Notification simple
+            console.log(type + ':', message);
         }
+
+        // Initialiser les commentaires
+        loadComments();
+        renderComments();
 
     </script>
 </body>
