@@ -6,6 +6,7 @@
     <title>ANSFAL - Association pour la Coopération, le Développement et l'Environnement</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* ==================== VARIABLES ET RESET ==================== */
         :root {
@@ -1172,6 +1173,209 @@
             transform: scale(1.1);
         }
 
+        /* ==================== BOUTON AJOUT GLOBAL ==================== */
+        .btn-add-float {
+            position: fixed;
+            bottom: 180px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--success), #2ecc71);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 3px 10px rgba(39, 174, 96, 0.3);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .btn-add-float.active {
+            display: flex;
+        }
+
+        .btn-add-float:hover {
+            background: linear-gradient(135deg, #219653, #27ae60);
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+        }
+
+        .add-menu {
+            position: fixed;
+            bottom: 240px;
+            right: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            z-index: 2000;
+            padding: 10px;
+            min-width: 200px;
+        }
+
+        .add-menu-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            padding: 10px 15px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            text-align: left;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .add-menu-item:hover {
+            background: #f0f9f3;
+        }
+
+        /* ==================== MODALE DE TÉLÉVERSEMENT ==================== */
+        .upload-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .upload-modal.active {
+            display: flex;
+        }
+
+        .upload-modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .upload-modal h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .upload-area {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary);
+            background: #f9f9f9;
+        }
+
+        .upload-area i {
+            font-size: 48px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .upload-area.drag-over {
+            border-color: var(--success);
+            background: #f0f9f3;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-preview {
+            margin-top: 20px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .file-icon {
+            font-size: 20px;
+            color: var(--primary);
+        }
+
+        .file-name {
+            font-weight: 500;
+        }
+
+        .file-size {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .remove-file {
+            background: var(--danger);
+            color: white;
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .upload-progress {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #eee;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .upload-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
         /* ==================== MESSAGES D'ALERTE ==================== */
         .alert {
             padding: 15px;
@@ -1312,6 +1516,16 @@
                 flex-direction: column;
                 gap: 10px;
             }
+            
+            .btn-add-float {
+                bottom: 150px;
+                right: 15px;
+            }
+            
+            .add-menu {
+                bottom: 210px;
+                right: 15px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1406,6 +1620,16 @@
             left: 20px;
         }
         
+        body.rtl .btn-add-float {
+            right: auto;
+            left: 20px;
+        }
+        
+        body.rtl .add-menu {
+            right: auto;
+            left: 20px;
+        }
+        
         body.rtl .publication-actions {
             justify-content: flex-start;
         }
@@ -1418,6 +1642,36 @@
         body.rtl .comment-item {
             border-left: none;
             border-right: 4px solid var(--accent);
+        }
+        
+        body.rtl .sidebar-menu a {
+            border-left: none;
+            border-right: 4px solid transparent;
+        }
+        
+        body.rtl .sidebar-menu a:hover,
+        body.rtl .sidebar-menu a.active {
+            border-left: none;
+            border-right-color: var(--accent);
+        }
+        
+        body.rtl .sidebar-menu i {
+            margin-right: 0;
+            margin-left: 10px;
+        }
+        
+        body.rtl .action-buttons {
+            justify-content: flex-start;
+        }
+        
+        body.rtl .btn-action {
+            flex-direction: row-reverse;
+        }
+        
+        body.rtl .section-title h2:after {
+            left: auto;
+            right: 50%;
+            transform: translateX(50%);
         }
     </style>
 </head>
@@ -1445,6 +1699,33 @@
                 <span id="userRole" class="user-role">Admin</span>
             </div>
             <button id="logoutBtn" class="logout-btn" onclick="logout()">Déconnexion</button>
+        </div>
+    </div>
+
+    <!-- ==================== MODALE DE TÉLÉVERSEMENT ==================== -->
+    <div class="upload-modal" id="uploadModal">
+        <div class="upload-modal-content">
+            <h3 id="uploadModalTitle">Téléverser un fichier</h3>
+            <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p id="uploadText">Cliquez pour sélectionner ou glissez-déposez vos fichiers</p>
+                <input type="file" id="fileInput" class="file-input" multiple accept="image/*,video/*">
+            </div>
+            <div class="file-preview" id="filePreview"></div>
+            <div class="upload-progress" id="uploadProgress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p id="progressText">0%</p>
+            </div>
+            <div class="upload-buttons">
+                <button class="btn" onclick="cancelUpload()" style="background-color: var(--danger);">
+                    <i class="fas fa-times"></i> Annuler
+                </button>
+                <button class="btn" onclick="uploadFiles()" id="uploadBtn" style="background-color: var(--success);">
+                    <i class="fas fa-upload"></i> Téléverser
+                </button>
+            </div>
         </div>
     </div>
 
@@ -1908,6 +2189,10 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
+    <button class="btn-add-float" id="addBtn" onclick="showAddMenu()">
+        <i class="fas fa-plus"></i>
+    </button>
+
     <button class="media-library-btn" id="mediaLibraryBtn" onclick="showMediaLibrary()">
         <i class="fas fa-images"></i>
     </button>
@@ -1935,107 +2220,792 @@
         let pendingComments = [];
         let approvedComments = [];
         let currentUser = null;
-        
-        // Traductions pour le dashboard
-        const dashboardTranslations = {
-            fr: {
-                title: "Tableau de Bord",
-                menu: ["Accueil", "Contenu", "Utilisateurs", "Paramètres", "Rapports", "Support"],
-                stats: {
-                    stat1: "Articles",
-                    stat2: "Utilisateurs Actifs",
-                    stat3: "Visites Quotidiennes",
-                    stat4: "Nouveaux Commentaires"
-                },
-                content: [
-                    {
-                        title: "Articles de Blog",
-                        description: "Gérez tous les articles de blog, créez de nouveaux articles, modifiez ou supprimez les articles existants."
-                    },
-                    {
-                        title: "Galerie Photos",
-                        description: "Gérez la galerie photos, téléchargez de nouvelles images, organisez les albums, optimisez les photos."
-                    },
-                    {
-                        title: "Vidéos",
-                        description: "Gérez la bibliothèque vidéo, téléchargez de nouvelles vidéos, créez des playlists."
-                    },
-                    {
-                        title: "Utilisateurs",
-                        description: "Gérez les comptes utilisateurs, les permissions, les groupes et les rapports d'activité."
-                    },
-                    {
-                        title: "Commentaires",
-                        description: "Examinez les commentaires, approuvez-les, répondez, ou supprimez les commentaires indésirables."
-                    },
-                    {
-                        title: "Paramètres",
-                        description: "Modifiez les paramètres du site, l'apparence, la langue, et les paramètres avancés."
-                    }
-                ],
-                roles: {
-                    admin: "Administrateur",
-                    editor: "Éditeur",
-                    user: "Utilisateur"
-                }
+        let currentUploadType = null;
+        let selectedFiles = [];
+
+        // Traductions COMPLÈTES
+        const translations = {
+            'fr': {
+                // Navigation
+                'navHome': 'Accueil',
+                'navAbout': 'À propos',
+                'navGallery': 'Galerie',
+                'navVideos': 'Vidéos',
+                'navProjects': 'Projets',
+                'navPublications': 'Publications',
+                'navComments': 'Commentaires',
+                'navContact': 'Contact',
+                'navDashboard': 'Dashboard',
+                
+                // Hero
+                'heroTitle': 'ANSFAL',
+                'heroSubtitle': 'Association pour la Coopération, le Développement et l\'Environnement',
+                'heroText': 'Œuvrant pour un développement durable, la coopération nationale et la protection de l\'environnement depuis 2023.',
+                'btnDiscover': 'Découvrir nos actions',
+                'btnGallery': 'Galerie',
+                'btnComments': 'Commentaires',
+                'btnDashboard': 'Dashboard',
+                
+                // About
+                'aboutTitle': 'À propos d\'ANSFAL',
+                'aboutSubtitle': 'Notre histoire',
+                'aboutText1': 'Fondée en 2023, l\'Association ANSFAL POUR LA COOPÉRATION ET LE DÉVELOPPEMENT ET L\'ENVIRONNEMENT est née de la conviction que le développement humain et la protection environnementale doivent aller de pair.',
+                'aboutText2': 'Notre nom \'ANSFAL\' symbolise notre engagement pour un avenir meilleur, basé sur la solidarité, le développement durable et la préservation de notre environnement.',
+                
+                // Sections
+                'galleryTitle': 'Galerie Photos',
+                'videosTitle': 'Vidéos',
+                'projectsTitle': 'Nos Projets',
+                'publicationsTitle': 'Publications',
+                'commentsTitle': 'Commentaires',
+                'contactTitle': 'Contactez-nous',
+                
+                // Projects
+                'projectTitle1': 'Protection des Forêts',
+                'projectDesc1': 'Campagne de reboisement et sensibilisation à la protection des écosystèmes forestiers.',
+                
+                // Publications
+                'pubTitle1': 'Rapport Annuel 2023',
+                'pubDesc1': 'Bilan des activités et réalisations de l\'association pour l\'année 2023.',
+                'btnViewText': 'Voir',
+                'btnDownloadText': 'Télécharger',
+                
+                // Contact
+                'contactAddress': 'Maroc',
+                'contactPhone': '+212 6 12 34 56 78',
+                'contactEmail': 'contact@ansfal.org',
+                
+                // Labels
+                'visitorsLabel': 'Visiteurs:',
+                'onlineLabel': 'En ligne:',
+                'lastVisitLabel': 'Dernière visite:',
+                
+                // Dashboard
+                'dashboardTitle': 'Tableau de Bord',
+                'stat1Title': 'Articles',
+                'stat2Title': 'Utilisateurs Actifs',
+                'stat3Title': 'Visites Quotidiennes',
+                'stat4Title': 'Nouveaux Commentaires',
+                
+                // Auth
+                'usernamePlaceholder': 'Nom d\'utilisateur',
+                'passwordPlaceholder': 'Mot de passe',
+                'loginButton': 'Connexion',
+                'logoutButton': 'Déconnexion',
+                
+                // Comments
+                'commentNamePlaceholder': 'Votre nom',
+                'commentTextPlaceholder': 'Votre commentaire',
+                'submitCommentButton': 'Publier le commentaire',
+                'noComments': 'Aucun commentaire pour le moment. Soyez le premier à commenter!',
+                
+                // Upload Modal
+                'uploadTitle': 'Téléverser un fichier',
+                'uploadText': 'Cliquez pour sélectionner ou glissez-déposez vos fichiers',
+                'cancelButton': 'Annuler',
+                'uploadButton': 'Téléverser'
             },
-            ar: {
-                title: "لوحة التحكم",
-                menu: ["الرئيسية", "المحتوى", "المستخدمون", "الإعدادات", "التقارير", "الدعم"],
-                stats: {
-                    stat1: "عدد المقالات",
-                    stat2: "المستخدمون النشطون",
-                    stat3: "الزيارات اليومية",
-                    stat4: "التعليقات الجديدة"
-                },
-                content: [
-                    {
-                        title: "مقالات المدونة",
-                        description: "إدارة جميع مقالات المدونة، إنشاء مقالات جديدة، تعديل أو حذف المقالات الحالية."
-                    },
-                    {
-                        title: "معرض الصور",
-                        description: "إدارة معرض الصور، رفع صور جديدة، تنظيم الألبومات، تحسين الصور."
-                    },
-                    {
-                        title: "الفيديوهات",
-                        description: "إدارة مكتبة الفيديو، رفع فيديوهات جديدة، إنشاء قوائم التشغيل."
-                    },
-                    {
-                        title: "المستخدمون",
-                        description: "إدارة حسابات المستخدمين، الصلاحيات، المجموعات، وتقارير النشاط."
-                    },
-                    {
-                        title: "التعليقات",
-                        description: "مراجعة التعليقات، الموافقة عليها، الرد، أو حذف التعليقات غير المرغوب فيها."
-                    },
-                    {
-                        title: "الإعدادات",
-                        description: "تعديل إعدادات الموقع، المظهر، اللغة، والإعدادات المتقدمة."
-                    }
-                ],
-                roles: {
-                    admin: "مدير النظام",
-                    editor: "محرر",
-                    user: "مستخدم"
-                }
+            'ar': {
+                // Navigation
+                'navHome': 'الرئيسية',
+                'navAbout': 'عن الجمعية',
+                'navGallery': 'المعرض',
+                'navVideos': 'فيديوهات',
+                'navProjects': 'المشاريع',
+                'navPublications': 'المنشورات',
+                'navComments': 'التعليقات',
+                'navContact': 'اتصل',
+                'navDashboard': 'لوحة التحكم',
+                
+                // Hero
+                'heroTitle': 'أنسفال',
+                'heroSubtitle': 'جمعية التعاون والتنمية والبيئة',
+                'heroText': 'تعمل من أجل التنمية المستدامة، والتعاون وحماية البيئة منذ 2023.',
+                'btnDiscover': 'اكتشف أنشطتنا',
+                'btnGallery': 'المعرض',
+                'btnComments': 'التعليقات',
+                'btnDashboard': 'لوحة التحكم',
+                
+                // About
+                'aboutTitle': 'عن أنسفال',
+                'aboutSubtitle': 'تاريخنا',
+                'aboutText1': 'تأسست في عام 2023، جمعية أنسفال للتعاون والتنمية والبيئة ولدت من قناعة بأن التنمية البشرية وحماية البيئة يجب أن يسيرا جنباً إلى جنب.',
+                'aboutText2': 'اسمنا \'أنسفال\' يرمز لالتزامنا بمستقبل أفضل، يقوم على التضامن والتنمية المستدامة والحفاظ على بيئتنا.',
+                
+                // Sections
+                'galleryTitle': 'معرض الصور',
+                'videosTitle': 'مقاطع الفيديو',
+                'projectsTitle': 'مشاريعنا',
+                'publicationsTitle': 'المنشورات',
+                'commentsTitle': 'التعليقات',
+                'contactTitle': 'اتصل بنا',
+                
+                // Projects
+                'projectTitle1': 'حماية الغابات',
+                'projectDesc1': 'حملة التشجير والتوعية بحماية النظم البيئية للغابات.',
+                
+                // Publications
+                'pubTitle1': 'التقرير السنوي 2023',
+                'pubDesc1': 'خلاصة أنشطة وإنجازات الجمعية لعام 2023.',
+                'btnViewText': 'عرض',
+                'btnDownloadText': 'تحميل',
+                
+                // Contact
+                'contactAddress': 'المغرب',
+                'contactPhone': '212 6 12 34 56 78+',
+                'contactEmail': 'contact@ansfal.org',
+                
+                // Labels
+                'visitorsLabel': 'الزوار:',
+                'onlineLabel': 'متصل الآن:',
+                'lastVisitLabel': 'آخر زيارة:',
+                
+                // Dashboard
+                'dashboardTitle': 'لوحة التحكم',
+                'stat1Title': 'عدد المقالات',
+                'stat2Title': 'المستخدمون النشطون',
+                'stat3Title': 'الزيارات اليومية',
+                'stat4Title': 'التعليقات الجديدة',
+                
+                // Auth
+                'usernamePlaceholder': 'اسم المستخدم',
+                'passwordPlaceholder': 'كلمة المرور',
+                'loginButton': 'تسجيل الدخول',
+                'logoutButton': 'تسجيل الخروج',
+                
+                // Comments
+                'commentNamePlaceholder': 'اسمك',
+                'commentTextPlaceholder': 'تعليقك',
+                'submitCommentButton': 'نشر التعليق',
+                'noComments': 'لا توجد تعليقات بعد. كن أول من يعلق!',
+                
+                // Upload Modal
+                'uploadTitle': 'رفع ملف',
+                'uploadText': 'انقر لتحديد أو اسحب وأفلت ملفاتك',
+                'cancelButton': 'إلغاء',
+                'uploadButton': 'رفع'
             }
         };
 
-        // Initialisation
+        // ==================== GESTION DES LANGUES ====================
+        function changeLanguage(lang, initialLoad = false) {
+            console.log('Changement de langue vers:', lang);
+            
+            currentLanguage = lang;
+            localStorage.setItem('ansfal_language', lang);
+            
+            // Mettre à jour les boutons de langue
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            const activeBtn = document.querySelector(`.lang-btn[onclick*="changeLanguage('${lang}')"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+            
+            // Appliquer la direction RTL pour l'arabe
+            if (lang === 'ar') {
+                document.body.classList.add('rtl');
+                document.body.style.fontFamily = "'Cairo', sans-serif";
+            } else {
+                document.body.classList.remove('rtl');
+                document.body.style.fontFamily = "'Roboto', sans-serif";
+            }
+            
+            // Traduire la page
+            translatePage(lang);
+            
+            // Mettre à jour l'interface
+            updateUIForLanguage();
+            
+            // Mettre à jour le dashboard
+            if (!initialLoad && document.querySelector('.dashboard-section.active')) {
+                updateDashboardLanguage();
+            }
+            
+            // Mettre à jour l'upload modal si ouvert
+            if (document.getElementById('uploadModal').classList.contains('active')) {
+                updateUploadModalLanguage();
+            }
+        }
+
+        function translatePage(lang) {
+            console.log('Traduction en cours pour:', lang);
+            
+            const t = translations[lang];
+            if (!t) return;
+            
+            // Traduire tous les éléments avec data-id
+            document.querySelectorAll('[data-id]').forEach(element => {
+                const id = element.getAttribute('data-id');
+                if (t[id] && element.hasAttribute('data-editable')) {
+                    element.textContent = t[id];
+                }
+            });
+            
+            // Traduire les boutons spéciaux
+            const specialButtons = ['btnDiscover', 'btnGallery', 'btnComments', 'btnDashboard'];
+            specialButtons.forEach(btnId => {
+                const btn = document.getElementById(btnId);
+                if (btn && t[btnId]) {
+                    const icon = btn.querySelector('i');
+                    if (icon) {
+                        btn.innerHTML = icon.outerHTML + ' ' + t[btnId];
+                    } else {
+                        btn.textContent = t[btnId];
+                    }
+                }
+            });
+            
+            // Traduire la navigation
+            const navIds = ['navHome', 'navAbout', 'navGallery', 'navVideos', 'navProjects', 
+                           'navPublications', 'navComments', 'navContact', 'navDashboard'];
+            navIds.forEach(navId => {
+                const navElement = document.getElementById(navId);
+                if (navElement && t[navId]) {
+                    navElement.textContent = t[navId];
+                }
+            });
+            
+            // Traduire les labels du compteur
+            const totalVisitors = document.getElementById('totalVisitors').textContent;
+            const onlineVisitors = document.getElementById('onlineVisitors').textContent;
+            const lastVisit = document.getElementById('lastVisit').textContent;
+            
+            document.getElementById('visitorsLabel').innerHTML = t['visitorsLabel'] + ' <span class="visitor-count" id="totalVisitors">' + totalVisitors + '</span>';
+            document.getElementById('onlineLabel').innerHTML = t['onlineLabel'] + ' <span class="visitor-count" id="onlineVisitors">' + onlineVisitors + '</span>';
+            document.getElementById('lastVisitLabel').innerHTML = t['lastVisitLabel'] + ' <span id="lastVisit">' + lastVisit + '</span>';
+            
+            // Traduire le formulaire d'authentification
+            if (document.getElementById('username')) {
+                document.getElementById('username').placeholder = t['usernamePlaceholder'];
+                document.getElementById('password').placeholder = t['passwordPlaceholder'];
+                document.querySelector('#loginForm button').textContent = t['loginButton'];
+                document.getElementById('logoutBtn').textContent = t['logoutButton'];
+            }
+            
+            // Traduire le formulaire de commentaires
+            if (document.getElementById('commentNameInput')) {
+                document.getElementById('commentNameInput').placeholder = t['commentNamePlaceholder'];
+                document.getElementById('commentTextInput').placeholder = t['commentTextPlaceholder'];
+                document.getElementById('btnSubmitComment').textContent = t['submitCommentButton'];
+            }
+            
+            // Traduire les boutons des publications
+            document.querySelectorAll('.btn-view-text').forEach(el => {
+                el.textContent = t['btnViewText'];
+            });
+            
+            document.querySelectorAll('.btn-download-text').forEach(el => {
+                el.textContent = t['btnDownloadText'];
+            });
+            
+            // Traduire le message "aucun commentaire"
+            const noCommentsDiv = document.querySelector('.no-comments');
+            if (noCommentsDiv) {
+                noCommentsDiv.textContent = t['noComments'];
+            }
+            
+            console.log('Traduction terminée');
+        }
+
+        function updateUIForLanguage() {
+            // Mettre à jour les titres des boutons flottants
+            document.getElementById('whatsappBtn').title = currentLanguage === 'ar' ? 'تواصل عبر واتساب' : 'Contactez-nous sur WhatsApp';
+            document.getElementById('addBtn').title = currentLanguage === 'ar' ? 'إضافة محتوى' : 'Ajouter du contenu';
+            document.getElementById('commentsBtn').title = currentLanguage === 'ar' ? 'التعليقات' : 'Commentaires';
+            document.getElementById('loginBtn').title = currentLanguage === 'ar' ? 'تسجيل الدخول' : 'Connexion';
+            document.getElementById('webmasterBtn').title = currentLanguage === 'ar' ? 'مدير النظام' : 'Webmaster';
+            document.getElementById('mediaLibraryBtn').title = currentLanguage === 'ar' ? 'مكتبة الوسائط' : 'Bibliothèque média';
+            
+            // Mettre à jour le nom de l'utilisateur si connecté
+            if (currentUser && currentUser.name) {
+                const userNameElement = document.getElementById('userName');
+                if (userNameElement) {
+                    if (currentLanguage === 'ar') {
+                        userNameElement.textContent = currentUser.name.includes('Administrateur') ? 'مدير أنسفال' : currentUser.name;
+                    } else {
+                        userNameElement.textContent = currentUser.name;
+                    }
+                }
+            }
+        }
+
+        function updateUploadModalLanguage() {
+            const t = translations[currentLanguage];
+            if (!t) return;
+            
+            const title = document.getElementById('uploadModalTitle');
+            const text = document.getElementById('uploadText');
+            const cancelBtn = document.querySelector('.upload-buttons .btn:first-child');
+            const uploadBtn = document.getElementById('uploadBtn');
+            
+            if (title && t['uploadTitle']) title.textContent = t['uploadTitle'];
+            if (text && t['uploadText']) text.textContent = t['uploadText'];
+            if (cancelBtn && t['cancelButton']) cancelBtn.innerHTML = `<i class="fas fa-times"></i> ${t['cancelButton']}`;
+            if (uploadBtn && t['uploadButton']) uploadBtn.innerHTML = `<i class="fas fa-upload"></i> ${t['uploadButton']}`;
+        }
+
+        function updateDashboardLanguage() {
+            const t = translations[currentLanguage];
+            if (!t) return;
+            
+            const title = document.getElementById('dashboardTitle');
+            if (title && t['dashboardTitle']) {
+                title.textContent = t['dashboardTitle'];
+            }
+            
+            // Mettre à jour les titres des statistiques
+            const statTitles = ['stat1Title', 'stat2Title', 'stat3Title', 'stat4Title'];
+            statTitles.forEach((statId, index) => {
+                const elements = document.querySelectorAll('.stat-card h3');
+                if (elements[index] && t[statId]) {
+                    elements[index].textContent = t[statId];
+                }
+            });
+        }
+
+        // ==================== FONCTIONS D'INITIALISATION ====================
+        function initDragAndDrop() {
+            const uploadArea = document.getElementById('uploadArea');
+            const fileInput = document.getElementById('fileInput');
+            
+            if (!uploadArea || !fileInput) return;
+            
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('drag-over');
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('drag-over');
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('drag-over');
+                
+                const files = e.dataTransfer.files;
+                handleFileSelection(files);
+            });
+            
+            fileInput.addEventListener('change', (e) => {
+                handleFileSelection(e.target.files);
+            });
+        }
+
+        function handleFileSelection(files) {
+            selectedFiles = Array.from(files);
+            updateFilePreview();
+        }
+
+        function updateFilePreview() {
+            const filePreview = document.getElementById('filePreview');
+            if (!filePreview) return;
+            
+            filePreview.innerHTML = '';
+            
+            if (selectedFiles.length === 0) {
+                return;
+            }
+            
+            selectedFiles.forEach((file, index) => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                
+                const fileIcon = getFileIcon(file.type);
+                const fileSize = formatFileSize(file.size);
+                
+                fileItem.innerHTML = `
+                    <div class="file-info">
+                        <i class="fas fa-${fileIcon} file-icon"></i>
+                        <div>
+                            <div class="file-name">${file.name}</div>
+                            <div class="file-size">${fileSize}</div>
+                        </div>
+                    </div>
+                    <button class="remove-file" onclick="removeFile(${index})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                
+                filePreview.appendChild(fileItem);
+            });
+            
+            const uploadBtn = document.getElementById('uploadBtn');
+            if (uploadBtn) {
+                uploadBtn.disabled = false;
+            }
+        }
+
+        function getFileIcon(fileType) {
+            if (fileType.startsWith('image/')) return 'image';
+            if (fileType.startsWith('video/')) return 'video';
+            if (fileType.includes('pdf')) return 'file-pdf';
+            return 'file';
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function removeFile(index) {
+            selectedFiles.splice(index, 1);
+            updateFilePreview();
+        }
+
+        // ==================== FONCTIONS DE TÉLÉVERSEMENT ====================
+        function uploadFiles() {
+            if (selectedFiles.length === 0) {
+                showAlert(
+                    currentLanguage === 'ar' ? 'لم يتم اختيار أي ملف' : 'Aucun fichier sélectionné',
+                    'error'
+                );
+                return;
+            }
+            
+            const uploadBtn = document.getElementById('uploadBtn');
+            const progressBar = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            const uploadProgress = document.getElementById('uploadProgress');
+            
+            if (!uploadBtn || !progressBar || !progressText || !uploadProgress) return;
+            
+            uploadBtn.disabled = true;
+            uploadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ' + 
+                (currentLanguage === 'ar' ? 'جاري الرفع...' : 'Téléversement...');
+            
+            uploadProgress.style.display = 'block';
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 10;
+                progressBar.style.width = progress + '%';
+                progressText.textContent = progress + '%';
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    
+                    setTimeout(() => {
+                        processUploadedFiles();
+                        resetUploadModal();
+                        hideUploadModal();
+                        showAlert(
+                            currentLanguage === 'ar' ? 'تم رفع الملفات بنجاح!' : 'Fichiers téléversés avec succès!',
+                            'success'
+                        );
+                    }, 500);
+                }
+            }, 200);
+        }
+
+        function processUploadedFiles() {
+            selectedFiles.forEach(file => {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        addGalleryItem(e.target.result, file.name);
+                    };
+                    reader.readAsDataURL(file);
+                } else if (file.type.startsWith('video/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        addVideoItem(e.target.result, file.name);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        function resetUploadModal() {
+            selectedFiles = [];
+            const filePreview = document.getElementById('filePreview');
+            const progressBar = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            const uploadProgress = document.getElementById('uploadProgress');
+            const uploadBtn = document.getElementById('uploadBtn');
+            
+            if (filePreview) filePreview.innerHTML = '';
+            if (progressBar) progressBar.style.width = '0%';
+            if (progressText) progressText.textContent = '0%';
+            if (uploadProgress) uploadProgress.style.display = 'none';
+            if (uploadBtn) {
+                uploadBtn.disabled = false;
+                uploadBtn.innerHTML = `<i class="fas fa-upload"></i> ${translations[currentLanguage]['uploadButton']}`;
+            }
+        }
+
+        function cancelUpload() {
+            resetUploadModal();
+            hideUploadModal();
+        }
+
+        function showUploadModal(type = 'image') {
+            currentUploadType = type;
+            const modal = document.getElementById('uploadModal');
+            const title = document.getElementById('uploadModalTitle');
+            const text = document.getElementById('uploadText');
+            const fileInput = document.getElementById('fileInput');
+            
+            if (!modal || !title || !text || !fileInput) return;
+            
+            updateUploadModalLanguage(); // Mettre à jour la langue
+            
+            if (type === 'image') {
+                title.textContent = currentLanguage === 'ar' ? 'رفع صورة' : 'Téléverser une image';
+                text.textContent = currentLanguage === 'ar' ? 'انقر لتحديد أو اسحب وأفلت صورك' : 'Cliquez pour sélectionner ou glissez-déposez vos images';
+                fileInput.accept = 'image/*';
+            } else if (type === 'video') {
+                title.textContent = currentLanguage === 'ar' ? 'رفع فيديو' : 'Téléverser une vidéo';
+                text.textContent = currentLanguage === 'ar' ? 'انقر لتحديد أو اسحب وأفلت فيديوهاتك' : 'Cliquez pour sélectionner ou glissez-déposez vos vidéos';
+                fileInput.accept = 'video/*';
+            }
+            
+            modal.classList.add('active');
+        }
+
+        function hideUploadModal() {
+            const modal = document.getElementById('uploadModal');
+            if (modal) {
+                modal.classList.remove('active');
+            }
+        }
+
+        // ==================== FONCTIONS D'AJOUT ====================
+        function showImageUploadModal() {
+            showUploadModal('image');
+        }
+
+        function showVideoUploadModal() {
+            showUploadModal('video');
+        }
+
+        function showProjectUploadModal() {
+            const title = prompt(
+                currentLanguage === 'ar' ? 'أدخل عنوان المشروع:' : 'Entrez le titre du projet:',
+                currentLanguage === 'ar' ? 'مشروع جديد' : 'Nouveau projet'
+            );
+            if (!title) return;
+            
+            const description = prompt(
+                currentLanguage === 'ar' ? 'أدخل وصف المشروع:' : 'Entrez la description du projet:',
+                currentLanguage === 'ar' ? 'وصف المشروع' : 'Description du projet'
+            );
+            if (!description) return;
+            
+            showUploadModal('project');
+            window.projectInfo = { title, description };
+        }
+
+        function showPublicationUploadModal() {
+            const title = prompt(
+                currentLanguage === 'ar' ? 'أدخل عنوان المنشور:' : 'Entrez le titre de la publication:',
+                currentLanguage === 'ar' ? 'منشور جديد' : 'Nouvelle publication'
+            );
+            if (!title) return;
+            
+            const description = prompt(
+                currentLanguage === 'ar' ? 'أدخل وصف المنشور:' : 'Entrez la description de la publication:',
+                currentLanguage === 'ar' ? 'وصف المنشور' : 'Description de la publication'
+            );
+            if (!description) return;
+            
+            showUploadModal('publication');
+            window.publicationInfo = { title, description };
+        }
+
+        function showAddMenu() {
+            const options = [
+                { text: 'Image', icon: 'image', action: 'showImageUploadModal' },
+                { text: 'Vidéo', icon: 'video', action: 'showVideoUploadModal' },
+                { text: 'Projet', icon: 'project-diagram', action: 'showProjectUploadModal' },
+                { text: 'Publication', icon: 'file-alt', action: 'showPublicationUploadModal' },
+                { text: 'Texte', icon: 'font', action: 'addAboutItem' }
+            ];
+            
+            const menu = document.createElement('div');
+            menu.className = 'add-menu';
+            
+            options.forEach(option => {
+                const btn = document.createElement('button');
+                btn.className = 'add-menu-item';
+                btn.onmouseover = () => btn.style.background = '#f0f9f3';
+                btn.onmouseout = () => btn.style.background = 'none';
+                btn.onclick = () => {
+                    if (!checkPermission('canAdd')) {
+                        showAlert(
+                            currentLanguage === 'ar' ? 'ليس لديك صلاحية الإضافة' : 'Vous n\'avez pas la permission d\'ajouter',
+                            'error'
+                        );
+                        return;
+                    }
+                    window[option.action]();
+                    menu.remove();
+                };
+                
+                const displayText = currentLanguage === 'ar' ? 
+                    (option.text === 'Image' ? 'صورة' :
+                     option.text === 'Vidéo' ? 'فيديو' :
+                     option.text === 'Projet' ? 'مشروع' :
+                     option.text === 'Publication' ? 'منشور' : 'نص') : option.text;
+                
+                btn.innerHTML = `
+                    <i class="fas fa-${option.icon}"></i>
+                    <span>${displayText}</span>
+                `;
+                
+                menu.appendChild(btn);
+            });
+            
+            document.body.appendChild(menu);
+            
+            setTimeout(() => {
+                const closeMenu = (e) => {
+                    if (!menu.contains(e.target) && e.target.id !== 'addBtn') {
+                        menu.remove();
+                        document.removeEventListener('click', closeMenu);
+                    }
+                };
+                document.addEventListener('click', closeMenu);
+            }, 100);
+        }
+
+        // ==================== FONCTIONS D'AUTHENTIFICATION ====================
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username === 'admin' && password === '123456') {
+                currentUser = {
+                    username: username,
+                    role: 'admin',
+                    name: currentLanguage === 'ar' ? 'مدير أنسفال' : 'Administrateur ANSFAL'
+                };
+                
+                localStorage.setItem('ansfal_user', JSON.stringify(currentUser));
+                showUserInfo();
+                showAlert(
+                    currentLanguage === 'ar' ? 'تم تسجيل الدخول بنجاح!' : 'Connexion réussie !',
+                    'success'
+                );
+                updateInterfaceForRole();
+            } else {
+                showAlert(
+                    currentLanguage === 'ar' ? 'بيانات الدخول غير صحيحة' : 'Identifiants incorrects',
+                    'error'
+                );
+            }
+        }
+
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('ansfal_user');
+            hideUserInfo();
+            showAlert(
+                currentLanguage === 'ar' ? 'تم تسجيل الخروج' : 'Déconnexion réussie',
+                'success'
+            );
+            updateInterfaceForRole();
+        }
+
+        function showUserInfo() {
+            if (currentUser) {
+                document.getElementById('loginForm').classList.add('hidden');
+                document.getElementById('userInfo').classList.remove('hidden');
+                
+                const userNameElement = document.getElementById('userName');
+                const userRoleElement = document.getElementById('userRole');
+                
+                if (userNameElement) {
+                    userNameElement.textContent = currentUser.name;
+                }
+                
+                if (userRoleElement) {
+                    userRoleElement.textContent = currentLanguage === 'ar' ? 'مدير' : 'Admin';
+                }
+            }
+        }
+
+        function hideUserInfo() {
+            document.getElementById('loginForm').classList.remove('hidden');
+            document.getElementById('userInfo').classList.add('hidden');
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        }
+
+        function checkPermission(action) {
+            if (!currentUser) return false;
+            
+            if (currentUser.role === 'admin') {
+                return true; // Admin a tous les droits
+            }
+            
+            if (currentUser.role === 'webmaster') {
+                const webmasterPermissions = ['canAdd', 'canEdit', 'canDelete', 'canUpload'];
+                return webmasterPermissions.includes(action);
+            }
+            
+            return false;
+        }
+
+        // ==================== FONCTIONS UTILITAIRES ====================
+        function showAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert ${type}`;
+            alertDiv.textContent = message;
+            alertDiv.style.position = 'fixed';
+            alertDiv.style.top = '100px';
+            alertDiv.style.right = '20px';
+            alertDiv.style.zIndex = '9999';
+            alertDiv.style.maxWidth = '300px';
+            alertDiv.style.padding = '15px';
+            alertDiv.style.borderRadius = '6px';
+            alertDiv.style.fontWeight = '500';
+            
+            if (type === 'success') {
+                alertDiv.style.background = '#d4edda';
+                alertDiv.style.color = '#155724';
+                alertDiv.style.border = '1px solid #c3e6cb';
+            } else if (type === 'error') {
+                alertDiv.style.background = '#f8d7da';
+                alertDiv.style.color = '#721c24';
+                alertDiv.style.border = '1px solid #f5c6cb';
+            }
+            
+            document.body.appendChild(alertDiv);
+            
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 3000);
+        }
+
+        function updateInterfaceForRole() {
+            if (currentUser) {
+                document.body.classList.add('authenticated');
+                document.getElementById('addBtn').classList.add('active');
+                document.getElementById('mediaLibraryBtn').classList.add('active');
+            } else {
+                document.body.classList.remove('authenticated');
+                document.getElementById('addBtn').classList.remove('active');
+                document.getElementById('mediaLibraryBtn').classList.remove('active');
+            }
+        }
+
+        // ==================== INITIALISATION ====================
         document.addEventListener('DOMContentLoaded', function() {
+            // Charger la langue
+            const savedLang = localStorage.getItem('ansfal_language') || 'fr';
+            changeLanguage(savedLang, true);
+            
             // Charger les données
             loadContentData();
             loadComments();
             updateVisitorCount();
-            
-            // Charger la langue
-            const savedLang = localStorage.getItem('ansfal_language') || 'fr';
-            changeLanguage(savedLang);
-            
-            // Vérifier les sessions
-            checkAdminStatus();
-            checkWebmasterStatus();
             
             // Vérifier l'authentification
             checkAuth();
@@ -2048,545 +3018,384 @@
             
             // Initialiser le dashboard
             initDashboard();
+            
+            // Mettre à jour l'interface selon les rôles
+            updateInterfaceForRole();
+            
+            // Initialiser les commentaires
+            renderComments();
+            
+            // Initialiser le drag and drop
+            initDragAndDrop();
+            
+            // Vérifier l'utilisateur connecté
+            const savedUser = localStorage.getItem('ansfal_user');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                showUserInfo();
+            }
         });
 
-        // ==================== GESTION DE L'AUTHENTIFICATION ====================
-        function login() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            if (username === 'admin' && password === '123456') {
-                currentUser = {
-                    username: username,
-                    role: 'admin',
-                    name: 'Administrateur ANSFAL'
-                };
-                
-                localStorage.setItem('ansfal_user', JSON.stringify(currentUser));
-                showUserInfo();
-                showAlert('Connexion réussie !', 'success');
-                
-                // Afficher les boutons d'édition
-                showEditButtons();
-            } else if (username === 'editor' && password === '123456') {
-                currentUser = {
-                    username: username,
-                    role: 'editor',
-                    name: 'Éditeur ANSFAL'
-                };
-                
-                localStorage.setItem('ansfal_user', JSON.stringify(currentUser));
-                showUserInfo();
-                showAlert('Connexion réussie !', 'success');
-            } else {
-                showAlert('Identifiants incorrects', 'error');
+        // ==================== FONCTIONS DE BASE ====================
+        function loadContentData() {
+            const saved = localStorage.getItem('ansfal_content');
+            if (saved) {
+                contentData = JSON.parse(saved);
             }
         }
 
-        function logout() {
-            currentUser = null;
-            localStorage.removeItem('ansfal_user');
-            hideUserInfo();
-            showAlert('Déconnexion réussie', 'success');
-            
-            // Masquer les boutons d'édition
-            hideEditButtons();
-        }
-
-        function checkAuth() {
-            const userData = localStorage.getItem('ansfal_user');
-            if (userData) {
-                try {
-                    currentUser = JSON.parse(userData);
-                    showUserInfo();
-                    
-                    if (currentUser.role === 'admin') {
-                        showEditButtons();
-                    }
-                } catch (e) {
-                    console.error('Erreur de parsing user data:', e);
-                }
+        function loadComments() {
+            const saved = localStorage.getItem('ansfal_comments');
+            if (saved) {
+                approvedComments = JSON.parse(saved);
             }
         }
 
-        function showUserInfo() {
-            if (currentUser) {
-                document.getElementById('loginForm').classList.add('hidden');
-                document.getElementById('userInfo').classList.remove('hidden');
-                document.getElementById('userName').textContent = currentUser.name;
-                document.getElementById('userRole').textContent = dashboardTranslations[currentLanguage].roles[currentUser.role] || currentUser.role;
-                
-                // Activer les boutons d'ajout
-                document.body.classList.add('authenticated');
-            }
-        }
-
-        function hideUserInfo() {
-            document.getElementById('loginForm').classList.remove('hidden');
-            document.getElementById('userInfo').classList.add('hidden');
-            document.getElementById('username').value = '';
-            document.getElementById('password').value = '';
-            
-            // Désactiver les boutons d'ajout
-            document.body.classList.remove('authenticated');
-        }
-
-        function showAlert(message, type) {
-            const alertDiv = document.createElement('div');
-            alertDiv.className = `alert ${type}`;
-            alertDiv.textContent = message;
-            alertDiv.style.position = 'fixed';
-            alertDiv.style.top = '100px';
-            alertDiv.style.right = '20px';
-            alertDiv.style.zIndex = '9999';
-            alertDiv.style.maxWidth = '300px';
-            
-            document.body.appendChild(alertDiv);
-            
-            setTimeout(() => {
-                alertDiv.remove();
-            }, 3000);
-        }
-
-        // ==================== DASHBOARD FUNCTIONS ====================
-        function initDashboard() {
-            updateDashboardLanguage();
-        }
-
-        function showDashboard() {
-            // Cacher toutes les sections du site
-            document.querySelectorAll('section:not(.dashboard-section)').forEach(section => {
-                section.style.display = 'none';
-            });
-            
-            // Afficher le dashboard
-            document.getElementById('dashboard').classList.add('active');
-            
-            // Mettre à jour le menu de navigation
-            document.querySelectorAll('#mainMenu a').forEach(a => a.classList.remove('active'));
-            document.querySelector('#navDashboard').classList.add('active');
-            
-            // Mettre à jour le titre de la page
-            document.title = dashboardTranslations[currentLanguage].title + ' - ANSFAL';
-            
-            // Faire défiler vers le haut
-            window.scrollTo(0, 0);
-        }
-
-        function hideDashboard() {
-            // Afficher toutes les sections du site
-            document.querySelectorAll('section').forEach(section => {
-                section.style.display = 'block';
-            });
-            
-            // Cacher le dashboard
-            document.getElementById('dashboard').classList.remove('active');
-            
-            // Mettre à jour le titre de la page
-            document.title = 'ANSFAL - Association pour la Coopération, le Développement et l\'Environnement';
-        }
-
-        function updateDashboardLanguage() {
-            const t = dashboardTranslations[currentLanguage];
-            
-            // Mettre à jour le titre du dashboard
-            document.getElementById('dashboardTitle').textContent = t.title;
-            
-            // Mettre à jour les statistiques
-            document.getElementById('stat1Title').textContent = t.stats.stat1;
-            document.getElementById('stat2Title').textContent = t.stats.stat2;
-            document.getElementById('stat3Title').textContent = t.stats.stat3;
-            document.getElementById('stat4Title').textContent = t.stats.stat4;
-            
-            // Mettre à jour le menu sidebar
-            const sidebarMenu = document.getElementById('sidebarMenu');
-            sidebarMenu.innerHTML = '';
-            
-            t.menu.forEach((item, index) => {
-                const li = document.createElement('li');
-                const a = document.createElement('a');
-                a.href = '#';
-                a.innerHTML = `<i class="fas fa-${getMenuIcon(index)}"></i> ${item}`;
-                a.className = index === 0 ? 'active' : '';
-                a.onclick = (e) => {
-                    e.preventDefault();
-                    document.querySelectorAll('#sidebarMenu a').forEach(a => a.classList.remove('active'));
-                    a.classList.add('active');
-                    document.getElementById('dashboardTitle').textContent = item;
-                    loadDashboardContent(item);
-                };
-                li.appendChild(a);
-                sidebarMenu.appendChild(li);
-            });
-            
-            // Mettre à jour le contenu du dashboard
-            const dashboardContent = document.getElementById('dashboardContent');
-            dashboardContent.innerHTML = '';
-            
-            t.content.forEach((item, index) => {
-                const card = document.createElement('div');
-                card.className = 'content-card';
-                card.innerHTML = `
-                    <h3>${item.title}</h3>
-                    <p>${item.description}</p>
-                    <button class="btn-add" onclick="addContent('${item.title}')">+</button>
-                `;
-                dashboardContent.appendChild(card);
-            });
-        }
-
-        function getMenuIcon(index) {
-            const icons = ['home', 'file-alt', 'users', 'cog', 'chart-bar', 'headset'];
-            return icons[index] || 'circle';
-        }
-
-        function loadDashboardContent(section) {
-            // Simuler le chargement de contenu
-            const dashboardContent = document.getElementById('dashboardContent');
-            dashboardContent.innerHTML = `<p>Chargement du contenu pour: ${section}...</p>`;
-            
-            setTimeout(() => {
-                const t = dashboardTranslations[currentLanguage];
-                dashboardContent.innerHTML = '';
-                
-                t.content.forEach((item, index) => {
-                    const card = document.createElement('div');
-                    card.className = 'content-card';
-                    card.innerHTML = `
-                        <h3>${item.title}</h3>
-                        <p>${item.description}</p>
-                        <div class="action-buttons">
-                            <button class="btn-action btn-edit" onclick="editDashboardItem('${item.title}')">
-                                <i class="fas fa-edit"></i> Modifier
-                            </button>
-                            <button class="btn-action btn-delete" onclick="deleteDashboardItem('${item.title}')">
-                                <i class="fas fa-trash"></i> Supprimer
-                            </button>
-                        </div>
-                    `;
-                    dashboardContent.appendChild(card);
-                });
-            }, 500);
-        }
-
-        function editDashboardItem(title) {
-            const newTitle = prompt('Modifier le titre:', title);
-            if (newTitle && newTitle !== title) {
-                showAlert(`Titre modifié: "${title}" → "${newTitle}"`, 'success');
-            }
-        }
-
-        function deleteDashboardItem(title) {
-            if (confirm(`Êtes-vous sûr de vouloir supprimer "${title}" ?`)) {
-                showAlert(`"${title}" supprimé`, 'success');
-            }
-        }
-
-        // ==================== GESTION DES LANGUES ====================
-        function changeLanguage(lang) {
-            currentLanguage = lang;
-            localStorage.setItem('ansfal_language', lang);
-            
-            // Mettre à jour les boutons de langue
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.querySelector(`.lang-btn[onclick="changeLanguage('${lang}')"]`).classList.add('active');
-            
-            // Appliquer la direction
-            if (lang === 'ar') {
-                document.body.classList.add('rtl');
-            } else {
-                document.body.classList.remove('rtl');
-            }
-            
-            // Traductions
-            translatePage(lang);
-            updateDashboardLanguage();
-        }
-
-        function translatePage(lang) {
-            const translations = {
-                'fr': {
-                    // Navigation
-                    'navHome': 'Accueil',
-                    'navAbout': 'À propos',
-                    'navGallery': 'Galerie',
-                    'navVideos': 'Vidéos',
-                    'navProjects': 'Projets',
-                    'navPublications': 'Publications',
-                    'navComments': 'Commentaires',
-                    'navContact': 'Contact',
-                    'navDashboard': 'Dashboard',
-                    
-                    // Hero
-                    'heroTitle': 'ANSFAL',
-                    'heroSubtitle': 'Association pour la Coopération, le Développement et l\'Environnement',
-                    'heroText': 'Œuvrant pour un développement durable, la coopération nationale et la protection de l\'environnement depuis 2023.',
-                    'btnDiscover': 'Découvrir nos actions',
-                    
-                    // About
-                    'aboutTitle': 'À propos d\'ANSFAL',
-                    'aboutSubtitle': 'Notre histoire',
-                    'aboutText1': 'Fondée en 2023, l\'Association ANSFAL POUR LA COOPÉRATION ET LE DÉVELOPPEMENT ET L\'ENVIRONNEMENT est née de la conviction que le développement humain et la protection environnementale doivent aller de pair.',
-                    'aboutText2': 'Notre nom \'ANSFAL\' symbolise notre engagement pour un avenir meilleur, basé sur la solidarité, le développement durable et la préservation de notre environnement.',
-                    
-                    // Sections
-                    'galleryTitle': 'Galerie Photos',
-                    'videosTitle': 'Vidéos',
-                    'projectsTitle': 'Nos Projets',
-                    'publicationsTitle': 'Publications',
-                    'commentsTitle': 'Commentaires',
-                    'contactTitle': 'Contactez-nous',
-                    
-                    // Projects
-                    'projectTitle1': 'Protection des Forêts',
-                    'projectDesc1': 'Campagne de reboisement et sensibilisation à la protection des écosystèmes forestiers.',
-                    
-                    // Publications
-                    'pubTitle1': 'Rapport Annuel 2023',
-                    'pubDesc1': 'Bilan des activités et réalisations de l\'association pour l\'année 2023.',
-                    
-                    // Contact
-                    'contactAddress': 'Maroc',
-                    'contactPhone': '+212 6 12 34 56 78',
-                    'contactEmail': 'contact@ansfal.org',
-                    
-                    // Labels
-                    'visitorsLabel': 'Visiteurs:',
-                    'onlineLabel': 'En ligne:',
-                    'lastVisitLabel': 'Dernière visite:',
-                },
-                'ar': {
-                    // Navigation
-                    'navHome': 'الرئيسية',
-                    'navAbout': 'عن الجمعية',
-                    'navGallery': 'المعرض',
-                    'navVideos': 'فيديوهات',
-                    'navProjects': 'المشاريع',
-                    'navPublications': 'المنشورات',
-                    'navComments': 'التعليقات',
-                    'navContact': 'اتصل',
-                    'navDashboard': 'لوحة التحكم',
-                    
-                    // Hero
-                    'heroTitle': 'أنسفال',
-                    'heroSubtitle': 'جمعية التعاون والتنمية والبيئة',
-                    'heroText': 'تعمل من أجل التنمية المستدامة، والتعاون وحماية البيئة منذ 2023.',
-                    'btnDiscover': 'اكتشف أنشطتنا',
-                    
-                    // About
-                    'aboutTitle': 'عن أنسفال',
-                    'aboutSubtitle': 'تاريخنا',
-                    'aboutText1': 'تأسست في عام 2023، جمعية أنسفال للتعاون والتنمية والبيئة ولدت من قناعة بأن التنمية البشرية وحماية البيئة يجب أن يسيرا جنباً إلى جنب.',
-                    'aboutText2': 'اسمنا \'أنسفال\' يرمز لالتزامنا بمستقبل أفضل، يقوم على التضامن والتنمية المستدامة والحفاظ على بيئتنا.',
-                    
-                    // Sections
-                    'galleryTitle': 'معرض الصور',
-                    'videosTitle': 'مقاطع الفيديو',
-                    'projectsTitle': 'مشاريعنا',
-                    'publicationsTitle': 'المنشورات',
-                    'commentsTitle': 'التعليقات',
-                    'contactTitle': 'اتصل بنا',
-                    
-                    // Projects
-                    'projectTitle1': 'حماية الغابات',
-                    'projectDesc1': 'حملة التشجير والتوعية بحماية النظم البيئية للغابات.',
-                    
-                    // Publications
-                    'pubTitle1': 'التقرير السنوي 2023',
-                    'pubDesc1': 'خلاصة أنشطة وإنجازات الجمعية لعام 2023.',
-                    
-                    // Contact
-                    'contactAddress': 'المغرب',
-                    'contactPhone': '212 6 12 34 56 78+',
-                    'contactEmail': 'contact@ansfal.org',
-                    
-                    // Labels
-                    'visitorsLabel': 'الزوار:',
-                    'onlineLabel': 'متصل الآن:',
-                    'lastVisitLabel': 'آخر زيارة:',
-                }
-            };
-            
-            // Appliquer les traductions
-            Object.keys(translations[lang]).forEach(key => {
-                const element = document.querySelector(`[data-id="${key}"]`);
-                if (element) {
-                    element.textContent = translations[lang][key];
-                }
-                
-                // Boutons spéciaux
-                if (key === 'btnDiscover') {
-                    document.getElementById('btnDiscover').textContent = translations[lang][key];
-                }
-                
-                // Navigation
-                const navElement = document.getElementById(key);
-                if (navElement) {
-                    navElement.textContent = translations[lang][key];
-                }
-                
-                // Labels du compteur
-                if (key === 'visitorsLabel') {
-                    document.getElementById('visitorsLabel').innerHTML = translations[lang][key] + ' <span class="visitor-count" id="totalVisitors">0</span>';
-                }
-                if (key === 'onlineLabel') {
-                    document.getElementById('onlineLabel').innerHTML = translations[lang][key] + ' <span class="visitor-count" id="onlineVisitors">0</span>';
-                }
-                if (key === 'lastVisitLabel') {
-                    document.getElementById('lastVisitLabel').innerHTML = translations[lang][key] + ' <span id="lastVisit">--/--/---- --:--:--</span>';
-                }
-            });
-        }
-
-        // ==================== GESTION DES VISITEURS ====================
         function updateVisitorCount() {
-            // Simuler des données
-            const total = localStorage.getItem('ansfal_total_visitors') || 319;
-            const online = 1;
-            const lastVisit = '24/12/2025 14:22:17';
-            
+            let total = parseInt(localStorage.getItem('ansfal_visitors') || '0');
+            total++;
+            localStorage.setItem('ansfal_visitors', total.toString());
             document.getElementById('totalVisitors').textContent = total;
+            
+            // Simuler les visiteurs en ligne
+            const online = Math.floor(Math.random() * 50) + 1;
             document.getElementById('onlineVisitors').textContent = online;
+            
+            // Mettre à jour la dernière visite
+            const now = new Date();
+            const lastVisit = now.toLocaleString(currentLanguage === 'ar' ? 'ar-MA' : 'fr-FR');
             document.getElementById('lastVisit').textContent = lastVisit;
         }
 
-        // ==================== ÉDITION DU CONTENU ====================
+        function checkAuth() {
+            const savedUser = localStorage.getItem('ansfal_user');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                showUserInfo();
+            }
+        }
+
+        function initWhatsApp() {
+            const phone = "+212612345678";
+            const message = currentLanguage === 'ar' ? 
+                "مرحباً، أريد معلومات عن جمعية أنسفال" : 
+                "Bonjour, je voudrais des informations sur l'association ANSFAL";
+            const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+            document.getElementById('whatsappBtn').href = whatsappUrl;
+        }
+
+        function initNavigation() {
+            // Navigation simple
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    
+                    if (targetId === 'dashboard') {
+                        showDashboard();
+                    } else {
+                        scrollToSection(targetId);
+                    }
+                    
+                    // Mettre à jour la classe active
+                    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        }
+
+        function initDashboard() {
+            // Initialisation basique du dashboard
+            const sidebarMenu = document.getElementById('sidebarMenu');
+            if (sidebarMenu) {
+                const menuItems = [
+                    { icon: 'tachometer-alt', text: 'Tableau de bord', id: 'dashboard' },
+                    { icon: 'chart-bar', text: 'Statistiques', id: 'stats' },
+                    { icon: 'images', text: 'Médias', id: 'media' },
+                    { icon: 'comments', text: 'Commentaires', id: 'comments' },
+                    { icon: 'users', text: 'Utilisateurs', id: 'users' },
+                    { icon: 'cog', text: 'Paramètres', id: 'settings' }
+                ];
+                
+                menuItems.forEach(item => {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.href = '#';
+                    a.innerHTML = `<i class="fas fa-${item.icon}"></i> ${item.text}`;
+                    a.onclick = (e) => {
+                        e.preventDefault();
+                        // Ici on peut charger le contenu correspondant
+                        showAlert(`Section ${item.text}`, 'success');
+                    };
+                    li.appendChild(a);
+                    sidebarMenu.appendChild(li);
+                });
+            }
+        }
+
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function showDashboard() {
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById('dashboard').classList.add('active');
+            
+            // Mettre à jour la navigation
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+            document.getElementById('navDashboard').classList.add('active');
+            
+            // Mettre à jour la langue du dashboard
+            updateDashboardLanguage();
+            
+            // Scroll vers le dashboard
+            scrollToSection('dashboard');
+        }
+
+        // ==================== FONCTIONS SIMPLIFIÉES POUR LA DÉMO ====================
         function editText(elementId) {
             const element = document.querySelector(`[data-id="${elementId}"]`);
-            if (!element) return;
-            
-            const currentText = element.textContent;
-            const promptText = currentLanguage === 'ar' ? 'تعديل النص:' : 'Modifier le texte:';
-            const newText = prompt(promptText, currentText);
-            
-            if (newText !== null && newText !== currentText) {
-                element.textContent = newText;
-                saveContentToStorage(elementId, newText);
+            if (element) {
+                const currentText = element.textContent;
+                const newText = prompt(
+                    currentLanguage === 'ar' ? 'أدخل النص الجديد:' : 'Entrez le nouveau texte:',
+                    currentText
+                );
+                if (newText !== null) {
+                    element.textContent = newText;
+                    showAlert(
+                        currentLanguage === 'ar' ? 'تم تحديث النص' : 'Texte mis à jour',
+                        'success'
+                    );
+                }
             }
         }
 
         function editImage(elementId) {
-            const promptText = currentLanguage === 'ar' ? 'أدخل رابط الصورة:' : 'Entrez l\'URL de l\'image:';
-            const url = prompt(promptText);
-            if (url) {
-                const element = document.querySelector(`[data-id="${elementId}"] img`);
-                if (element) {
-                    element.src = url;
-                    saveContentToStorage(elementId + '_img', url);
+            const element = document.querySelector(`[data-id="${elementId}"] img`);
+            if (element) {
+                const newUrl = prompt(
+                    currentLanguage === 'ar' ? 'أدخل رابط الصورة الجديد:' : 'Entrez la nouvelle URL de l\'image:',
+                    element.src
+                );
+                if (newUrl && newUrl.trim() !== '') {
+                    element.src = newUrl;
+                    showAlert(
+                        currentLanguage === 'ar' ? 'تم تحديث الصورة' : 'Image mise à jour',
+                        'success'
+                    );
                 }
             }
         }
 
-        function saveContentToStorage(id, content) {
-            if (!contentData) contentData = {};
-            contentData[id] = content;
-            localStorage.setItem('ansfal_content', JSON.stringify(contentData));
-        }
-
-        function loadContentData() {
-            const saved = localStorage.getItem('ansfal_content');
-            if (saved) {
-                try {
-                    contentData = JSON.parse(saved);
-                    Object.keys(contentData).forEach(id => {
-                        if (id.endsWith('_img')) {
-                            const elementId = id.replace('_img', '');
-                            const element = document.querySelector(`[data-id="${elementId}"] img`);
-                            if (element) element.src = contentData[id];
-                        } else {
-                            const element = document.querySelector(`[data-id="${id}"]`);
-                            if (element) element.textContent = contentData[id];
+        function addAboutItem() {
+            const newText = prompt(
+                currentLanguage === 'ar' ? 'أدخل النص الجديد:' : 'Entrez le nouveau texte:',
+                currentLanguage === 'ar' ? 'نص جديد' : 'Nouveau texte'
+            );
+            if (newText) {
+                const aboutText = document.querySelector('.about-text');
+                if (aboutText) {
+                    const newParagraph = document.createElement('p');
+                    newParagraph.className = 'editable';
+                    newParagraph.setAttribute('data-id', 'aboutText' + (Math.random() * 1000).toFixed(0));
+                    newParagraph.setAttribute('data-editable', 'true');
+                    newParagraph.textContent = newText;
+                    
+                    // Ajouter le bouton d'édition
+                    const editBtn = document.createElement('button');
+                    editBtn.className = 'edit-btn';
+                    editBtn.innerHTML = '<i class="fas fa-edit"></i>';
+                    editBtn.onclick = function() {
+                        const currentText = newParagraph.textContent;
+                        const updatedText = prompt(
+                            currentLanguage === 'ar' ? 'أدخل النص الجديد:' : 'Entrez le nouveau texte:',
+                            currentText
+                        );
+                        if (updatedText !== null) {
+                            newParagraph.textContent = updatedText;
                         }
-                    });
-                } catch (e) {
-                    console.error('Erreur chargement contenu:', e);
+                    };
+                    
+                    newParagraph.appendChild(editBtn);
+                    aboutText.appendChild(newParagraph);
+                    
+                    showAlert(
+                        currentLanguage === 'ar' ? 'تمت الإضافة بنجاح' : 'Élément ajouté avec succès',
+                        'success'
+                    );
                 }
             }
         }
 
-        function saveContent() {
-            // Sauvegarder tous les éléments éditables
-            const editableElements = document.querySelectorAll('[data-editable="true"]');
-            editableElements.forEach(element => {
-                const id = element.dataset.id;
-                if (id) {
-                    contentData[id] = element.textContent;
-                }
-            });
+        function submitComment() {
+            const nameInput = document.getElementById('commentNameInput');
+            const textInput = document.getElementById('commentTextInput');
             
-            // Sauvegarder les images
-            const imageElements = document.querySelectorAll('.image-editable img');
-            imageElements.forEach(element => {
-                const parent = element.closest('.image-editable');
-                if (parent && parent.dataset.id) {
-                    contentData[parent.dataset.id + '_img'] = element.src;
-                }
-            });
+            if (!nameInput.value.trim() || !textInput.value.trim()) {
+                showAlert(
+                    currentLanguage === 'ar' ? 'الرجاء ملء جميع الحقول' : 'Veuillez remplir tous les champs',
+                    'error'
+                );
+                return;
+            }
             
-            localStorage.setItem('ansfal_content', JSON.stringify(contentData));
-            showAlert(currentLanguage === 'ar' ? 'تم حفظ المحتوى!' : 'Contenu sauvegardé!', 'success');
+            const newComment = {
+                id: Date.now(),
+                name: nameInput.value.trim(),
+                text: textInput.value.trim(),
+                date: new Date().toLocaleDateString(currentLanguage === 'ar' ? 'ar-MA' : 'fr-FR'),
+                approved: currentUser ? true : false // Auto-approve si connecté
+            };
+            
+            if (currentUser) {
+                approvedComments.push(newComment);
+                localStorage.setItem('ansfal_comments', JSON.stringify(approvedComments));
+            } else {
+                pendingComments.push(newComment);
+                localStorage.setItem('ansfal_pending_comments', JSON.stringify(pendingComments));
+            }
+            
+            // Réinitialiser le formulaire
+            nameInput.value = '';
+            textInput.value = '';
+            
+            // Mettre à jour l'affichage
+            renderComments();
+            
+            showAlert(
+                currentLanguage === 'ar' ? 
+                    (currentUser ? 'تم نشر التعليق' : 'تم إرسال التعليق للمراجعة') :
+                    (currentUser ? 'Commentaire publié' : 'Commentaire envoyé pour modération'),
+                'success'
+            );
         }
 
-        // ==================== GESTION DE L'AFFICHAGE ====================
-        function showAdminPanel() {
+        function renderComments() {
+            const commentsList = document.getElementById('commentsList');
+            if (!commentsList) return;
+            
+            const allComments = [...approvedComments];
+            
+            if (allComments.length === 0) {
+                commentsList.innerHTML = `
+                    <div class="no-comments">
+                        ${currentLanguage === 'ar' ? 'لا توجد تعليقات بعد. كن أول من يعلق!' : 'Aucun commentaire pour le moment. Soyez le premier à commenter!'}
+                    </div>
+                `;
+                return;
+            }
+            
+            commentsList.innerHTML = '';
+            
+            allComments.forEach(comment => {
+                const commentDiv = document.createElement('div');
+                commentDiv.className = 'comment-item';
+                commentDiv.innerHTML = `
+                    <div class="comment-header">
+                        <div class="comment-author">${comment.name}</div>
+                        <div class="comment-date">${comment.date}</div>
+                    </div>
+                    <div class="comment-content">${comment.text}</div>
+                `;
+                commentsList.appendChild(commentDiv);
+            });
+        }
+
+        // ==================== FONCTIONS POUR LES BOUTONS FLOTTANTS ====================
+        function showLoginModal() {
             document.getElementById('adminOverlay').classList.add('active');
-            showEditButtons();
         }
 
         function hideAdminPanel() {
             document.getElementById('adminOverlay').classList.remove('active');
         }
 
-        function showWebmasterPanel() {
+        function showWebmasterLoginModal() {
             document.getElementById('webmasterOverlay').classList.add('active');
-            document.getElementById('mediaLibraryBtn').classList.add('active');
-            showUploadButtons();
-            showUploadModal();
         }
 
         function hideWebmasterPanel() {
             document.getElementById('webmasterOverlay').classList.remove('active');
         }
 
-        function showEditButtons() {
-            document.querySelectorAll('.edit-btn, .image-edit-btn, .add-section-btn, .add-item-btn, .remove-item-btn').forEach(btn => {
-                btn.style.display = 'flex';
-            });
+        function showMediaLibrary() {
+            showAlert(
+                currentLanguage === 'ar' ? 'مكتبة الوسائط' : 'Bibliothèque média',
+                'info'
+            );
         }
 
-        function hideEditButtons() {
-            if (!isAdmin && !isWebmaster) {
-                document.querySelectorAll('.edit-btn, .image-edit-btn, .add-section-btn, .add-item-btn, .remove-item-btn').forEach(btn => {
-                    btn.style.display = 'none';
-                });
+        // ==================== FONCTIONS DE SUPPRESSION ====================
+        function removeGalleryItem(itemId) {
+            if (confirm(currentLanguage === 'ar' ? 'هل أنت متأكد من حذف هذه الصورة؟' : 'Êtes-vous sûr de vouloir supprimer cette image ?')) {
+                const item = document.querySelector(`[data-id="${itemId}"]`);
+                if (item) {
+                    item.remove();
+                    showAlert(
+                        currentLanguage === 'ar' ? 'تم حذف الصورة' : 'Image supprimée',
+                        'success'
+                    );
+                }
             }
         }
 
-        function showUploadButtons() {
-            document.querySelectorAll('.add-section-btn, .add-item-btn, .remove-item-btn').forEach(btn => {
-                btn.style.display = 'flex';
-            });
-        }
-
-        // ==================== FONCTIONS D'AJOUT ====================
-        function showImageUploadModal() {
-            const url = prompt(currentLanguage === 'ar' ? 'أدخل رابط الصورة:' : 'Entrez l\'URL de l\'image:', 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');
-            if (url) {
-                addGalleryItem(url);
+        function removeVideoItem(button) {
+            if (confirm(currentLanguage === 'ar' ? 'هل أنت متأكد من حذف هذا الفيديو؟' : 'Êtes-vous sûr de vouloir supprimer cette vidéo ?')) {
+                const item = button.closest('.video-item');
+                if (item) {
+                    item.remove();
+                    showAlert(
+                        currentLanguage === 'ar' ? 'تم حذف الفيديو' : 'Vidéo supprimée',
+                        'success'
+                    );
+                }
             }
         }
 
-        function addGalleryItem(url) {
+        function removeProjectItem(button) {
+            if (confirm(currentLanguage === 'ar' ? 'هل أنت متأكد من حذف هذا المشروع؟' : 'Êtes-vous sûr de vouloir supprimer ce projet ?')) {
+                const item = button.closest('.project-card');
+                if (item) {
+                    item.remove();
+                    showAlert(
+                        currentLanguage === 'ar' ? 'تم حذف المشروع' : 'Projet supprimé',
+                        'success'
+                    );
+                }
+            }
+        }
+
+        function removePublicationItem(button) {
+            if (confirm(currentLanguage === 'ar' ? 'هل أنت متأكد من حذف هذا المنشور؟' : 'Êtes-vous sûr de vouloir supprimer cette publication ?')) {
+                const item = button.closest('.publication-card');
+                if (item) {
+                    item.remove();
+                    showAlert(
+                        currentLanguage === 'ar' ? 'تم حذف المنشور' : 'Publication supprimée',
+                        'success'
+                    );
+                }
+            }
+        }
+
+        // ==================== FONCTIONS D'AJOUT D'ÉLÉMENTS ====================
+        function addGalleryItem(imageSrc, altText) {
             const galleryGrid = document.getElementById('galleryGrid');
-            const newId = 'gallery' + Date.now();
+            if (!galleryGrid) return;
             
-            const newItem = document.createElement('div');
-            newItem.className = 'gallery-item image-editable';
-            newItem.setAttribute('data-id', newId);
-            newItem.innerHTML = `
-                <img src="${url}" alt="Image">
+            const newId = 'gallery' + Date.now();
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'gallery-item image-editable';
+            galleryItem.setAttribute('data-id', newId);
+            
+            galleryItem.innerHTML = `
+                <img src="${imageSrc}" alt="${altText || 'Image'}">
                 <button class="image-edit-btn" onclick="editImage('${newId}')">
                     <i class="fas fa-edit"></i>
                 </button>
@@ -2598,33 +3407,19 @@
                 </button>
             `;
             
-            galleryGrid.appendChild(newItem);
-            saveContent();
+            galleryGrid.appendChild(galleryItem);
         }
 
-        function removeGalleryItem(id) {
-            if (confirm(currentLanguage === 'ar' ? 'هل تريد حذف هذه الصورة؟' : 'Voulez-vous supprimer cette image?')) {
-                const element = document.querySelector(`[data-id="${id}"]`);
-                if (element) element.remove();
-                saveContent();
-            }
-        }
-
-        function showVideoUploadModal() {
-            const url = prompt(currentLanguage === 'ar' ? 'أدخل رابط فيديو YouTube:' : 'Entrez l\'URL de la vidéo YouTube:', 'https://www.youtube.com/embed/dQw4w9WgXcQ');
-            if (url) {
-                addVideoItem(url);
-            }
-        }
-
-        function addVideoItem(url) {
+        function addVideoItem(videoSrc, altText) {
             const videoContainer = document.getElementById('videoContainer');
+            if (!videoContainer) return;
             
-            const newItem = document.createElement('div');
-            newItem.className = 'video-item';
-            newItem.innerHTML = `
+            const videoItem = document.createElement('div');
+            videoItem.className = 'video-item';
+            
+            videoItem.innerHTML = `
                 <div class="youtube-embed">
-                    <iframe src="${url}" allowfullscreen></iframe>
+                    <iframe src="${videoSrc}" allowfullscreen></iframe>
                 </div>
                 <button class="add-item-btn" onclick="showVideoUploadModal()" title="${currentLanguage === 'ar' ? 'إضافة فيديو' : 'Ajouter une vidéo'}">
                     <i class="fas fa-plus"></i>
@@ -2634,370 +3429,8 @@
                 </button>
             `;
             
-            videoContainer.appendChild(newItem);
+            videoContainer.appendChild(videoItem);
         }
-
-        function removeVideoItem(button) {
-            if (confirm(currentLanguage === 'ar' ? 'هل تريد حذف هذا الفيديو؟' : 'Voulez-vous supprimer cette vidéo?')) {
-                button.closest('.video-item').remove();
-            }
-        }
-
-        function showProjectUploadModal() {
-            const title = prompt(currentLanguage === 'ar' ? 'أدخل عنوان المشروع:' : 'Entrez le titre du projet:', 'Nouveau projet');
-            if (!title) return;
-            
-            const description = prompt(currentLanguage === 'ar' ? 'أدخل وصف المشروع:' : 'Entrez la description du projet:', 'Description du projet');
-            if (!description) return;
-            
-            const imageUrl = prompt(currentLanguage === 'ar' ? 'أدخل رابط صورة المشروع:' : 'Entrez l\'URL de l\'image du projet:', 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');
-            if (!imageUrl) return;
-            
-            addProjectItem(title, description, imageUrl);
-        }
-
-        function addProjectItem(title, description, imageUrl) {
-            const projectsContainer = document.getElementById('projectsContainer');
-            const projectId = 'project' + Date.now();
-            const titleId = 'projectTitle' + Date.now();
-            const descId = 'projectDesc' + Date.now();
-            const imgId = 'projectImg' + Date.now();
-            
-            const newItem = document.createElement('div');
-            newItem.className = 'project-card';
-            newItem.innerHTML = `
-                <div class="project-img image-editable" data-id="${imgId}">
-                    <img src="${imageUrl}" alt="${title}">
-                    <button class="image-edit-btn" onclick="editImage('${imgId}')">
-                        <i class="fas fa-edit"></i>
-                    </button>
-                </div>
-                <div class="project-info">
-                    <h3 class="editable" data-id="${titleId}" data-editable="true">${title}</h3>
-                    <button class="edit-btn" onclick="editText('${titleId}')">
-                        <i class="fas fa-edit"></i>
-                    </button>
-                    <p class="editable" data-id="${descId}" data-editable="true">${description}</p>
-                    <button class="edit-btn" onclick="editText('${descId}')">
-                        <i class="fas fa-edit"></i>
-                    </button>
-                </div>
-                <button class="add-item-btn" onclick="showProjectUploadModal()" title="${currentLanguage === 'ar' ? 'إضافة مشروع' : 'Ajouter un projet'}">
-                    <i class="fas fa-plus"></i>
-                </button>
-                <button class="remove-item-btn" onclick="removeProjectItem(this)" title="${currentLanguage === 'ar' ? 'حذف هذا المشروع' : 'Supprimer ce projet'}">
-                    <i class="fas fa-times"></i>
-                </button>
-            `;
-            
-            projectsContainer.appendChild(newItem);
-            saveContent();
-        }
-
-        function removeProjectItem(button) {
-            if (confirm(currentLanguage === 'ar' ? 'هل تريد حذف هذا المشروع؟' : 'Voulez-vous supprimer ce projet?')) {
-                button.closest('.project-card').remove();
-                saveContent();
-            }
-        }
-
-        function showPublicationUploadModal() {
-            const title = prompt(currentLanguage === 'ar' ? 'أدخل عنوان المنشور:' : 'Entrez le titre de la publication:', 'Nouvelle publication');
-            if (!title) return;
-            
-            const description = prompt(currentLanguage === 'ar' ? 'أدخل وصف المنشور:' : 'Entrez la description de la publication:', 'Description de la publication');
-            if (!description) return;
-            
-            addPublicationItem(title, description);
-        }
-
-        function addPublicationItem(title, description) {
-            const publicationsGrid = document.getElementById('publicationsGrid');
-            const pubId = 'pub' + Date.now();
-            const titleId = 'pubTitle' + Date.now();
-            const descId = 'pubDesc' + Date.now();
-            const date = new Date().toLocaleDateString();
-            
-            const newItem = document.createElement('div');
-            newItem.className = 'publication-card';
-            newItem.innerHTML = `
-                <div class="publication-header">
-                    <span class="publication-type">Rapport</span>
-                    <span class="publication-date">${date}</span>
-                </div>
-                <div class="publication-content">
-                    <h3 class="publication-title editable" data-id="${titleId}" data-editable="true">${title}</h3>
-                    <button class="edit-btn" onclick="editText('${titleId}')">
-                        <i class="fas fa-edit"></i>
-                    </button>
-                    <p class="publication-description editable" data-id="${descId}" data-editable="true">${description}</p>
-                    <button class="edit-btn" onclick="editText('${descId}')">
-                        <i class="fas fa-edit"></i>
-                    </button>
-                    <div class="publication-actions">
-                        <a href="#" class="btn-view">
-                            <i class="fas fa-eye"></i> <span class="btn-view-text">${currentLanguage === 'ar' ? 'عرض' : 'Voir'}</span>
-                        </a>
-                        <a href="#" class="btn-download">
-                            <i class="fas fa-download"></i> <span class="btn-download-text">${currentLanguage === 'ar' ? 'تحميل' : 'Télécharger'}</span>
-                        </a>
-                    </div>
-                </div>
-                <button class="add-item-btn" onclick="showPublicationUploadModal()" title="${currentLanguage === 'ar' ? 'إضافة منشور' : 'Ajouter une publication'}">
-                    <i class="fas fa-plus"></i>
-                </button>
-                <button class="remove-item-btn" onclick="removePublicationItem(this)" title="${currentLanguage === 'ar' ? 'حذف هذا المنشور' : 'Supprimer cette publication'}">
-                    <i class="fas fa-times"></i>
-                </button>
-            `;
-            
-            publicationsGrid.appendChild(newItem);
-            saveContent();
-        }
-
-        function removePublicationItem(button) {
-            if (confirm(currentLanguage === 'ar' ? 'هل تريد حذف هذا المنشور؟' : 'Voulez-vous supprimer cette publication?')) {
-                button.closest('.publication-card').remove();
-                saveContent();
-            }
-        }
-
-        function addAboutItem() {
-            const text = prompt(currentLanguage === 'ar' ? 'أدخل نصًا جديدًا:' : 'Entrez un nouveau texte:');
-            if (text) {
-                const aboutText = document.querySelector('.about-text');
-                const paraId = 'aboutText' + Date.now();
-                
-                const newPara = document.createElement('p');
-                newPara.className = 'editable';
-                newPara.setAttribute('data-id', paraId);
-                newPara.setAttribute('data-editable', 'true');
-                newPara.textContent = text;
-                
-                const editBtn = document.createElement('button');
-                editBtn.className = 'edit-btn';
-                editBtn.innerHTML = '<i class="fas fa-edit"></i>';
-                editBtn.onclick = () => editText(paraId);
-                
-                newPara.appendChild(editBtn);
-                aboutText.appendChild(newPara);
-                saveContent();
-            }
-        }
-
-        // ==================== GESTION DES COMMENTAIRES ====================
-        function submitComment() {
-            const nameInput = document.getElementById('commentNameInput');
-            const textInput = document.getElementById('commentTextInput');
-            
-            const name = nameInput.value.trim();
-            const text = textInput.value.trim();
-            
-            if (!name || !text) {
-                alert(currentLanguage === 'ar' ? 'يرجى إدخال اسمك وتعليقك' : 'Veuillez entrer votre nom et votre commentaire');
-                return;
-            }
-            
-            const comment = {
-                id: Date.now(),
-                name: name,
-                text: text,
-                date: new Date().toLocaleString(),
-                approved: true
-            };
-            
-            approvedComments.push(comment);
-            saveComments();
-            
-            nameInput.value = '';
-            textInput.value = '';
-            
-            renderComments();
-            showAlert(currentLanguage === 'ar' ? 'شكراً لتعليقك!' : 'Merci pour votre commentaire!', 'success');
-        }
-
-        function loadComments() {
-            const saved = localStorage.getItem('ansfal_comments');
-            if (saved) {
-                try {
-                    const commentsData = JSON.parse(saved);
-                    pendingComments = commentsData.pending || [];
-                    approvedComments = commentsData.approved || [];
-                } catch (e) {
-                    console.error('Erreur chargement commentaires:', e);
-                }
-            }
-        }
-
-        function saveComments() {
-            const commentsData = {
-                pending: pendingComments,
-                approved: approvedComments
-            };
-            localStorage.setItem('ansfal_comments', JSON.stringify(commentsData));
-        }
-
-        function renderComments() {
-            const commentsList = document.getElementById('commentsList');
-            commentsList.innerHTML = '';
-            
-            if (approvedComments.length === 0) {
-                commentsList.innerHTML = '<div class="no-comments">' + (currentLanguage === 'ar' ? 'لا توجد تعليقات بعد. كن أول من يعلق!' : 'Aucun commentaire pour le moment. Soyez le premier à commenter!') + '</div>';
-                return;
-            }
-            
-            approvedComments.forEach(comment => {
-                const commentItem = document.createElement('div');
-                commentItem.className = 'comment-item';
-                commentItem.innerHTML = `
-                    <div class="comment-header">
-                        <div class="comment-author">${comment.name}</div>
-                        <div class="comment-date">${comment.date}</div>
-                    </div>
-                    <div class="comment-content">${comment.text}</div>
-                `;
-                commentsList.appendChild(commentItem);
-            });
-        }
-
-        // ==================== AUTHENTIFICATION ADMIN/WEBMASTER ====================
-        function showLoginModal() {
-            const password = prompt(currentLanguage === 'ar' ? 'كلمة مرور المدير:' : 'Mot de passe administrateur:');
-            if (password === 'admin123') {
-                isAdmin = true;
-                localStorage.setItem('ansfal_admin_logged_in', 'true');
-                showAdminPanel();
-                showAlert(currentLanguage === 'ar' ? 'تم تسجيل الدخول!' : 'Connexion réussie!', 'success');
-            } else {
-                alert(currentLanguage === 'ar' ? 'كلمة المرور غير صحيحة!' : 'Mot de passe incorrect!');
-            }
-        }
-
-        function showWebmasterLoginModal() {
-            const password = prompt(currentLanguage === 'ar' ? 'كلمة مرور ويبماستر:' : 'Mot de passe webmaster:');
-            if (password === 'web123') {
-                isWebmaster = true;
-                localStorage.setItem('ansfal_webmaster_logged_in', 'true');
-                showWebmasterPanel();
-                showAlert(currentLanguage === 'ar' ? 'تم تسجيل الدخول!' : 'Connexion réussie!', 'success');
-            } else {
-                alert(currentLanguage === 'ar' ? 'كلمة المرور غير صحيحة!' : 'Mot de passe incorrect!');
-            }
-        }
-
-        function checkAdminStatus() {
-            if (localStorage.getItem('ansfal_admin_logged_in') === 'true') {
-                isAdmin = true;
-                showEditButtons();
-            }
-        }
-
-        function checkWebmasterStatus() {
-            if (localStorage.getItem('ansfal_webmaster_logged_in') === 'true') {
-                isWebmaster = true;
-                document.getElementById('mediaLibraryBtn').classList.add('active');
-                showUploadButtons();
-            }
-        }
-
-        function logoutAdmin() {
-            isAdmin = false;
-            localStorage.removeItem('ansfal_admin_logged_in');
-            hideEditButtons();
-            hideAdminPanel();
-            showAlert(currentLanguage === 'ar' ? 'تم تسجيل الخروج!' : 'Déconnexion réussie!', 'info');
-        }
-
-        function logoutWebmaster() {
-            isWebmaster = false;
-            localStorage.removeItem('ansfal_webmaster_logged_in');
-            document.getElementById('mediaLibraryBtn').classList.remove('active');
-            hideUploadButtons();
-            hideWebmasterPanel();
-            showAlert(currentLanguage === 'ar' ? 'تم تسجيل الخروج!' : 'Déconnexion réussie!', 'info');
-        }
-
-        // ==================== FONCTIONS UTILITAIRES ====================
-        function initWhatsApp() {
-            document.getElementById('whatsappBtn').href = 'https://wa.me/212612345678';
-            document.getElementById('whatsappBtn').target = '_blank';
-        }
-
-        function initNavigation() {
-            document.querySelectorAll('nav a').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    const href = this.getAttribute('href');
-                    if (href.startsWith('#')) {
-                        e.preventDefault();
-                        const targetId = href.substring(1);
-                        
-                        // Gestion spéciale pour le dashboard
-                        if (targetId === 'dashboard') {
-                            showDashboard();
-                            return;
-                        }
-                        
-                        // Pour les autres sections, cacher le dashboard
-                        hideDashboard();
-                        
-                        // Navigation normale
-                        const targetElement = document.getElementById(targetId);
-                        if (targetElement) {
-                            // Mettre à jour le menu actif
-                            document.querySelectorAll('#mainMenu a').forEach(a => a.classList.remove('active'));
-                            this.classList.add('active');
-                            
-                            // Faire défiler vers la section
-                            window.scrollTo({
-                                top: targetElement.offsetTop - 100,
-                                behavior: 'smooth'
-                            });
-                        }
-                    }
-                });
-            });
-        }
-
-        function scrollToSection(sectionId) {
-            hideDashboard();
-            
-            const targetElement = document.getElementById(sectionId);
-            if (targetElement) {
-                // Mettre à jour le menu actif
-                document.querySelectorAll('#mainMenu a').forEach(a => a.classList.remove('active'));
-                document.querySelector(`a[href="#${sectionId}"]`).classList.add('active');
-                
-                // Faire défiler vers la section
-                window.scrollTo({
-                    top: targetElement.offsetTop - 100,
-                    behavior: 'smooth'
-                });
-            }
-        }
-
-        function showMediaLibrary() {
-            alert(currentLanguage === 'ar' ? 'مكتبة الوسائط - ستتم إضافتها قريبًا' : 'Bibliothèque média - À implémenter prochainement');
-        }
-
-        function showUserManagement() {
-            alert(currentLanguage === 'ar' ? 'إدارة المستخدمين - ستتم إضافتها قريبًا' : 'Gestion des utilisateurs - À implémenter prochainement');
-        }
-
-        function showChangePasswordModal(role) {
-            const newPass = prompt(currentLanguage === 'ar' ? 'كلمة المرور الجديدة:' : 'Nouveau mot de passe:');
-            if (newPass) {
-                alert((currentLanguage === 'ar' ? 'تم تغيير كلمة المرور!' : 'Mot de passe changé!'));
-            }
-        }
-
-        function showUploadModal() {
-            alert(currentLanguage === 'ar' ? 'نافذة الرفع - ستتم إضافتها قريبًا' : 'Fenêtre d\'upload - À implémenter prochainement');
-        }
-
-        // Initialiser les commentaires
-        loadComments();
-        renderComments();
-
     </script>
 </body>
 </html>
